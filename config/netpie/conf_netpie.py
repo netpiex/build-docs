@@ -52,8 +52,8 @@ rest_domain = 'https://api.netpie.io/v2/device'
 rest_domain2 = 'api.netpie.io/v2/device'
 feed_domain = 'https://api.netpie.io/v2/feed'
 feed_domain2 = 'api.netpie.io/v2/feed'
-#gql_domain = ''
-#swagger_part = ''
+gql_domain = ''
+swagger_part = '(ทดสอบการทำงานของ API ได้ที่ https://trial-api.netpie.io)'
 
 rst_prolog = """
 .. |portal_url| replace:: {0}
@@ -63,6 +63,8 @@ rst_prolog = """
 .. |rest_url2| replace:: {4}
 .. |feed_url| replace:: {5}
 .. |feed_url2| replace:: {6}
+.. |gql_url| replace:: {7}
+.. |swagger_part| replace:: {8}
 """.format(
 portal_domain, 
 broker_domain,
@@ -70,7 +72,9 @@ auth_domain,
 rest_domain,
 rest_domain2,
 feed_domain,
-feed_domain2
+feed_domain2,
+gql_domain,
+swagger_part
 )
 
 # -- Customize Config For NEXPIE Site ----------------------------------------
