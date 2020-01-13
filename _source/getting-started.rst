@@ -59,9 +59,9 @@ Key ใช้สำหรับการเชื่อมต่อของ Dev
 
 :Port: 1883 (mqtt), 1884 (mqtts)
 
-:Client ID: Client ID ของ Device ที่สร้างขึ้นใน NEXPIE
+:Client ID: Client ID ของ Device ที่สร้างขึ้นใน |platform_name|
 
-:Username: Token ของ Device ที่สร้างขึ้นใน NEXPIE
+:Username: Token ของ Device ที่สร้างขึ้นใน |platform_name|
 
 :Password: ยังไม่ต้องระบุ (ใช้สำหรับกรณีที่ต้องการตรวจสอบที่เพิ่มมากขึ้น)
 
@@ -69,7 +69,7 @@ Key ใช้สำหรับการเชื่อมต่อของ Dev
 
 .. image:: _static/mqttbox_create.png
 
-หลังจากนั้นคลิกที่ปุ่ม "Create MQTT Client" เพื่อสร้างการเชื่อมต่อไปยัง MQTT Server (ในที่นี้คือ NEXPIE IoT Platform) :
+หลังจากนั้นคลิกที่ปุ่ม "Create MQTT Client" เพื่อสร้างการเชื่อมต่อไปยัง MQTT Server (ในที่นี้คือ |platform_name| Platform) :
 
 .. image:: _static/mqttbox_config.png
 
