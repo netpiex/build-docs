@@ -3,14 +3,14 @@ Service Usage Calculation
 
 |
 
-การคำนวณปริมาณการใช้งาน Service ต่างๆ ของ NEXPIE Platform จะถูกแยกการคิดได้เป็นประเภทใหญ่ๆ ดังต่อนี้
+การคำนวณปริมาณการใช้งาน Service ต่างๆ ของ |platform_name| Platform จะถูกแยกการคิดได้เป็นประเภทใหญ่ๆ ดังต่อนี้
 
 |
 
 API Call
 --------------------
 
-ปริมาณการใช้บริการ REST API ทั้งหมดใน NEXPIE Platform มีหน่วยนับเป็น Operation โดยการกระทำที่จะถูกนับเป็นการใช้งานประเภทนี้ คือ
+ปริมาณการใช้บริการ REST API ทั้งหมดใน |platform_name| Platform มีหน่วยนับเป็น Operation โดยการกระทำที่จะถูกนับเป็นการใช้งานประเภทนี้ คือ
 
 |
 
@@ -45,13 +45,13 @@ API Response
 Device Online 
 --------------------
 
-ระยะเวลารวมทั้งหมดที่ Device เชื่อมต่ออยู่ใน NEXPIE Platform มีหน่วยนับเป็นวินาที(Second)
+ระยะเวลารวมทั้งหมดที่ Device เชื่อมต่ออยู่ใน |platform_name| Platform มีหน่วยนับเป็นวินาที(Second)
 
 |
 
 *ตัวอย่าง*
 ````````````
-	มี Device ที่ลงทะเบียนใช้งาน NEXPIE Platform อยู่ 2 Devices Device เพื่อส่งข้อมูลสถานะการทำงานต่างๆ ของเครื่องจักรไปเก็บที่ Platform โดย Device1 เชื่อมต่อ Platform เวลา 08:00:03 ส่งข้อมูลเสร็จและตัดการเชื่อมต่อ Platform ที่เวลา 08:00:15 ส่วน Device2 เชื่อมต่อ Platform เวลา 08:00:05 ส่งข้อมูลเสร็จและตัดการเชื่อมต่อ Platform ที่เวลา 08:00:20 ดังนั้น เวลารวมในกรณีนี้จะเป็น
+	มี Device ที่ลงทะเบียนใช้งาน |platform_name| Platform อยู่ 2 Devices Device เพื่อส่งข้อมูลสถานะการทำงานต่างๆ ของเครื่องจักรไปเก็บที่ Platform โดย Device1 เชื่อมต่อ Platform เวลา 08:00:03 ส่งข้อมูลเสร็จและตัดการเชื่อมต่อ Platform ที่เวลา 08:00:15 ส่วน Device2 เชื่อมต่อ Platform เวลา 08:00:05 ส่งข้อมูลเสร็จและตัดการเชื่อมต่อ Platform ที่เวลา 08:00:20 ดังนั้น เวลารวมในกรณีนี้จะเป็น
 
 	|
 
@@ -90,17 +90,17 @@ MQTT Deliver
 |
 
 MQTT Connect
-	: จำนวนครั้งในการขอเชื่อมต่อ (Connect) มายัง NEXPIE Platform แต่ละครั้งนับเป็น 1 Message
+	: จำนวนครั้งในการขอเชื่อมต่อ (Connect) มายัง |platform_name| Platform แต่ละครั้งนับเป็น 1 Message
 
 |
 
 *ตัวอย่าง*
 ````````````
-	มี 5 Devices เชื่อมต่อมายัง NEXPIE Platform โดย Device1 Publish Message ขนาด 6 kilobytes ไปที่ myDevice Topic ซึ่ง Device2, Device3, Device4 และ Device5 ได้ทำการ Subscribe ที่ myDevice Topic อยู่ ดังนั้น การนับในครั้งนี้จะเป็นดังนี้
+	มี 5 Devices เชื่อมต่อมายัง |platform_name| Platform โดย Device1 Publish Message ขนาด 6 kilobytes ไปที่ myDevice Topic ซึ่ง Device2, Device3, Device4 และ Device5 ได้ทำการ Subscribe ที่ myDevice Topic อยู่ ดังนั้น การนับในครั้งนี้จะเป็นดังนี้
 	
 	|
 
-	5 Devices เชื่อมต่อ NEXPIE Platform		 = 5 x 1 = 5 Messages(MQTT Connect)
+	5 Devices เชื่อมต่อ |platform_name| Platform		 = 5 x 1 = 5 Messages(MQTT Connect)
 	
 	|
 

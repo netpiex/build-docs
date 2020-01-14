@@ -189,7 +189,7 @@ Data Store API
 
 	- ``end_relative`` => ระบุเวลาสิ้นสุดที่สัมพันธ์กับเวลาปัจจุบัน โดยนำเวลาปัจจุบันลบด้วยเวลาที่ระบุ ซึ่งระบุเป็นจำนวนและหน่วยของเวลา หน่วยที่เป็นไปได้มี ดังนี้ milliseconds, seconds, minutes, hours, days, weeks, months และ years ตัวอย่างเช่น หากเวลาเริ่มต้นคือ 30 นาทีและเวลาสิ้นสุดคือ 10 นาที จุดข้อมูลที่ถูกส่งกลับมาจะอยู่ระหว่าง 30 นาทีล่าสุดจนถึง 10 นาทีสุดท้าย หากไม่ได้ระบุเวลาสิ้นสุดจะถือว่าเป็นวันที่และเวลาปัจจุบัน
 
-	- ``time_zone`` => เขตเวลาสำหรับช่วงเวลาของการ Query ข้อมูล หากไม่ได้ระบุจะใช้ UTC (สำหรับ ``time_zone`` ที่ NEXPIE Platform กำหนดให้จะเป็น GMT)
+	- ``time_zone`` => เขตเวลาสำหรับช่วงเวลาของการ Query ข้อมูล หากไม่ได้ระบุจะใช้ UTC (สำหรับ ``time_zone`` ที่ |platform_name| Platform กำหนดให้จะเป็น GMT)
 
 	** หมายเหตุ ** : ``start_absolute`` และ ``start_relative`` จำเป็นต้องระบุค่า แต่เลือกใช้เพียงค่าใดค่าหนึ่งเท่านั้น ส่วน ``end_absolute`` และ ``end_relative`` จะระบุหรือไม่ก็ได้ ถ้าระบุก็เลือกใช้เพียงค่าใดค่าหนึ่งเช่นเดียวกัน
 
@@ -197,15 +197,15 @@ Data Store API
 
 	*2. Metric Properties* ประกอบด้วย
 
-	- ``name`` => ชื่อของ Metric ที่ต้องการ Query ข้อมูล ให้ระบุเป็น DeviceId (Client ID ของ Device) จาก NEXPIE Platform (ต้องระบุ)
+	- ``name`` => ชื่อของ Metric ที่ต้องการ Query ข้อมูล ให้ระบุเป็น DeviceId (Client ID ของ Device) จาก |platform_name| Platform (ต้องระบุ)
 
 	- ``aggregators`` => Array ของการตั้งค่าการรวมหรือประมวลผลข้อมูลในรูปแบบต่างๆ ก่อนส่งจุดข้อมูลกลับมา ซึ่ง Parameters ที่เกี่ยวข้องมีดังนี้
 
 		- name => ประเภทรูปแบบการประมวลผลข้อมูล ได้แก่ "avg" (Average), "dev" (Standard Deviation), "count", "first", "gaps", "histogram", "last", "least_squares", "max", "min", "percentile", "sum", "diff" (Difference), "div" (Divide), "rate", "sampler", "scale", "trim", "save_as", "filter", "js_function" (JS Aggregator), "js_filter" (JS Aggregator), "js_range" (JS Aggregator) ดูรายละเอียดเพิ่มเติมจาก `kairosdb <https://kairosdb.github.io/docs/build/html/restapi/Aggregators.html>`_
 
-	- ``tags`` => สำหรับกรองข้อมูลที่ต้องการตาม Tag ใน NEXPIE Platform ระบุ Data Field ที่ต้องการ รูปแบบ คือ tags : { attr: [ field_1, field_2, ..., field_n ] }
+	- ``tags`` => สำหรับกรองข้อมูลที่ต้องการตาม Tag ใน |platform_name| Platform ระบุ Data Field ที่ต้องการ รูปแบบ คือ tags : { attr: [ field_1, field_2, ..., field_n ] }
 
-	- ``group_by`` => จัดกลุ่มจุดข้อมูลที่ Query โดยสามารถจัดตาม Tag, ช่วงเวลา, ค่าจุดข้อมูล หรือตามถังข้อมูล ใน NEXPIE Platform ใช้ Tag ในการจัดกลุ่มข้อมูล (แยกตาม Data Field)
+	- ``group_by`` => จัดกลุ่มจุดข้อมูลที่ Query โดยสามารถจัดตาม Tag, ช่วงเวลา, ค่าจุดข้อมูล หรือตามถังข้อมูล ใน |platform_name| Platform ใช้ Tag ในการจัดกลุ่มข้อมูล (แยกตาม Data Field)
 
 	- ``exclude_tags`` => จะให้แสดง Tag ในข้อมูลที่ส่งกลับมาด้วยหรือไม่ (``true`` คือ แสดง Tag เป็นค่า Default, ``false`` คือ ไม่แสดง Tag)
 
