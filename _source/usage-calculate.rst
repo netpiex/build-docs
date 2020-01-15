@@ -165,14 +165,23 @@ Time Series Data Store
 
 	2(point data) x [ 24(hours/day) x 30(days) ] x 7(days) = 10080 Point-Day
 
-	หรือ
-
-	2(point data) x [ 24(hours/day) x 30(days) ] x [ 7(days) / 30(days/month) ] = 336 Point-Month	
+	|
 
 	หรือ
+
+	|
+
+	2(point data) x [ 24(hours/day) x 30(days) ] x [ 7(days) / 30(days/month) ] = 336 Point-Month
+
+	|	
+
+	หรือ
+
+	|
 
 	2(point data) x [ 24(hours/day) x 30(days) ] x [ 7(days) / 365(days/year) ] = 27.62 Point-Year
 
+|
 
 Trigger & Action
 --------------------
