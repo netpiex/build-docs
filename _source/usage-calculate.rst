@@ -153,7 +153,7 @@ Shadow Expression
 Time Series Data Store
 -----------------------
 
-ปริมาณข้อมูล (Time Series Data) และระยะเวลาที่ต้องการเก็บข้อมูล มีหน่วยนับเป็น Point-Day หมายความว่า ข้อมูลที่ส่งมาเก็บ 1 จุดข้อมูล (ขนาดข้อมูลไม่เกิน 1 kilobyte) ระยะเวลาในการเก็บ (TTL) 1 วัน ถูกนับเป็น 1 Point-Day
+ปริมาณข้อมูล (Time Series Data) และระยะเวลาที่ต้องการเก็บข้อมูล มีหน่วยนับเป็น Point-Day, Point-Month หรือ Point-Year หมายความว่า ข้อมูลที่ส่งมาเก็บ 1 จุดข้อมูล (ขนาดข้อมูลไม่เกิน 1 kilobyte) ระยะเวลาในการเก็บ (TTL) 1 วัน, 1 เดือน หรือ 1 ปี ถูกนับเป็น 1 Point-Day, 1 Point-Month หรือ 1 Point-Year ตามลำดับ จำนวนจุดข้อมูลที่เก็บได้จะแปรผกผันกับระยะเวลาในการเก็บ (ถ้าเก็บนานจำนวนจุดข้อมูลที่เก็บได้จะน้อยลง)
 
 |
 
@@ -163,7 +163,16 @@ Time Series Data Store
 
 	|
 
-	2(point data) x 7(TTL) X 24(hours/day) x 30(days) = 10080 Point-Day
+	2(point data) x [ 24(hours/day) x 30(days) ] x 7(days) = 10080 Point-Day
+
+	หรือ
+
+	2(point data) x [ 24(hours/day) x 30(days) ] x [ 7(days) / 30(days/month) ] = 336 Point-Month	
+
+	หรือ
+
+	2(point data) x [ 24(hours/day) x 30(days) ] x [ 7(days) / 365(days/year) ] = 27.62 Point-Year
+
 
 Trigger & Action
 --------------------
