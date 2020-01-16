@@ -127,15 +127,14 @@ MQTT Topic ที่เกี่ยวข้องกับการจัดก
 	``@private/shadow/state/get/response``  การรอรับ Device Shadow State เมื่อมีการร้องขอข้อมูลไป
 	======================================  ============================================================
 		
-2. **Shadow Topic** คือ Topic ที่ใช้สำหรับจัดการ Device Shadow ของตัวเองและของ Device อื่นที่อยู่ภายใต้กลุ่มเดียวกัน โดยถ้าเป็น Device อื่นจะต้องระบุชื่อ (Alias) ของ Device นั้นๆ มีทั้ง Publish (แก้ไขข้อมูล Shadow) และ Subscribe (รอรับข้อมูล Shadow) Topic ที่เกี่ยวข้องมีดังนี้
+2. **Shadow Topic** คือ Topic ที่ใช้สำหรับจัดการ Device Shadow ของตัวเอง Topic ที่เกี่ยวข้องมีดังนี้
 
 	=========================================================  ==================================================
 	Publish Topic                                              คำอธิบาย
 	=========================================================  ==================================================
 	``@shadow/data/get`` 		                               เป็นการร้องขอข้อมูล Shadow Data ของตัวเองแบบทั้งหมด โดยการรอรับข้อมูลให้ Subscribe Topic ``@private/#`` หรือ ``@private/shadow/data/get/response`` เพื่อรอรับข้อมูล (ใช้ในกรณีที่เป็น Shadow ตัวเองท่านั้น)
-	``@shadow/state/get`` 		                               เป็นการขอข้อมูล Shadow State ของตัวเองแบบทั้งหมด โดยการรอรับข้อมูลให้ Subscribe Topic ``@private/#`` หรือ ``@private/shadow/state/get/response`` เพื่อรอรับข้อมูล (ใช้ในกรณีที่เป็น Shadow ตัวเองท่านั้น)
+	``@shadow/state/get`` 		                               เป็นการขอข้อมูล Shadow State ของตัวเองแบบทั้งหมด โดยการรอรับข้อมูลให้ Subscribe Topic ``@private/#`` หรือ ``@private/shadow/state/get/response`` เพื่อรอรับข้อมูล
 	``@shadow/data/update``            						   เป็นการอัพเดทค่าใน Shadow Data โดยส่ง Payload ดังนี้ { "data":{ "field name 1": value 1, "field name 2": value 2, ..., "field name n": value n }} ถ้าต้องการได้รับข้อมูลเมื่อค่าต่าง ๆ ใน Shadow Data ถูกอัพเดทให้ Subscribe Topic ``@shadow/data/updated`` รอไว้
-	``@shadow/data/update:{Alias}``  							   เป็นการอัพเดทค่าใน Shadow Data แต่เป็นของ Device อื่นที่อยู่ภายใต้กลุ่มเดียวกัน โดยระบุชื่อของ Device (Alias) และส่ง Payload ลักษณะเช่นเดียวกับการอัพเดท Shadow Data ของตัวเอง ถ้าต้องการได้รับข้อมูลเมื่อค่าต่าง ๆ ใน Shadow Data ของ Device อื่นภายใต้กลุ่มเดียวกัน ถูกอัพเดทให้ Subscribe Topic ``@shadow/data/updated:{Alias}`` รอไว้
 	=========================================================  ==================================================
 
 .. note:: 
