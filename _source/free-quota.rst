@@ -36,8 +36,6 @@ Free Monthly Quota is Free Forever
      - Operation per month
 
 .. note::
-
 	*Messages are metered in 4 KB increments.
 
 	**A point-month unit refers to number of data points (data size limit is 1 KB) that can be stored for one month period.
-
