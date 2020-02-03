@@ -1,9 +1,9 @@
 Free Quota 
 ===============
-|
+
 Free Monthly Quota is Free Forever
 ----------------------------------
-|
+
 .. list-table::
    :widths: 40 40 40
 
@@ -34,8 +34,6 @@ Free Monthly Quota is Free Forever
    * - Trigger and action
      - 5,000
      - Operation per month
-
-|
 
 .. note::
 
