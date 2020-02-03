@@ -57,6 +57,7 @@ Key ใช้สำหรับการเชื่อมต่อของ Dev
 
 .. list-table::
   :widths: 30 50
+  
    * - **Host**
      - |broker_url|
    * - **Port**
