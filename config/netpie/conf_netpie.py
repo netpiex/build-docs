@@ -75,7 +75,7 @@ rest_domain,
 rest_domain2,
 feed_domain,
 feed_domain2,
-gql_domail,
+gql_domain,
 swagger_part,
 platform_name
 )
