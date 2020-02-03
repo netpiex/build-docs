@@ -253,14 +253,17 @@ Device Trigger and Event Hook
 	            "condition": "$NEW.bedroom.temp > $PREV.bedroom.temp",
 	            "msg": "bedroom temperature is increased from {{$PREV.bedroom.temp}} to {{$NEW.bedroom.temp}}",
 	            "option": {
-	                "linetoken": "abcdefghijklmnopqrstuvwxyz0123456789"
+	                "linetoken": "Line Token"
 	            }
 	        },
 	        {
-	            "action": "DeviceStatusPush",
+	            "action": "LINENOTIFY",
 	            "event": "DEVICE.STATUSCHANGED",
 	            "msg": "{\"status\":\"{{$NEW.STATUS}}\",\"topic\":\"{{$DEVICEID}}\"}",
-	        }
+		    "option": {
+        		"linetoken": "Line Token"
+	        	}
+		}
 	    ]
 	}
 
