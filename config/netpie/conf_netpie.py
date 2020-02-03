@@ -52,7 +52,7 @@ rest_domain = 'https://api.netpie.io/v2/device'
 rest_domain2 = 'api.netpie.io/v2/device'
 feed_domain = 'https://api.netpie.io/v2/feed'
 feed_domain2 = 'api.netpie.io/v2/feed'
-gql_domain = ''
+gql_domain = 'gql'
 swagger_part = '(ทดสอบการทำงานของ API ได้ที่ https://trial-api.netpie.io)'
 platform_name = 'NETPIE'
 
