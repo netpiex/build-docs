@@ -14,4 +14,5 @@
    device-config
    mqtt-api
    device-api
+   free-quota
    usage-calculate
