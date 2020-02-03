@@ -58,15 +58,15 @@ Key ใช้สำหรับการเชื่อมต่อของ Dev
 .. list-table::
   :widths: 30 50
   
-   * - **Host**
+   * - Host
      - |broker_url|
-   * - **Port**
+   * - Port
      - 1883 (mqtt), 1884 (mqtts)
-   * - **Client ID**
+   * - Client ID
      - Client ID ของ Device ที่สร้างขึ้นใน |platform_name|
-   * - **Username**
+   * - Username**
      - Token ของ Device ที่สร้างขึ้นใน |platform_name|
-   * - **Password**
+   * - Password
      - ยังไม่ต้องระบุ (ใช้สำหรับกรณีที่ต้องการตรวจสอบที่เพิ่มมากขึ้น)
 
 ทดลองเชื่อมต่อ Platform ด้วย MQTT Box โดยดาวน์โหลดได้จาก http://workswithweb.com/mqttbox.html เมื่อดาวน์โหลดเรียบร้อยให้เปิดโปรแกรมขึ้นมาดังรูป :
