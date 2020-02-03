@@ -1,4 +1,5 @@
 
+###########################
 คู่มือการใช้งาน NETPIE Platform
 ###########################
 
@@ -14,5 +15,5 @@
    device-config
    mqtt-api
    device-api
-   quota-netpie
+   free-quota
    usage-calculate
