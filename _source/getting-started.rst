@@ -55,6 +55,7 @@ Getting started
 
 Key ใช้สำหรับการเชื่อมต่อของ Device มายัง Platform กรณีเชื่อมต่อผ่าน MQTT Protocol ให้เลือกใช้งาน MQTT Client Library ที่เหมาะสมหรือรองรับกับ Device ที่จะใช้ในการเชื่อมต่อ โดยการเชื่อมต่อของ MQTT จะต้องใช้ 4 Paramters คือ Host, Client id, Username และ Password โดยดูข้อมูลที่จะนำมาใช่ สามารถระบุค่าได้ดังนี้
 
+
 .. list-table::
    :widths: 30 50
   
@@ -68,6 +69,7 @@ Key ใช้สำหรับการเชื่อมต่อของ Dev
      - Token ของ Device ที่สร้างขึ้นใน |platform_name|
    * - **Password**
      - ยังไม่ต้องระบุ (ใช้สำหรับกรณีที่ต้องการตรวจสอบที่เพิ่มมากขึ้น)
+
 
 ทดลองเชื่อมต่อ Platform ด้วย MQTT Box โดยดาวน์โหลดได้จาก http://workswithweb.com/mqttbox.html เมื่อดาวน์โหลดเรียบร้อยให้เปิดโปรแกรมขึ้นมาดังรูป :
 
