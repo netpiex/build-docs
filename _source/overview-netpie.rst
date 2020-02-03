@@ -1,4 +1,4 @@
 NETPIE Overview
 ===============
 
-...input content...
+.. image:: _static/netpie2020_architecture.png
