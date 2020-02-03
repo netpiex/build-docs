@@ -63,8 +63,8 @@ rst_prolog = """
 .. |rest_url2| replace:: {4}
 .. |feed_url| replace:: {5}
 .. |feed_url2| replace:: {6}
-.. |swagger_part| replace:: {8}
-.. |platform_name| replace:: {9}
+.. |swagger_part| replace:: {7}
+.. |platform_name| replace:: {8}
 """.format(
 portal_domain, 
 broker_domain,
