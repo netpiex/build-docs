@@ -20,7 +20,7 @@ Device API
 
 - แบบที่ 1 เป็นการระบุ Topic ในรูปแบบ URL Path
 
-:EndPoint: |rest_url|/device/message/{any}/{topic}
+:EndPoint: |rest_url|/message/{any}/{topic}
 
 :Method: PUT
 
@@ -50,7 +50,7 @@ Device API
 
 - แบบที่ 2 เป็นการระบุ Topic ผ่าน Parameter (Query String)
 
-:EndPoint: |rest_url|/device/message
+:EndPoint: |rest_url|/message
 
 :Method: PUT
 
@@ -78,7 +78,7 @@ Device API
 
 **2. การอ่านข้อมูล Shadow Data ของ Device (ต้องเป็น Device ที่อยู่ใน Group เดียวกัน)**
 
-:EndPoint: |rest_url|/device/shadow/data
+:EndPoint: |rest_url|/shadow/data
 
 :Method: GET
 
@@ -102,7 +102,7 @@ Device API
 
 **3. การเขียนข้อมูลลง Shadow Data แบบเขียนผสาน (Merge)**
 
-:EndPoint: |rest_url|/device/shadow/data
+:EndPoint: |rest_url|/shadow/data
 
 :Method: PUT
 
@@ -132,7 +132,7 @@ Device API
 
 **4. การเขียนข้อมูลลง Shadow Data แบบเขียนทับ (Overwrite)**
 
-:EndPoint: |rest_url|/device/shadow/data
+:EndPoint: |rest_url|/shadow/data
 
 :Method: POST
 
