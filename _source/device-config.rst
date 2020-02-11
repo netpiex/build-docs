@@ -253,14 +253,17 @@ Device Trigger and Event Hook
 	            "condition": "$NEW.bedroom.temp > $PREV.bedroom.temp",
 	            "msg": "bedroom temperature is increased from {{$PREV.bedroom.temp}} to {{$NEW.bedroom.temp}}",
 	            "option": {
-	                "linetoken": "abcdefghijklmnopqrstuvwxyz0123456789"
+	                "linetoken": "Line Token"
 	            }
 	        },
 	        {
-	            "action": "DeviceStatusPush",
+	            "action": "LINENOTIFY",
 	            "event": "DEVICE.STATUSCHANGED",
 	            "msg": "{\"status\":\"{{$NEW.STATUS}}\",\"topic\":\"{{$DEVICEID}}\"}",
-	        }
+		    "option": {
+        		"linetoken": "Line Token"
+	        	}
+		}
 	    ]
 	}
 
@@ -282,13 +285,13 @@ Device Trigger and Event Hook
 
 เป็นตัวกลางที่ใช้กำหนดว่าเมื่อเกิด Trigger จะให้ดำเนินการอะไร ซึ่งจะต้องไปกำหนดที่ |portal_url| เมนู *Event Hooks* ดังรูป :
 
-.. image:: _static/event_hooks.png
+.. image:: _static/event_hooks2.png
 
 |
 
 สร้าง Event Hook โดยการคลิกที่ปุ่ม "Create" กรอกข้อมูล สำหรับ *Type* คือ ชนิดของ Event Hook ซึ่งปัจจุบันมีเพียงชนิดเดียว คือ WEBHOOK ในอนาคตจะมีการพัฒนาชนิดอื่นๆ ตามมา จากนั้นคลิกที่ปุ่ม "Create" ระบบจะทำการสร้าง Event Hook ให้ ดังรูป :
 
-.. image:: _static/event_hooks_create.png
+.. image:: _static/event_hooks_create2.png
 
 |
 
