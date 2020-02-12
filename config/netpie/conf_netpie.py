@@ -130,5 +130,5 @@ html_theme = 'rtcat_sphinx_theme'
 import rtcat_sphinx_theme
 html_theme_path = [rtcat_sphinx_theme.get_html_theme_path()]
 
-html_logo = 'netpie2020_logo_1.png'
+html_logo = 'netpie_logo_4.png'
 html_favicon = 'netpie_favicon.png'
