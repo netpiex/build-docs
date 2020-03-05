@@ -56,7 +56,11 @@ Message API Topic
 
 |
 
-เป็นการกำหนด Topic สำหรับ Publish / Subscribe ข้อมูลเพื่อสื่อสารระหว่าง Devices ที่อยู่ภายในใต้ Group เดียวกัน โดยรูปแบบการใช้งานให้ขึ้นต้น Topic ด้วย @msg ตามด้วยโครงสร้าง Topic ที่ต้องการ ดังนี้
+เป็นการกำหนด Topic สำหรับ Publish / Subscribe ข้อมูลเพื่อสื่อสารระหว่าง Devices ที่อยู่ภายในใต้ Group เดียวกัน การจัด Device เข้า Group มีขั้นตอนตามรูปต่อไปนี้
+
+.. image:: _static/device_group.png 
+
+โดยเมื่อนำ Device เข้า Group เรียบร้อยแล้ว รูปแบบการใช้งานให้ขึ้นต้น Topic ด้วย @msg ตามด้วยโครงสร้าง Topic ที่ต้องการ ดังนี้
 	
 	:publish:
 
