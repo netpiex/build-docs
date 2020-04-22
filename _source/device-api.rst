@@ -76,6 +76,12 @@ Device API
 
 |
 
+.. caution:: 
+
+	การส่ง message ผ่านทาง REST API ลักษณะ Topic จะแตกต่างจากการส่งผ่าน MQTT Prototol เล็กน้อย คือ ถ้าส่งผ่าน REST API การตั้งค่า Topic ไม่ต้องใส่ "@msg" นำหน้า แต่ระบบจะทำการเติมให้อัตโนมัติ ซึ่งถ้าส่งผ่าน MQTT Prototol จะต้องใส่ "@msg" นำหน้า Topic ที่จะส่งเอง
+
+|
+
 **2. การอ่านข้อมูล Shadow Data ของ Device (ต้องเป็น Device ที่อยู่ใน Group เดียวกัน)**
 
 :EndPoint: |rest_url|/shadow/data
