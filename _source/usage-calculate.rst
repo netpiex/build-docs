@@ -224,7 +224,7 @@ Shadow Trigger
 			"action": "checkTemp",
 			"event": "SHADOW.UPDATED",
 			"condition": "$NEW.bedroom.temp > 0",
-			"msg": "My temperature was change from {{$OLD.bedroom.temp}} to {{$NEW.bedroom.temp}}",
+			"msg": "My temperature was change from {{$PREV.bedroom.temp}} to {{$NEW.bedroom.temp}}",
 			"option": {
 				"url": "https://mywebhook/devicetemp"
 			}
