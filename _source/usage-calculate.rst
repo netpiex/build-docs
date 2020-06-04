@@ -173,7 +173,7 @@ Device Trigger
 |
 
 Shadow Trigger
-	: Trigger ที่เกิดจาก Shadow มีการเปลี่ยนแปลงและมีการเซ็ตเงื่อนไขสำหรับตรวจสอบการเปลี่ยนไว้ด้วย เซ็ต Trigger Event เป็น ``SHADOW.UPDATED`` ดูรายละเอียดเพิ่มเติมจาก :ref:`trigger-and-action` ถ้ามีการตั้งค่า Trigger นี้ไว้ ทุกครั้งที่ Shadow มีการเปลี่ยนแปลงจะถูกนับเป็น 1 Operation / 1 Trigger Condition ที่เซ็ตไว้ และถ้า Trigger Condition ได้ค่าเป็น True จะถูกนับเพิ่มอีก 1 Operation
+	: Trigger ที่เกิดจาก Shadow มีการเปลี่ยนแปลงและมีการเซ็ตเงื่อนไขสำหรับตรวจสอบการเปลี่ยนไว้ด้วย เซ็ต Trigger Event เป็น ``SHADOW.UPDATED`` ดูรายละเอียดเพิ่มเติมจาก :ref:`trigger-and-action` ถ้ามีการตั้งค่า Trigger นี้ไว้ ทุกครั้งที่ Shadow มีการเปลี่ยนแปลงและเงื่อนไขเป็นจริง (Trigger Condition ได้ค่าเป็น True) จะถูกนับเป็น 1 Operation / 1 Trigger Condition
 
 |
 
@@ -187,9 +187,9 @@ Shadow Trigger
 
 	|
 
-	ส่งอุณหภูมิ (temp) ครั้งที่ 1 ค่าเป็น 1 ทำ action ``checkTemp`` ตรวจสอบเงื่อนไขและค่าเป็น True = 2 Operations
-	ส่งอุณหภูมิ (temp) ครั้งที่ 2 ค่าเป็น 0 ทำ action ``checkTemp`` ตรวจสอบเงื่อนไขและค่าเป็น False = 1 Operations
-	ส่งอุณหภูมิ (temp) ครั้งที่ 3 ค่าเป็น -1 ทำ action ``checkTemp`` ตรวจสอบเงื่อนไขและค่าเป็น False = 1 Operations
+	ส่งอุณหภูมิ (temp) ครั้งที่ 1 ค่าเป็น 1 ทำ action ``checkTemp`` ตรวจสอบเงื่อนไขและค่าเป็น True = 1 Operations
+	ส่งอุณหภูมิ (temp) ครั้งที่ 2 ค่าเป็น 0 ทำ action ``checkTemp`` ตรวจสอบเงื่อนไขและค่าเป็น False = 0 Operations
+	ส่งอุณหภูมิ (temp) ครั้งที่ 3 ค่าเป็น -1 ทำ action ``checkTemp`` ตรวจสอบเงื่อนไขและค่าเป็น False = 0 Operations
 
 	|
 
@@ -197,7 +197,7 @@ Shadow Trigger
 
 	|
 
-	รวม Trigger & Action Quota ที่ถูกใช้ไป 			 = 2 + 2 + 1 + 1 + 2 = 8 Operations
+	รวม Trigger & Action Quota ที่ถูกใช้ไป 			 = 2 + 1 + 0 + 0 + 2 = 5 Operations
 	
 .. code-block:: json
 
