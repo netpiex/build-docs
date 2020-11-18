@@ -29,6 +29,8 @@ release = '1'
 extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.githubpages',
+    'sphinx-prompt',
+    'sphinx_substitution_extensions'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -55,6 +57,7 @@ feed_domain2 = 'api.netpie.io/v2/feed'
 gql_domain = ''
 swagger_part = '(ทดสอบการทำงานของ API ได้ที่ https://trial-api.netpie.io)'
 platform_name = 'NETPIE'
+coap_domain = 'coap://coap.nexpie.io'
 
 rst_prolog = """
 .. |portal_url| replace:: {0}
@@ -67,6 +70,7 @@ rst_prolog = """
 .. |gql_url| replace:: {7}
 .. |swagger_part| replace:: {8}
 .. |platform_name| replace:: {9}
+.. |coap_url| replace:: {10}
 """.format(
 portal_domain, 
 broker_domain,
@@ -77,7 +81,8 @@ feed_domain,
 feed_domain2,
 gql_domain,
 swagger_part,
-platform_name
+platform_name,
+coap_domain
 )
 
 # -- Customize Config For NEXPIE Site ----------------------------------------
