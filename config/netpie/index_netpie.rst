@@ -14,5 +14,6 @@
    device-config
    mqtt-api
    device-api
+   coap
    quota-netpie
    usage-calculate
