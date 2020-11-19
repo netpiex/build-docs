@@ -114,7 +114,8 @@ pygments_style = 'sphinx'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+#html_static_path = ['_static']
+#html_extra_path = ['_static']
 
 
 # Custom sidebar templates, must be a dictionary that maps document names
@@ -131,5 +132,5 @@ html_theme = 'rtcat_sphinx_theme'
 import rtcat_sphinx_theme
 html_theme_path = [rtcat_sphinx_theme.get_html_theme_path()]
 
-html_logo = 'NETPIE2020-logo.png'
-html_favicon = 'netpie_favicon.png'
+html_logo = '_static/NETPIE2020-logo.png'
+html_favicon = '_static/netpie_favicon.png'
