@@ -55,7 +55,7 @@ feed_domain2 = 'api.netpie.io/v2/feed'
 gql_domain = ''
 swagger_part = '(ทดสอบการทำงานของ API ได้ที่ https://trial-api.netpie.io)'
 platform_name = 'NETPIE'
-coap_domain = 'coap://coap.nexpie.io'
+coap_domain = 'coap://coap.netpie.io'
 
 rst_prolog = """
 .. |portal_url| replace:: {0}
