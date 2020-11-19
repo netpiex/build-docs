@@ -7,15 +7,19 @@ MQTT
 
 |
 
-:Host: |broker_url|
-
-:Port: 1883 (mqtt), 1884 (mqtts)
-
-:Client ID: Client ID ของ Device ที่สร้างขึ้นใน |platform_name|
-
-:Username: Token ของ Device ที่สร้างขึ้นใน |platform_name|
-
-:Password: ยังไม่ต้องระบุ (ใช้สำหรับกรณีที่ต้องการตรวจสอบที่เพิ่มมากขึ้น)
+.. list-table::
+   :widths: 30 50
+  
+   * - **Host**
+     - |broker_url|
+   * - **Port**
+     - 1883 (mqtt), 1884 (mqtts)
+   * - **Client ID**
+     - Client ID ของ Device ที่สร้างขึ้นใน |platform_name|
+   * - **Username**
+     - Token ของ Device ที่สร้างขึ้นใน |platform_name|
+   * - **Password**
+     - ยังไม่ต้องระบุ (ใช้สำหรับกรณีที่ต้องการตรวจสอบที่เพิ่มมากขึ้น)
 
 .. image:: _static/device_key.png
 
@@ -61,22 +65,18 @@ Message API Topic
 .. image:: _static/device_group.png 
 
 โดยเมื่อนำ Device เข้า Group เรียบร้อยแล้ว รูปแบบการใช้งานให้ขึ้นต้น Topic ด้วย @msg ตามด้วยโครงสร้าง Topic ที่ต้องการ ดังนี้
+
+|
 	
-	:publish:
-
-		``publish @msg/{any}/{topic}`` 		
-
-	:subscribe:
-
-		``subscribe @msg/{any}/{topic}``
-
-	:ตัวอย่าง Topic:
-		
-		@msg/myhome/bedroom/lamp
-
-		@msg/sensor/temp
-
-		@msg/john
+.. list-table::
+   :widths: 20 60
+  
+   * - **publish**
+     - ``publish @msg/{any}/{topic}``
+   * - **subscribe**
+     - ``subscribe @msg/{any}/{topic}``
+   * - **ตัวอย่าง Topic**
+     - @msg/myhome/bedroom/lamp, @msg/sensor/temp, @msg/john
 
 จะเห็นได้ว่า Topic สามารถระบุเป็นลำดับชั้นได้โดยการคั่นด้วย "/" นอกจากการระบุ Topic ที่เฉพาะเจาะจงแล้ว ยังรองรับการระบุ Topic แบบ Wildcard ด้วย มี 2 ลักษณะ คือ
 
