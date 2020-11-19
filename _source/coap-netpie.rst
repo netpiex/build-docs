@@ -32,7 +32,6 @@ CoAP (Constrained Application Protocol) เป็น Protocol ประเภท
 ตัวอย่าง (Command Line) 
 
 .. code-block:: console
-	:substitutions:
 
 	coap put "coap://coap.netpie.io/message/home/bedroom?auth=6c36fdee-5273-4318-ba7e-75dfd2c513db:nzxGsGMYnFdfET6qbpifb32U9z5kuhvx" -p "Hello from CoAP"
 
@@ -62,7 +61,6 @@ CoAP (Constrained Application Protocol) เป็น Protocol ประเภท
 ตัวอย่าง (Command Line) 
 
 .. code-block:: console
-	:substitutions:
 
 	coap get "coap://coap.netpie.io/shadow/data?auth=6c36fdee-5273-4318-ba7e-75dfd2c513db:nzxGsGMYnFdfET6qbpifb32U9z5kuhvx"
 
@@ -104,7 +102,6 @@ CoAP (Constrained Application Protocol) เป็น Protocol ประเภท
 ตัวอย่าง (Command Line)  {"deviceid":"6c36fdee-5273-4318-ba7e-75dfd2c513db","data":{"temp":30.4},"modified":1605518877506,"timestamp":1605518877506}
 
 .. code-block:: console
-	:substitutions:
 
 	coap put "coap://coap.netpie.io/shadow/data?auth=6c36fdee-5273-4318-ba7e-75dfd2c513db:nzxGsGMYnFdfET6qbpifb32U9z5kuhvx" -p "{data: {temp: 30.4} }"
 
