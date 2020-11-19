@@ -34,7 +34,7 @@ CoAP (Constrained Application Protocol) เป็น Protocol ประเภท
 .. code-block:: console
 	:substitutions:
 
-	coap put "|coap_url|/message/home/bedroom?auth=6c36fdee-5273-4318-ba7e-75dfd2c513db:nzxGsGMYnFdfET6qbpifb32U9z5kuhvx" -p "Hello from CoAP"
+	coap put "coap://coap.netpie.io/message/home/bedroom?auth=6c36fdee-5273-4318-ba7e-75dfd2c513db:nzxGsGMYnFdfET6qbpifb32U9z5kuhvx" -p "Hello from CoAP"
 
 จากตัวอย่างด้านบน เป็นการ Publish ข้อความ ``Hello from CoAP`` ไปที่ Topic ``@msg/home/bedroom`` 
 
@@ -64,7 +64,7 @@ CoAP (Constrained Application Protocol) เป็น Protocol ประเภท
 .. code-block:: console
 	:substitutions:
 
-	coap get "|coap_url|/shadow/data?auth=6c36fdee-5273-4318-ba7e-75dfd2c513db:nzxGsGMYnFdfET6qbpifb32U9z5kuhvx"
+	coap get "coap://coap.netpie.io/shadow/data?auth=6c36fdee-5273-4318-ba7e-75dfd2c513db:nzxGsGMYnFdfET6qbpifb32U9z5kuhvx"
 
 จากตัวอย่างด้านบน เป็นการอ่านข้อมูล Shadow ของ Device ID : 6c36fdee-5273-4318-ba7e-75dfd2c513db และค่าที่ได้กลับมา คือ
 
@@ -106,7 +106,7 @@ CoAP (Constrained Application Protocol) เป็น Protocol ประเภท
 .. code-block:: console
 	:substitutions:
 
-	coap put "|coap_url|/shadow/data?auth=6c36fdee-5273-4318-ba7e-75dfd2c513db:nzxGsGMYnFdfET6qbpifb32U9z5kuhvx" -p "{data: {temp: 30.4} }"
+	coap put "coap://coap.netpie.io/shadow/data?auth=6c36fdee-5273-4318-ba7e-75dfd2c513db:nzxGsGMYnFdfET6qbpifb32U9z5kuhvx" -p "{data: {temp: 30.4} }"
 
 จากตัวอย่างด้านบน เป็นการเขียนข้อมูล Shadow แบบผสาน (Merge) ของ Device ID : 6c36fdee-5273-4318-ba7e-75dfd2c513db และค่าที่ได้กลับมา คือ
 
