@@ -52,10 +52,10 @@ rest_domain = 'https://api.netpie.io/v2/device'
 rest_domain2 = 'api.netpie.io/v2/device'
 feed_domain = 'https://api.netpie.io/v2/feed'
 feed_domain2 = 'api.netpie.io/v2/feed'
-gql_domain = ''
 swagger_part = '(ทดสอบการทำงานของ API ได้ที่ https://trial-api.netpie.io)'
 platform_name = 'NETPIE'
 coap_domain = 'coap://coap.netpie.io'
+#gql_domain = ''
 
 rst_prolog = """
 .. |portal_url| replace:: {0}
@@ -65,10 +65,9 @@ rst_prolog = """
 .. |rest_url2| replace:: {4}
 .. |feed_url| replace:: {5}
 .. |feed_url2| replace:: {6}
-.. |gql_url| replace:: {7}
-.. |swagger_part| replace:: {8}
-.. |platform_name| replace:: {9}
-.. |coap_url| replace:: {10}
+.. |swagger_part| replace:: {7}
+.. |platform_name| replace:: {8}
+.. |coap_url| replace:: {9}
 """.format(
 portal_domain, 
 broker_domain,
@@ -77,7 +76,6 @@ rest_domain,
 rest_domain2,
 feed_domain,
 feed_domain2,
-gql_domain,
 swagger_part,
 platform_name,
 coap_domain
