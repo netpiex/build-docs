@@ -80,7 +80,7 @@ Device API
 
 - แบบที่ 1 เป็นการระบุ Topic ในรูปแบบ URL Path
 
-:EndPoint: |rest_url|/device/private/{any}/{topic}
+:EndPoint: |rest_url|/private/{any}/{topic}
 
 :Method: PUT
 
@@ -110,7 +110,7 @@ Device API
 
 - แบบที่ 2 เป็นการระบุ Topic ผ่าน Parameter (Query String)
 
-:EndPoint: |rest_url|/device/private
+:EndPoint: |rest_url|/private
 
 :Method: PUT
 
