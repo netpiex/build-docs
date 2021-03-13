@@ -76,13 +76,75 @@ Device API
 
 |
 
-.. caution:: 
+**2. การ Publish ข้อความส่วนตัว (Private Message) ไปยัง Device แบบเจาะจง Device สามารถใช้งานได้ 2 แบบ**
 
-	การส่ง message ผ่านทาง REST API ลักษณะ Topic จะแตกต่างจากการส่งผ่าน MQTT Prototol เล็กน้อย คือ ถ้าส่งผ่าน REST API การตั้งค่า Topic ไม่ต้องใส่ "@msg" นำหน้า แต่ระบบจะทำการเติมให้อัตโนมัติ ซึ่งถ้าส่งผ่าน MQTT Prototol จะต้องใส่ "@msg" นำหน้า Topic ที่จะส่งเอง
+- แบบที่ 1 เป็นการระบุ Topic ในรูปแบบ URL Path
+
+:EndPoint: |rest_url|/device/private/{any}/{topic}
+
+:Method: PUT
+
+:Request Header: Authorization : *Device ClientID ของ Device ที่ต้องการส่งข้อความไปหา:Token ของ Device ที่ต้องการส่งข้อความไปหา*
+
+:Request Body: Content-type : *text/plain*
+	
+	ข้อความส่วนตัวที่ต้องการ Publish ไปยัง Device ที่ต้องการ ภายใต้ Topic ที่ระบุ 
+
+:Return: *Response Object*
+
+	- ``status`` => รหัสตอบกลับ (HTTP Response Code)
+
+	- ``message`` => ข้อความตอบกลับ
+
+:ตัวอย่าง: 
+	
+	PUT /device/private/topic/for/me HTTP/1.1
+
+	Host: |rest_url2|
+
+	Authorization: Device 777d5c96-4c83-4aa6-a273-5ee7c5f453b1:abcduKh8r2tP1zVc1W1nG8YWZeu21234
+
+	Hello Device
 
 |
 
-**2. การอ่านข้อมูล Shadow Data ของ Device (ต้องเป็น Device ที่อยู่ใน Group เดียวกัน)**
+- แบบที่ 2 เป็นการระบุ Topic ผ่าน Parameter (Query String)
+
+:EndPoint: |rest_url|/device/private
+
+:Method: PUT
+
+:Request Header: Authorization : *Device ClientID ของ Device ที่ต้องการส่งข้อความไปหา:Token ของ Device ที่ต้องการส่งข้อความไปหา*
+
+:Parameter: ``topic`` :*string* คือ Topic ที่ต้องการ Publish ข้อความส่วนตัวหา ({any}/{topic})
+
+:Return: *Response Object*
+
+	- ``status`` => รหัสตอบกลับ (HTTP Response Code)
+
+	- ``message`` => ข้อความตอบกลับ
+
+:ตัวอย่าง: 
+	
+	PUT /device/private?topic=topic/for/me HTTP/1.1
+
+	Host: |rest_url2|
+
+	Authorization: Device 777d5c96-4c83-4aa6-a273-5ee7c5f453b1:abcduKh8r2tP1zVc1W1nG8YWZeu21234
+
+	Hello Device
+
+|
+
+.. caution:: 
+
+	การส่ง  Message ผ่านทาง REST API ลักษณะ Topic จะแตกต่างจากการส่งผ่าน MQTT Prototol เล็กน้อย คือ ถ้าส่งผ่าน REST API การตั้งค่า Topic ไม่ต้องใส่ "@msg" นำหน้า แต่ระบบจะทำการเติมให้อัตโนมัติ ซึ่งถ้าส่งผ่าน MQTT Prototol จะต้องใส่ "@msg" นำหน้า Topic ที่จะส่งเอง
+	
+	การส่งข้อความส่วนตัว (Private Message) ฝั่ง Device ที่ถูกส่ง Message ไปหาต้องทำการ Subcribe Topic โดยมี Prefix เป็น @private นำหน้า Topic ที่ต้องการ Subcribe เช่น @private/topic/for/me หรือจะใช้ @private/# ก็จะทำให้ได้รับ Private Message ในทุก Topic
+
+|
+
+**3. การอ่านข้อมูล Shadow Data ของ Device (ต้องเป็น Device ที่อยู่ใน Group เดียวกัน)**
 
 :EndPoint: |rest_url|/shadow/data
 
@@ -106,7 +168,7 @@ Device API
 
 	Authorization: Device 777d5c96-4c83-4aa6-a273-5ee7c5f453b1:abcduKh8r2tP1zVc1W1nG8YWZeu21234
 
-**3. การเขียนข้อมูลลง Shadow Data แบบเขียนผสาน (Merge)**
+**4. การเขียนข้อมูลลง Shadow Data แบบเขียนผสาน (Merge)**
 
 :EndPoint: |rest_url|/shadow/data
 
@@ -136,7 +198,7 @@ Device API
 
 	{data:{temperature:33.7, config: {item1: a, item2: b}, note: test case}}
 
-**4. การเขียนข้อมูลลง Shadow Data แบบเขียนทับ (Overwrite)**
+**5. การเขียนข้อมูลลง Shadow Data แบบเขียนทับ (Overwrite)**
 
 :EndPoint: |rest_url|/shadow/data
 
