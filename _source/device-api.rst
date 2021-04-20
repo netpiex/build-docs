@@ -241,7 +241,7 @@ Data Store API
 
 :Method: POST
 
-:Request Header: Authorization : *Bearer UserToken*
+:Request Header: Authorization : *Bearer UserToken* หรือ Authorization : *Device ClientID:DeviceToken* 
 
 	Content-Type : *application/json*
 
@@ -294,7 +294,7 @@ Data Store API
 		- 500 Internal Server Error => หากเกิดข้อผิดพลาดในการเรียกข้อมูลทางฝั่ง Server
 
 
-:ตัวอย่าง: 
+:ตัวอย่างที่ 1 Authorization ด้วย UserToken: 
 
 	POST /api/v1/datapoints/query HTTP/1.1
 
@@ -305,6 +305,18 @@ Data Store API
 	NTcxMzc1ODk4LCJuYmYiOjE1NzEzNzU4OTgsImV4cCI6MTU3MTQ2MjI5OCwiZXhwaXJlSW4iOjg2NDAwLCJqdGkiOiIzRk50VkVmVCIsImlzcyI6I
 
 	mNlcjp1c2VydG9rZW4ifQ.AtbhSRgGXCjiQk4wENMD4KQ3ufDof7HnzHY5Rcli0y0LpTJEDLklM-AmsAVzBnPBnJh9L3LvSGODc9xrYWotcA
+
+	Content-Type: application/json
+
+	{ "start_relative": { "value":1, "unit":"days" }, "metrics":[{ "name":"Aaa5d93b-Ae16-455f-A854-335AAAA16256", "tags":{"attr":["temp", "humit"]}, "limit":50, "group_by":[{ "name":"tag", "tags":["attr"] }], "aggregators":[{ "name":"avg", "sampling":{ "value":"1", "unit":"minutes" } }] }] }
+
+:ตัวอย่างที่ 2 Authorization ด้วย ClientID และ DeviceToken: 
+
+	POST /api/v1/datapoints/query HTTP/1.1
+
+	Host: |feed_url2|
+
+	Authorization: Device Aaa5d93b-Ae16-455f-A854-335AAAA16256:TuZfsgosxxxxx3br4Qt1Do9jvzLM5hZQ
 
 	Content-Type: application/json
 
