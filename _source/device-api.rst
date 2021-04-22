@@ -237,6 +237,62 @@ Shadow Batch Update
 
 |
 
+จะใช้ในกรณีที่ IoT Device ไม่สามารถส่งข้อมูลขึ้น Cloud Platform ได้ตามเวลาที่กำหนด เช่น อาจจะเกิดจากปัญหาการเชื่อมต่ออินเตอร์เน็ต เป็นต้น ทำให้ IoT Device จำเป็นต้องเก็บข้อมูลไว้ที่หน่วยความจำของ Device เองก่อน เช่น เก็บลง SD Card เป็นต้น และเมื่อสามารถเชื่อมต่อ Cloud Platform ได้ จึงทำการส่งข้อมูลที่เก็บไว้ทั้งหมดขึ้น Cloud Platform อีกที โดยสามารถส่งค่าขึ้น Platform ครั้งละหลาย ๆ จุดพร้อมกันได้
+
+|
+
+การเขียน Shadow แบบ Batch ทำได้ 3 ช่องทาง ได้แก่
+
+1. REST API คือ การเขียนข้อมูลเป็น Batch โดยดำเนินการผ่าน REST API ซึ่งสามารถเขียนได้ทั้งแบบผสาน  (Merge) หรือเขียนทับ (Overwrite) มีรายละเอียดดังนี้
+
+|
+
+:EndPoint: |rest_url|/shadow/batch
+
+:Method: PUT (กรณี Merge) หรือ POST (กรณี Overwrite)
+
+:Request Header: Authorization : *Device ClientID:Token*
+
+:Request Body: 
+	
+	ชุดข้อมูลที่ต้องการเขียนลง Shadow อยู่ในรูปแบบ JSON ดังนี้ ``{"batch" : [{"data":{ Shadow Data 1 }, "ts": time 1}, {"data":{ Shadow Data 2 }, "ts": time 2}, ..., {"data":{ Shadow Data n }, "ts": time n}]}``
+
+:Return: *Response Object*
+
+	- ``deviceid`` => ClientID ของ Device ที่ถูกเขียน Shadow
+
+	- ``response`` => สรุปข้อมูลการอัพเดท Shadow (JSON)
+
+:ตัวอย่าง: 
+
+	POST /device/shadow/batch HTTP/1.1
+	
+	Host: |rest_url2|
+
+	Authorization: Device 777d5c96-4c83-4aa6-a273-5ee7c5f453b1:abcduKh8r2tP1zVc1W1nG8YWZeu21234
+
+	{
+  		"batch" : [
+        	{"data":{"temp":25.9, "humid":9.6}, "ts":-90000},
+        	{"data":{"temp":25.3, "humid":9.8}, "ts":-60000},
+       		{"data":{"temp":24.5, "humid":9.1}, "ts":-30000},
+        	{"data":{"temp":26.8, "humid":8.2}, "ts":0}
+	}
+
+.. note:: 
+
+	เวลาที่กำกับของแต่ละชุดข้อมูลมีหน่อยเป็น Millisecond สามารถใช้คำว่า ts หรือ timestamp เป็นชื่อฟิลด์ก็ได้ หากมีค่าต่ำกว่า 1000 * 2^23 = 8388608000 จะถือว่าเป็นค่า Relative Time กับเวลาปัจจุบัน ถ้ามีค่ามากกว่า จะถือเป็น timestamp แบบ Absolute Time สามารถใช้ค่าลบแทนเวลาในอดีตได้ ซึ่งจะเหมาะสำหรับการอัพเดตข้อมูลจุดย้อนหลัง ยกตัวอย่างเช่น ถ้ากำหนด ts หรือ timestamp เป็น -90000 และ timestamp ปัจจุบัน คือ 1619075885 เวลาที่เกิดจุดข้อมูลนั้นจะเป็น 1619075885 - 90000 = 1618985885 (เวลาย้อนหลังไปจากปัจจุบัน 90 วินาที)
+
+|
+
+2. MQTT คือ การเขียนข้อมูลเป็น Batch จะใช้ Topic และ Payload ดูรายละเอียดได้ที่ :ref:`key-shadow-batch-mqtt`
+
+|
+
+3. CoAP API คือ การเขียนข้อมูลเป็น Batch โดยดำเนินการผ่าน CoAP Protocol ซึ่งสามารถเขียนได้ทั้งแบบผสาน (Merge) หรือเขียนทับ (Overwrite) เช่นกัน ดูรายละเอียดได้ที่ :ref:`key-shadow-batch-coap`
+
+|
+
 Data Store API
 --------------------
 

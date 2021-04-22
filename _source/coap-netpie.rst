@@ -125,3 +125,66 @@ Shadow Batch Update
 --------------------
 
 |
+
+จะใช้ในกรณีที่ IoT Device ไม่สามารถส่งข้อมูลขึ้น Cloud Platform ได้ตามเวลาที่กำหนด เช่น อาจจะเกิดจากปัญหาการเชื่อมต่ออินเตอร์เน็ต เป็นต้น ทำให้ IoT Device จำเป็นต้องเก็บข้อมูลไว้ที่หน่วยความจำของ Device เองก่อน เช่น เก็บลง SD Card เป็นต้น และเมื่อสามารถเชื่อมต่อ Cloud Platform ได้ จึงทำการส่งข้อมูลที่เก็บไว้ทั้งหมดขึ้น Cloud Platform อีกที โดยสามารถส่งค่าขึ้น Platform ครั้งละหลาย ๆ จุดพร้อมกันได้
+
+|
+
+การเขียน Shadow แบบ Batch ทำได้ 3 ช่องทาง ได้แก่
+
+|
+
+1. CoAP API คือ การเขียนข้อมูลเป็น Batch โดยดำเนินการผ่าน CoAP Protocol ซึ่งสามารถเขียนได้ทั้งแบบผสาน (Merge) หรือเขียนทับ (Overwrite) มีรายละเอียดดังนี้
+
+|
+
+.. list-table::
+	:widths: 20 80
+
+	* - **EndPoint**
+	  - |coap_url|/shadow/batch
+	* - **Method**
+	  - PUT (กรณี Merge) หรือ POST (กรณี Overwrite)
+	* - **Parameter**
+	  - auth=<ClientID>:<Token>
+	* - **Payload**
+	  - -p {"ackid" : ID value, "batch" : [ {"data":{ Shadow Data 1 }, "ts": time 1}, {"data":{ Shadow Data 2 }, "ts": time 2}, ...,{"data":{ Shadow Data n }, "ts": time n} ]
+	* - **Return**
+	  - Response Object {``deviceid`` => ClientID, ``response`` => สรุปข้อมูลการอัพเดท Shadow (JSON)}
+
+|
+
+ตัวอย่าง (Command Line)  
+
+.. code-block:: console
+
+	coap put "coap://coap.netpie.io/shadow/batch?auth=6c36fdee-5273-4318-xxxx-75dfd2c513db:nzxGsGMYnFdfET6xxxxfb32U9z5kuhvx" -p '{"ackid" : 1234,"batch" : [{"data":{"humid":9.6}, "ts":-90000},{"data":{"humid":9.8}, "ts":-60000},{"data":{"humid":9.1}, "ts":-30000},{"data":{"temp":26.8}, "ts":0}]}'
+
+จากตัวอย่างด้านบน เป็นการเขียนข้อมูล Shadow แบบ Batch แบบผสาน (Merge) ของ Device ID : 6c36fdee-5273-4318-xxxx-75dfd2c513db และค่าที่ได้กลับมา คือ
+
+.. code-block:: json
+	
+	{
+		"deviceid":"6c36fdee-5273-4318-xxxx-75dfd2c513db",
+		"response": {
+			"ackid":1234,
+			"total":4,
+			"mints":1619088626897,
+			"maxts":1619088716897
+		}
+	}
+
+|
+
+.. note:: 
+
+	เวลาที่กำกับของแต่ละชุดข้อมูลมีหน่อยเป็น Millisecond สามารถใช้คำว่า ts หรือ timestamp เป็นชื่อฟิลด์ก็ได้ หากมีค่าต่ำกว่า 1000 * 2^23 = 8388608000 จะถือว่าเป็นค่า Relative Time กับเวลาปัจจุบัน ถ้ามีค่ามากกว่า จะถือเป็น timestamp แบบ Absolute Time สามารถใช้ค่าลบแทนเวลาในอดีตได้ ซึ่งจะเหมาะสำหรับการอัพเดตข้อมูลจุดย้อนหลัง ยกตัวอย่างเช่น ถ้ากำหนด ts หรือ timestamp เป็น -90000 และ timestamp ปัจจุบัน คือ 1619075885 เวลาที่เกิดจุดข้อมูลนั้นจะเป็น 1619075885 - 90000 = 1618985885 (เวลาย้อนหลังไปจากปัจจุบัน 90 วินาที)
+	ackid ใช้เป็นค่าอ้างอิงการตอบกลับของแต่ละ Request ตั้งเป็นค่าอะไรก็ได้ เป็นได้ Number หรือ String โดยทุกการตอบกลับจะมีการทวนค่า ackid เดิม เพื่อให้ผู้ใช้สามารถจับคู่ระหว่าง Request และ Response ได้
+
+|
+
+2. MQTT คือ การเขียนข้อมูลเป็น Batch จะใช้ Topic และ Payload ดูรายละเอียดได้ที่ :ref:`key-shadow-batch-mqtt`
+
+|
+
+3. REST API คือ การเขียนข้อมูลเป็น Batch โดยดำเนินการผ่าน REST API ซึ่งสามารถเขียนได้ทั้งแบบผสาน (Merge) หรือเขียนทับ (Overwrite) เช่นกัน ดูรายละเอียดได้ที่ :ref:`key-shadow-batch-rest`

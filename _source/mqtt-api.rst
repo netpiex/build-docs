@@ -162,6 +162,8 @@ MQTT Topic ที่เกี่ยวข้องกับการจัดก
 
 |
 
+.. _key-shadow-batch-mqtt:
+
 Shadow Batch Update
 --------------------
 
