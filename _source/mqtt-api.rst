@@ -183,14 +183,7 @@ Shadow Batch Update
    * - **Publish Topic**
      - @shadow/batch/update
    * - **Payload**
-     - {
-  		"batch" : [
-        	{"data":{"temp":25.9, "humid":9.6}, "ts":-90000},
-        	{"data":{"temp":25.3, "humid":9.8}, "ts":-60000},
-        	{"data":{"temp":24.5, "humid":9.1}, "ts":-30000},
-        	{"data":{"temp":26.8, "humid":8.2}, "ts":0}
-  		]
-		}
+     - { "batch" : [ {"data":{"temp":25.9, "humid":9.6}, "ts":-90000}, {"data":{"temp":25.3, "humid":9.8}, "ts":-60000}, {"data":{"temp":24.5, "humid":9.1}, "ts":-30000}, {"data":{"temp":26.8, "humid":8.2}, "ts":0}] }
 
 |
 
@@ -204,15 +197,7 @@ Shadow Batch Update
    * - **Publish Topic**
      - @shadow/batch/update
    * - **Payload**
-     - {
-     	"ackid" : 1839,
-  		"batch" : [
-        	{"data":{"temp":25.9, "humid":9.6}, "ts":-90000},
-        	{"data":{"temp":25.3, "humid":9.8}, "ts":-60000},
-        	{"data":{"temp":24.5, "humid":9.1}, "ts":-30000},
-        	{"data":{"temp":26.8, "humid":8.2}, "ts":0}
-  		]
-		}
+     - { "ackid" : 1839, "batch" : [ {"data":{"temp":25.9, "humid":9.6}, "ts":-90000}, {"data":{"temp":25.3, "humid":9.8}, "ts":-60000}, {"data":{"temp":24.5, "humid":9.1}, "ts":-30000}, {"data":{"temp":26.8, "humid":8.2}, "ts":0}] }
 
 |
 
@@ -226,12 +211,7 @@ Shadow Batch Update
    * - **Subscribe Topic**
      - @private/shadow/data/updated:[...device name...]/response
    * - **Payload**
-     - {
-  		"ackid": 1839,
-  		"total": 4,
-  		"mints": 1618457252257,
-  		"maxts":1618457342257
-		}
+     - { "ackid": 1839, "total": 4, "mints": 1618457252257, "maxts":1618457342257 }
 
 |
 
