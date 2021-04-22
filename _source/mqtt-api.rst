@@ -178,7 +178,7 @@ Shadow Batch Update
 |
 
 .. list-table::
-   :widths: 30 50
+   :widths: 10 50
   
    * - **Publish Topic**
      - @shadow/batch/update
@@ -192,7 +192,7 @@ Shadow Batch Update
 |
 
 .. list-table::
-   :widths: 30 50
+   :widths: 10 50
   
    * - **Publish Topic**
      - @shadow/batch/update
@@ -206,7 +206,7 @@ Shadow Batch Update
 |
 
 .. list-table::
-   :widths: 30 50
+   :widths: 10 50
   
    * - **Subscribe Topic**
      - @private/shadow/data/updated:[...device name...]/response
