@@ -116,3 +116,12 @@ CoAP (Constrained Application Protocol) เป็น Protocol ประเภท
 		"modified":1605518877506,
 		"timestamp":1605518877506
 	}
+
+|
+
+.. _key-shadow-batch-coap:
+
+Shadow Batch Update
+--------------------
+
+|

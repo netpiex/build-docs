@@ -230,6 +230,13 @@ Device API
 
 |
 
+.. _key-shadow-batch-rest:
+
+Shadow Batch Update
+--------------------
+
+|
+
 Data Store API
 --------------------
 
