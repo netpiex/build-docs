@@ -148,7 +148,7 @@ Shadow Batch Update
 	* - **Parameter**
 	  - auth=<ClientID>:<Token>
 	* - **Payload**
-	  - -p {"ackid" : ID value, "batch" : [ {"data":{ Shadow Data 1 }, "ts": time 1}, {"data":{ Shadow Data 2 }, "ts": time 2}, ...,{"data":{ Shadow Data n }, "ts": time n} ]
+	  - -p {"ackid" : ID value, "batch" : [ {"data":{ Shadow Data 1 }, "ts": time 1}, {"data":{ Shadow Data 2 }, "ts": time 2}, ...,{"data":{ Shadow Data n }, "ts": time n} ], "merged": true or false }
 	* - **Return**
 	  - Response Object {``deviceid`` => ClientID, ``response`` => สรุปข้อมูลการอัพเดท Shadow (JSON)}
 
@@ -182,6 +182,18 @@ Shadow Batch Update
 
 	ackid ใช้เป็นค่าอ้างอิงการตอบกลับของแต่ละ Request ตั้งเป็นค่าอะไรก็ได้ เป็นได้ Number หรือ String โดยทุกการตอบกลับจะมีการทวนค่า ackid เดิม เพื่อให้ผู้ใช้สามารถจับคู่ระหว่าง Request และ Response ได้
 
+	|
+
+	ในส่วนของฟิลด์ ``merged`` ที่ระบุอยู่ใน Request Body เพื่อส่งไปเขียนลง Shadow เป็นการกำหนดรูปแบบการเขียนข้อมูลว่าจะเขียนแบบผสาน (Merge) หรือแบบเขียนทับ (Overwrite) ถ้าเซ็ต ``merged : true`` จะเป็นการเขียนแบบผสาน (Merge) และถ้าเซ็ต ``merged : false`` จะเป็นการเขียนแบบเขียนทับ (Overwrite) แต่ถ้าไม่มีการระบุค่านี้ลงใน Request Body ระบบจะดูจาก Method ที่เลือกใช้ในการ Request ครั้งนั้น ๆ ว่าเป็น PUT (เขียนแบบ Merge) หรือ POST (เขียนแบบ Overwrite) กรณีที่มีการใช้ Method ขัดแย้งกับฟิลด์ ``merged`` ระบบจะให้ความสำคัญสูงสุดกับฟิลด์ ``merged`` โดยไม่สนใจ Method ของ Request
+
+	|
+
+	การทำงานของ Expression ที่กำหนดไว้ใน Schema และ Trigger กรณีเขียน Shadow แบบ Batch
+
+	Expression ยังคงถูกคำนวณตามสูตรที่กำหนดไว้ทุกชุดข้อมูล เหมือนการ For Loop เขียน Shadow เอง แต่การเขียน Shadow แบบ Batch จะถูกหักโควต้า Shadow read/write เพยีง 1 Operation เท่านั้น แต่โควต้า Shadow Expression จะถูกหักตามจำนวนชุดข้อมูลเช่นเดิม ยกตัวอย่างเช่น ชุดข้อมูลที่ส่งค่ามาบันทึก 100 จุด และมีฟิลด์ข้อมูลที่เซ็ต Expression ไว้ 1 ฟิลด์ จำนวน Shadow Expression ที่ถูกหักจะเท่ากับ 1 x 100 = 100 Operations เป็นต้น
+
+	สำหรับ Trigger จะทำงานเฉพาะชุดข้อมูลที่เป็นค่าล่าสุด (Timestamp มีค่าสูงสุด) เท่านั้น และจะถูกหักโควต้าการใช้งานเหมือนการเขียนข้อมูลแค่ชุดเดียว
+
 |
 
 2. MQTT คือ การเขียนข้อมูลเป็น Batch จะใช้ Topic และ Payload ดูรายละเอียดได้ที่ :ref:`key-shadow-batch-mqtt`
@@ -189,3 +201,9 @@ Shadow Batch Update
 |
 
 3. REST API คือ การเขียนข้อมูลเป็น Batch โดยดำเนินการผ่าน REST API ซึ่งสามารถเขียนได้ทั้งแบบผสาน (Merge) หรือเขียนทับ (Overwrite) เช่นกัน ดูรายละเอียดได้ที่ :ref:`key-shadow-batch-rest`
+
+|
+
+.. caution::
+
+	ข้อจำกัดของการเขียน Shadow แบบ Batch คือ จำนวนชุดข้อมูลที่ส่งไปเขียนได้ต่อครั้งต้องไม่เกิน 100 ชุดข้อมูล (JSON Array ของฟลิด์ ``batch``) เช่น กำหนด Payload ที่ส่งไปเขียนข้อมูลเป็น ``{ "ackid" : 1234, "batch" : [ {"data":{"temp":25.9, "humid":9.6}, "ts":-90000}, {"data":{"temp":25.3, "humid":9.8}, "ts":-60000}, {"data":{"temp":24.5, "humid":9.1}, "ts":-30000}, {"data":{"temp":26.8, "humid":8.2}, "ts":0}], "merged": true }`` แสดงว่ามีจำนวนชุดข้อมูลเท่ากับ 4 ชุดข้อมูล เป็นต้น หากมีส่งชุดข้อมูลไปเกินกว่าที่กำหนด ข้อมูลทั้งหมดจะไม่ถูกบันทึก และจะมีข้อความแจ้งเตือนกลับมาในรูปแบบ JSON ดังนี้ ``{"ackid":1234,"errcode":429,"message":"batch size exceeds 100","inputsize": 102}`` หมายความว่า การเขียนข้อมูลแบบ Batch ที่ ackid เป็น 1234 ส่งชุดข้อมูลไปเกิน 100 ชุด โดยส่งไป 102 ชุด เป็นต้น

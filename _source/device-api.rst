@@ -255,7 +255,11 @@ Shadow Batch Update
 
 :Request Body: 
 	
-	ชุดข้อมูลที่ต้องการเขียนลง Shadow อยู่ในรูปแบบ JSON ดังนี้ ``{"batch" : [{"data":{ Shadow Data 1 }, "ts": time 1}, {"data":{ Shadow Data 2 }, "ts": time 2}, ..., {"data":{ Shadow Data n }, "ts": time n}]}``
+	ชุดข้อมูลที่ต้องการเขียนลง Shadow อยู่ในรูปแบบ JSON ดังนี้ 
+
+.. code-block:: console
+
+	``{"batch" : [{"data":{ Shadow Data 1 }, "ts": time 1}, {"data":{ Shadow Data 2 }, "ts": time 2}, ..., {"data":{ Shadow Data n }, "ts": time n}], "merged": true or false}``
 
 :Return: *Response Object*
 
@@ -271,17 +275,23 @@ Shadow Batch Update
 
 	Authorization: Device 777d5c96-4c83-4aa6-a273-5ee7c5f453b1:abcduKh8r2tP1zVc1W1nG8YWZeu21234
 
-	{
-  		"batch" : [
-        	{"data":{"temp":25.9, "humid":9.6}, "ts":-90000},
-        	{"data":{"temp":25.3, "humid":9.8}, "ts":-60000},
-       		{"data":{"temp":24.5, "humid":9.1}, "ts":-30000},
-        	{"data":{"temp":26.8, "humid":8.2}, "ts":0}
-	}
+	{ "batch" : [ {"data":{"temp":25.9, "humid":9.6}, "ts":-90000}, {"data":{"temp":25.3, "humid":9.8}, "ts":-60000}, {"data":{"temp":24.5, "humid":9.1}, "ts":-30000}, {"data":{"temp":26.8, "humid":8.2}, "ts":0 }}
 
 .. note:: 
 
 	เวลาที่กำกับของแต่ละชุดข้อมูลมีหน่อยเป็น Millisecond สามารถใช้คำว่า ts หรือ timestamp เป็นชื่อฟิลด์ก็ได้ หากมีค่าต่ำกว่า 1000 * 2^23 = 8388608000 จะถือว่าเป็นค่า Relative Time กับเวลาปัจจุบัน ถ้ามีค่ามากกว่า จะถือเป็น timestamp แบบ Absolute Time สามารถใช้ค่าลบแทนเวลาในอดีตได้ ซึ่งจะเหมาะสำหรับการอัพเดตข้อมูลจุดย้อนหลัง ยกตัวอย่างเช่น ถ้ากำหนด ts หรือ timestamp เป็น -90000 และ timestamp ปัจจุบัน คือ 1619075885 เวลาที่เกิดจุดข้อมูลนั้นจะเป็น 1619075885 - 90000 = 1618985885 (เวลาย้อนหลังไปจากปัจจุบัน 90 วินาที)
+
+	|
+
+	ในส่วนของฟิลด์ ``merged`` ที่ระบุอยู่ใน Request Body เพื่อส่งไปเขียนลง Shadow เป็นการกำหนดรูปแบบการเขียนข้อมูลว่าจะเขียนแบบผสาน (Merge) หรือแบบเขียนทับ (Overwrite) ถ้าเซ็ต ``merged : true`` จะเป็นการเขียนแบบผสาน (Merge) และถ้าเซ็ต ``merged : false`` จะเป็นการเขียนแบบเขียนทับ (Overwrite) แต่ถ้าไม่มีการระบุค่านี้ลงใน Request Body ระบบจะดูจาก Method ที่เลือกใช้ในการ Request ครั้งนั้น ๆ ว่าเป็น PUT (เขียนแบบ Merge) หรือ POST (เขียนแบบ Overwrite) กรณีที่มีการใช้ Method ขัดแย้งกับฟิลด์ ``merged`` ระบบจะให้ความสำคัญสูงสุดกับฟิลด์ ``merged`` โดยไม่สนใจ Method ของ Request
+
+	|
+
+	การทำงานของ Expression ที่กำหนดไว้ใน Schema และ Trigger กรณีเขียน Shadow แบบ Batch
+
+	Expression ยังคงถูกคำนวณตามสูตรที่กำหนดไว้ทุกชุดข้อมูล เหมือนการ For Loop เขียน Shadow เอง แต่การเขียน Shadow แบบ Batch จะถูกหักโควต้า Shadow read/write เพยีง 1 Operation เท่านั้น แต่โควต้า Shadow Expression จะถูกหักตามจำนวนชุดข้อมูลเช่นเดิม ยกตัวอย่างเช่น ชุดข้อมูลที่ส่งค่ามาบันทึก 100 จุด และมีฟิลด์ข้อมูลที่เซ็ต Expression ไว้ 1 ฟิลด์ จำนวน Shadow Expression ที่ถูกหักจะเท่ากับ 1 x 100 = 100 Operations เป็นต้น
+
+	สำหรับ Trigger จะทำงานเฉพาะชุดข้อมูลที่เป็นค่าล่าสุด (Timestamp มีค่าสูงสุด) เท่านั้น และจะถูกหักโควต้าการใช้งานเหมือนการเขียนข้อมูลแค่ชุดเดียว
 
 |
 
@@ -290,6 +300,10 @@ Shadow Batch Update
 |
 
 3. CoAP API คือ การเขียนข้อมูลเป็น Batch โดยดำเนินการผ่าน CoAP Protocol ซึ่งสามารถเขียนได้ทั้งแบบผสาน (Merge) หรือเขียนทับ (Overwrite) เช่นกัน ดูรายละเอียดได้ที่ :ref:`key-shadow-batch-coap`
+
+.. caution::
+
+	ข้อจำกัดของการเขียน Shadow แบบ Batch คือ จำนวนชุดข้อมูลที่ส่งไปเขียนได้ต่อครั้งต้องไม่เกิน 100 ชุดข้อมูล (JSON Array ของฟลิด์ ``batch``) เช่น กำหนด Request Body ที่ส่งไปเขียนข้อมูลเป็น ``{ "batch" : [ {"data":{"temp":25.9, "humid":9.6}, "ts":-90000}, {"data":{"temp":25.3, "humid":9.8}, "ts":-60000}, {"data":{"temp":24.5, "humid":9.1}, "ts":-30000}, {"data":{"temp":26.8, "humid":8.2}, "ts":0}], "merged": true }`` แสดงว่ามีจำนวนชุดข้อมูลเท่ากับ 4 ชุดข้อมูล เป็นต้น หากมีส่งชุดข้อมูลไปเกินกว่าที่กำหนด ข้อมูลทั้งหมดจะไม่ถูกบันทึก และจะมีข้อความแจ้งเตือนกลับมา
 
 |
 
