@@ -51,7 +51,7 @@ Getting started
 
 ส่วนสำคัญที่ใช้ในการเชื่อมต่อ Platform ของ Device คือ Key :
 
-.. image:: _static/device_key.png
+.. image:: _static/device_key2.png
 
 Key ใช้สำหรับการเชื่อมต่อของ Device มายัง Platform กรณีเชื่อมต่อผ่าน MQTT Protocol ให้เลือกใช้งาน MQTT Client Library ที่เหมาะสมหรือรองรับกับ Device ที่จะใช้ในการเชื่อมต่อ โดยการเชื่อมต่อของ MQTT จะต้องใช้ 4 Paramters คือ Host, Client id, Username และ Password โดยดูข้อมูลที่จะนำมาใช่ สามารถระบุค่าได้ดังนี้
 
@@ -70,8 +70,7 @@ Key ใช้สำหรับการเชื่อมต่อของ Dev
    * - **Password**
      - ยังไม่ต้องระบุ (ใช้สำหรับกรณีที่ต้องการตรวจสอบที่เพิ่มมากขึ้น)
 
-
-ทดลองเชื่อมต่อ Platform ด้วย MQTT Box โดยดาวน์โหลดได้จาก http://workswithweb.com/mqttbox.html เมื่อดาวน์โหลดเรียบร้อยให้เปิดโปรแกรมขึ้นมาดังรูป :
+ทดลองเชื่อมต่อ Platform ด้วย MQTT Box ซึ่งเป็นแอปที่สามารถดาวน์โหลดได้จาก chrome เว็บสโตร์ เมื่อดาวน์โหลดเรียบร้อยให้เปิดโปรแกรมขึ้นมาดังรูป :
 
 .. image:: _static/mqttbox_create.png
 
@@ -87,6 +86,13 @@ Key ใช้สำหรับการเชื่อมต่อของ Dev
 
 .. image:: _static/mqttbox_self_pubsub.png
 
+|
+
+.. caution:: 
+
+     การตั้งค่าเชื่อมต่อผ่าน MQTT Box ต้องเซ็ต Append timestamp to MQTT client id? ให้เป็น No เพื่อไม่ให้ MQTT Box นำ Timestamp มาต่อท้าย MQTT Client Id ซึ่งจะทำให้ Key ที่ใช้เชื่อมต่อไม่ถูกต้อง และไม่สามารถเชื่อมต่อ Platform ได้ 
+
+|
 
 การสื่อสารระหว่าง Devices
 ---------------------------
