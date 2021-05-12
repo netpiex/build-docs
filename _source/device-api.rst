@@ -259,7 +259,7 @@ Shadow Batch Update
 
 .. code-block:: console
 
-	``{"batch" : [{"data":{ Shadow Data 1 }, "ts": time 1}, {"data":{ Shadow Data 2 }, "ts": time 2}, ..., {"data":{ Shadow Data n }, "ts": time n}], "merged": true or false}``
+	{"batch" : [{"data":{ Shadow Data 1 }, "ts": time 1}, {"data":{ Shadow Data 2 }, "ts": time 2}, ..., {"data":{ Shadow Data n }, "ts": time n}], "merged": true or false}
 
 :Return: *Response Object*
 
