@@ -1,3 +1,7 @@
+.. raw:: html
+
+    <div align="right"><b>TH</b> | <a href="https://docs.netpie.io/en/getting-started.html">EN</a></div>
+
 Getting started
 ===============
 
