@@ -1,3 +1,7 @@
+.. raw:: html
+
+    <div align="right"><b>TH</b> | <a href="https://docs.netpie.io/en/coap-netpie.html">EN</a></div>
+
 CoAP API
 ==========
 
