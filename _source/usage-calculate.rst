@@ -1,3 +1,7 @@
+.. raw:: html
+
+    <div align="right"><b>TH</b> | <a href="https://docs.netpie.io/en/usage-calculate.html">EN</a></div>
+
 Service Usage Calculation
 ==========================
 
