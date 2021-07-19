@@ -20,7 +20,41 @@ Device API
 
 |
 
-**1. การ Publish ข้อความ ไปที่ Topic ต่างๆ สามารถใช้งานได้ 2 แบบ**
+**1. การขอสถานะเชื่อมต่อ Platform ของ Device (Device Status)**
+
+:EndPoint: |rest_url|/status
+
+:Method: GET
+
+:Request Header: Authorization : *Device ClientID:Token*
+
+:Return: *Response Object*
+
+	- ``deviceid`` => รหัสของ Device
+
+	- ``alias`` => ชื่อของ Device
+
+	- ``groupid`` => กลุ่มของ Device
+    
+	- ``projectid`` => โปรเจคของ Device
+    
+	- ``status`` => สถานะการเชื่อมต่อ Platform (1 = เชื่อมต่ออยู่ หรือ online, 0 = ไม่ได้เชื่อมต่อ หรือ offline)
+    
+	- ``enabled`` => สถานะการเปิดใช้งาน Device Key (true = เปิดใช้งาน เชื่อมต่อ Platform ได้, false = ปิดใช้งาน เชื่อมต่อ Platform ไม่ได้)
+    
+	- ``banned`` => สถานะการถูกระงับใช้งานจากระบบ (true = ถูกระงับใช้งาน เชื่อมต่อ Platform ไม่ได้, false = ไม่ถูกระงับใช้งาน เชื่อมต่อ Platform ได้)
+
+:ตัวอย่าง: 
+
+	GET /device/status HTTP/1.1
+
+	Host: |rest_url2|
+
+	Authorization: Device 777d5c96-4c83-4aa6-a273-5ee7c5f453b1:abcduKh8r2tP1zVc1W1nG8YWZeu21234
+
+|
+
+**2. การ Publish ข้อความ ไปที่ Topic ต่างๆ สามารถใช้งานได้ 2 แบบ**
 
 - แบบที่ 1 เป็นการระบุ Topic ในรูปแบบ URL Path
 
@@ -80,7 +114,7 @@ Device API
 
 |
 
-**2. การ Publish ข้อความส่วนตัว (Private Message) ไปยัง Device แบบเจาะจง Device สามารถใช้งานได้ 2 แบบ**
+**3. การ Publish ข้อความส่วนตัว (Private Message) ไปยัง Device แบบเจาะจง Device สามารถใช้งานได้ 2 แบบ**
 
 - แบบที่ 1 เป็นการระบุ Topic ในรูปแบบ URL Path
 
@@ -148,7 +182,7 @@ Device API
 
 |
 
-**3. การอ่านข้อมูล Shadow Data ของ Device (ต้องเป็น Device ที่อยู่ใน Group เดียวกัน)**
+**4. การอ่านข้อมูล Shadow Data ของ Device (ต้องเป็น Device ที่อยู่ใน Group เดียวกัน)**
 
 :EndPoint: |rest_url|/shadow/data
 
@@ -172,7 +206,9 @@ Device API
 
 	Authorization: Device 777d5c96-4c83-4aa6-a273-5ee7c5f453b1:abcduKh8r2tP1zVc1W1nG8YWZeu21234
 
-**4. การเขียนข้อมูลลง Shadow Data แบบเขียนผสาน (Merge)**
+|
+
+**5. การเขียนข้อมูลลง Shadow Data แบบเขียนผสาน (Merge)**
 
 :EndPoint: |rest_url|/shadow/data
 
@@ -202,7 +238,9 @@ Device API
 
 	{data:{temperature:33.7, config: {item1: a, item2: b}, note: test case}}
 
-**5. การเขียนข้อมูลลง Shadow Data แบบเขียนทับ (Overwrite)**
+|
+
+**6. การเขียนข้อมูลลง Shadow Data แบบเขียนทับ (Overwrite)**
 
 :EndPoint: |rest_url|/shadow/data
 
