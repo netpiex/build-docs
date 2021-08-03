@@ -19,5 +19,6 @@
    mqtt-api
    device-api
    coap-netpie
+   freeboard
    quota-netpie
    usage-calculate
