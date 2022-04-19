@@ -11,6 +11,8 @@ Service Usage Calculation
 
 |
 
+.. _api-quota:
+
 API Call
 --------------------
 
@@ -45,6 +47,8 @@ API Response
 	รวม API Call Quota ที่ถูกใช้ไป 		= 1 + 3 = 4 Operations
 
 |
+
+.. _mqtt-quota:
 
 Real-time Messages
 ----------------------------

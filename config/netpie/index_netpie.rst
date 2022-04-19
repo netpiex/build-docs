@@ -22,3 +22,4 @@
    freeboard
    quota-netpie
    usage-calculate
+   self-examination
