@@ -106,7 +106,7 @@
 - Shadow read/write : ถ้า Service นี้หมด จะไม่สามารถ Read/Write Shadow นอกจากนี้ยังส่งผลกระทบไปถึง Service อื่นที่ดำเนินการผ่าน Shadow ด้วย เช่น การบันทึกข้อมูลลง Time-series data storage ผ่านการ Write Shadow จะไม่สามารถบันทึกได้ เป็นต้น
 - API call : ถ้า Service นี้หมด การดำเนินการผ่าน REST API ทั้งหมดจะไม่ทำงาน ดูรายละเอียดได้ที่ :ref:`api-quota`
 - Trigger and action : ถ้า Service นี้หมด Notifiication ต่าง ๆ ตั้งค่าไว้จะไม่ทำงาน
-- Datasources : Service นี้คือ จำนวนขนาดข้อมูลสะสม (หน่วยเป็น Byte) ที่เกิดจากการ Download ข้อมูลจาก Time-series data storage (Data Transfer) ถ้า Service นี้หมด จะส่งผลให้ API call ใช้ไม่ได้ด้วย
+- Datasources : Service นี้คือ จำนวนขนาดข้อมูลสะสม (หน่วยเป็น Byte) ที่เกิดจากการ Download ข้อมูลจาก Time-series data storage (Data Transfer) ถ้า Service นี้หมด จะส่งผลให้การดึงข้อมูลจาก Time-series data storage (ส่วนการแสดง Feed ทั้งหมด) ไม่ทำงาน
 
 |
 
