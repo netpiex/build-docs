@@ -238,3 +238,26 @@ Shadow Trigger
 			}
 		}]
 	}
+
+.. _datasource-quota:
+
+Datasource
+--------------------
+
+|
+
+ปริมาณขนาดข้อมูลสะสม (หน่วยเป็น Byte) ที่เกิดจากการ Download ข้อมูลจาก Time-series data storage หรือก็คือ Data Transfer ซึ่ง ณ ปัจจุบัน การ Download ข้อมูลจาก Time-series data storage จะดำเนินการผ่าน REST API เท่านั้น
+
+|
+
+*ตัวอย่าง*
+````````````
+	มีการเก็บข้อมูลอุณหภุมิและความชื้นลงใน Time-series data storage มีการพัฒนา Web Application เพื่อมาดึงข้อมูลจาก Time-series data storage ไปแสดงผลเป็นกราฟ โดยความถี่ในการดึงข้อมูลมาอัพเดทในกราฟ คือ ทุก 5 นาที (Auto Refresh), ขนาดข้อมูลที่ดึงไปแสดงผลในแต่ละครั้ง คือ 2.5 KB ดังนั้น ถ้ามีการเปิด Web Application ให้แสดงผลกราฟทิ้งไว้นาน 1 ชั่วโมง จะคำนวณปริมาณ Datasource ที่ถูกใช้ไปได้ ดังนี้
+
+	|
+
+	Datasource = 60(นาที) / 5(นาที) x 2.5(KB) = 30 KB 
+
+	|
+	
+	คิดเป็นหน่วย Byte = 30 * 1024 = 30,720 B
