@@ -246,7 +246,7 @@ Datasource
 
 |
 
-ปริมาณขนาดข้อมูลสะสม (หน่วยเป็น Byte) ที่เกิดจากการ Download ข้อมูลจาก Time-series data storage หรือก็คือ Data Transfer ซึ่ง ณ ปัจจุบัน การ Download ข้อมูลจาก Time-series data storage จะดำเนินการผ่าน REST API เท่านั้น
+ปริมาณขนาดข้อมูลสะสม (หน่วยเป็น Byte) ที่เกิดจากการ Download ข้อมูลจาก Time-series data storage หรือก็คือ Data Transfer ซึ่งการดึงข้อมูลทั้งจากระบบภายนอก หรือ Dashboard ที่มีให้ใช้งานภายในจะถูกคิดโควต้าส่วนนี้ทั้งหมด
 
 |
 
