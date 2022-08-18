@@ -1,8 +1,6 @@
 Dashboard
 -----------------------
 
-|
-
 ใช้สำหรับนำข้อมูลที่เก็บอยู่ใน Platfrom มาแสดงผลในรูปแบบต่างๆ  เป็นเหมือนช่องทางให้ผู้ใช้สามารถติดตามหรือควบคุมการทำงานของ Deviec ของตัวเอง โดย Dashboard ที่มีให้ใช้งาน ณ ปัจจุบันมีเพียงประเภทเดียว คือ Freeboard ซึ่งสามารถเข้าใช้งานได้ด้วยการคลิกที่เมนู "Freeboard" ในแทบซ้ายมือ ก็จะปรากฏหน้าจอแสดงรายรายชื่อ Freeboard ทั้งหมดที่เคยสร้างไว้ภายใน Project นั้นๆ (ถ้ามี) ดังรูป
 
 .. image:: _static/portal_freeboard_init.png
@@ -13,10 +11,9 @@ Dashboard
 
 จากรูปด้านบนข้อมูล Dashboard ที่สามารถระบุได้มีดังนี้
 
-:Dashboard Name: ชื่อ Dashboard ไม่อนุญาตให้มีช่องว่าง (White Space) อยู่ในชื่อ
-:Dashboard Description: คำอธิบาย Dashboard
+- **Dashboard Name** คือ ชื่อ Dashboard ไม่อนุญาตให้มีช่องว่าง (White Space) อยู่ในชื่อ
+- **Dashboard Description** คือ คำอธิบาย Dashboard
 
-|
 
 เมื่อกรอกข้อมูลเรียบร้อยแล้วให้คลิกที่ปุ่ม "Create" ก็จะปรากฏรายการ Freeboard ใหม่ที่พึ่งสร้างขึ้นมา ดังรูป
 
@@ -49,7 +46,7 @@ Dashboard
 |
 
 การใช้งาน Freeboard
-~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^
 
 **1. สร้าง "DATASOURCES"** โดยเริ่มจากคลิกที่ "ADD" ในส่วนจัดการ DATASOURCE จะปรากฏฟอร์มให้กรอกข้อมูลเกี่ยวกับ DATASOURCE ที่สร้างดังรูป
 
@@ -57,13 +54,13 @@ Dashboard
 
 จากรูปด้านบนข้อมูล DATASOURCE ที่สามารถระบุได้มีดังนี้
 
-:Name: ชื่อ "DATASOURCES" ตั้งเป็นอะไรก็ได้ และจะเป็นส่วนที่ใช้ในการอ้างอิงตอนดึงข้อมูลมาแสดงผลในแต่ละ Widget
-:Device ID: Client ID ของ Device
-:Device Token: Token ของ Device
-:Subscribed Topics: Topic ที่ต้องการรอรับข้อมูล (Subscribec) ถ้ามีหลาย Topic ให้คั่นแต่ละ Topic ด้วย comma (,)
-:Feed: การเปิดใช้ข้อมูลจาก Timeseries Database ซึ่งจะใช้กับ Feed View Widget (YES เปิดใช้งาน, NO ปิดใช้งาน)
-:Since: ช่วงเวลาย้อนหลังในการดึงข้อมูล Timeseries 
-:Down Sampling: ความละเอียดของจุดข้อมูล เช่น เซ็ตไว้ที่ 1 นาที หมายความว่า จุดข้อมูลต่างๆ ที่เก็บในช่วงเวลา 1 นาที จะถูกนำมาแสดงเพียง 1 จุด (ถ้ามีข้อมูลมากกว่า 1 จุด จะใช้ค่าเฉลี่ย) หรือก็คือ GRANULARITY ของ Feed ใน NETPIE2015
+- **Name** คือ ชื่อ "DATASOURCES" ตั้งเป็นอะไรก็ได้ และจะเป็นส่วนที่ใช้ในการอ้างอิงตอนดึงข้อมูลมาแสดงผลในแต่ละ Widget
+- **Device ID** คือ Client ID ของ Device
+- **Device Token** คือ Token ของ Device
+- **Subscribed Topics** คือ Topic ที่ต้องการรอรับข้อมูล (Subscribec) ถ้ามีหลาย Topic ให้คั่นแต่ละ Topic ด้วย comma (,)
+- **Feed** คือ การเปิดใช้ข้อมูลจาก Timeseries Database ซึ่งจะใช้กับ Feed View Widget (YES เปิดใช้งาน, NO ปิดใช้งาน)
+- **Since** คือ ช่วงเวลาย้อนหลังในการดึงข้อมูล Timeseries 
+- **Down Sampling** คือ ความละเอียดของจุดข้อมูล เช่น เซ็ตไว้ที่ 1 นาที หมายความว่า จุดข้อมูลต่างๆ ที่เก็บในช่วงเวลา 1 นาที จะถูกนำมาแสดงเพียง 1 จุด (ถ้ามีข้อมูลมากกว่า 1 จุด จะใช้ค่าเฉลี่ย) หรือก็คือ GRANULARITY ของ Feed ใน NETPIE2015
 
 .. image:: _static/portal_freeboard_DSinput.png
 
@@ -95,11 +92,9 @@ Dashboard
 
 ทุก Widget ที่มีให้เลือกใน Freeboard จะมีช่องให้กรอก DATASOURCE ทั้งสิ้น ถึงแม้เป็น Control Widget ก็จำเป็นที่จะต้องนำค่าล่าสุดจาก Platform มาอัพเดทสถานะของ Widget เพื่อให้สถานะตรงกันทั้งสองฝั่ง กรณีที่พึ่งเปิด Freeboard นั้นๆ ขึ้นมา หรือสามารถควบคุมได้จากที่อื่น เป็นต้น การกรอก DATASOURCE ในแต่ละ Widget จะมีลักษณะที่คล้ายกัน เริ่มต้นให้ทำการคลิกที่ปุ่ม "DATASOURCE" ซึ่งแสดงอยู่หลังช่องที่จะกรอก หรือพิมพ์คำว่า *datasources["* ลงไปในช่อง หลังจากนั้น Auto Complete จะดึงข้อมูลจากใน DATASOURCE ที่ได้สร้างไว้แล้วมาให้เลือกได้ โดยการเลือกข้อมูลขึ้นอยู่กับประเภทข้อมูลที่ต้องการจาก DATASOURCE นั้นๆ ซึ่งมี 4 ประเภท ตามที่ได้กล่าวไปแล้วในหัวข้อก่อนหน้า รูปแบบการเลือกข้อมูลแต่ละประเภทเป็นดังนี้
 
-|
 
 ``datasources["...DATASOURCE_NAME..."]["...ประเภทข้อมูล..."]["...ขึ้นอยู่กับประเภทข้อมูลที่เลือกก่อนหน้า..."]``
 
-|
 
 **กรณีที่ 1** : เลือกประเภทข้อมูล shadow
 
@@ -116,13 +111,11 @@ Dashboard
 		}
 	}
 
-|
 
 ถ้าต้องการเข้าถึงข้อมูล ventilator speed ต้องกรอก DATASOURCE ดังนี้
 
 ``datasources["...DATASOURCE_NAME..."]["shadow"]["bathroom"]["ventilator"]["speed"]``
 
-|
 
 **กรณีที่ 2** : เลือกประเภทข้อมูล status
 
@@ -130,7 +123,6 @@ Dashboard
 
 ``datasources["...DATASOURCE_NAME..."]["status"]``
 
-|
 
 **กรณีที่ 3** : เลือกประเภทข้อมูล feed
 
@@ -138,7 +130,6 @@ Dashboard
 
 ``datasources["...DATASOURCE_NAME..."]["feed"]``
 
-|
 
 **กรณีที่ 4** : เลือกประเภทข้อมูล msg
 
@@ -146,7 +137,6 @@ Dashboard
 
 ``datasources["...DATASOURCE_NAME..."]["msg"]["home"]["kitchen"]``
 
-|
 
 สำหรับ Control Widget นอกจากจะช่องให้กรอก DATASOURCE แล้ว ยังมีช่องสำหรับตั้งค่าเกี่ยวกับการ Control โดยส่วนใหญ่ช่องดังกล่าวมักมีชื่อฟิลด์เป็น "...ON_EVENT... ACTION" ดังรูป
 
@@ -154,13 +144,11 @@ Dashboard
 
 การเซ็คค่าในช่อง Control จะมีรูปแบบที่แตกต่างไปจากช่องกรอก DATASOURCE ลักษณะจะเป็นการเรียกใช้งาน Object Function มีรูปแบบดังนี้
 
-|
 
 **Control ด้วยการ Write Shadow**
 
 ``netpie["...DATASOURCE_NAME..."].writeShadow("...shadow field...", "...value...")``
 
-|
 
 **Control ด้วยการ Publish Message**
 
@@ -169,11 +157,10 @@ Dashboard
 |
 
 การตั้งค่า Widget
-~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^
 
-|
-
-**Widget : Text**
+Widget : Text
+~~~~~~~~~~~~~~~~
 
 เป็น Data Display Widget ที่แสดงผลในรูปแบบข้อความลักษณะของ Plaint Text
 
@@ -181,25 +168,30 @@ Dashboard
 
 จากรูปด้านบนข้อมูลที่สามารถระบุได้มีดังนี้
 
-:TYPE: ชนิดของ widget
-:TITLE: ตั้งชื่อ widget
-:SIZE: กำหนดขนาดข้อความ
-:VALUE: กำหนดค่าที่ต้องการแสดงผล (ช่องกรอก DATASOURCE)
-:INCLUDE SPARKLINE: แสดงเส้นกราฟจากค่า value (ตัวเลข)
-:ANIMATE VALUE CHANGES: แอนิเมชั่นเมื่อมีการเปลี่ยนแปลงค่าในช่อง VALUE
-:UNITS: หน่วยข้อมูล
+- **TYPE** คือ ชนิดของ widget
+- **TITLE** คือ ตั้งชื่อ widget
+- **SIZE** คือ กำหนดขนาดข้อความ
+- **VALUE** คือ กำหนดค่าที่ต้องการแสดงผล (ช่องกรอก DATASOURCE)
+- **INCLUDE SPARKLINE** คือ แสดงเส้นกราฟจากค่า value (ตัวเลข)
+- **ANIMATE VALUE CHANGES** คือ แอนิเมชั่นเมื่อมีการเปลี่ยนแปลงค่าในช่อง VALUE
+- **UNITS** คือ หน่วยข้อมูล
 
-ตัวอย่างการกรอก DATASOURCE เมื่อต้องการแสดงสถานะการเชื่อมต่อ Platform ของ Device
+.. admonition:: ตัวอย่าง
 
-``(datasources["...DATASOURCE_NAME..."]["status"]) ? "ON LINE" : "OFF LINE"``
+	การกรอก DATASOURCE เมื่อต้องการแสดงสถานะการเชื่อมต่อ Platform ของ Device
 
-การแสดงผลที่ได้เป็นดังรูป
+	``(datasources["...DATASOURCE_NAME..."]["status"]) ? "ON LINE" : "OFF LINE"``
 
-.. image:: _static/portal_freeboard_widgettext2.png
+	การแสดงผลที่ได้เป็นดังรูป
+
+	.. image:: _static/portal_freeboard_widgettext2.png
+
+	|
 
 |
 
-**Widget : Gauge**
+Widget : Gauge
+~~~~~~~~~~~~~~~~
 
 เป็น Data Display Widget ที่แสดงผลในรูปแบบการวัดค่า กำหนดค่าสูงสุด/ต่ำสุดได้
 
@@ -207,24 +199,29 @@ Dashboard
 
 จากรูปด้านบนข้อมูลที่สามารถระบุได้มีดังนี้
 
-:TYPE: ชนิดของ widget
-:TITLE: ตั้งชื่อ widget
-:VALUE: กำหนดค่าที่ต้องการแสดงผล (ช่องกรอก DATASOURCE)
-:UNITS: หน่วยข้อมูล
-:MINIMUM: ค่าต่ำสุด (ตัวเลข)
-:MAXIMUM: ค่าสูงสุด (ตัวเลข)
+- **TYPE** คือ ชนิดของ widget
+- **TITLE** คือ ตั้งชื่อ widget
+- **VALUE** คือ กำหนดค่าที่ต้องการแสดงผล (ช่องกรอก DATASOURCE)
+- **UNITS** คือ หน่วยข้อมูล
+- **MINIMUM** คือ ค่าต่ำสุด (ตัวเลข)
+- **MAXIMUM** คือ ค่าสูงสุด (ตัวเลข)
 
-ตัวอย่างการกรอก DATASOURCE เมื่อต้องการแสดงข้อมูลอุณหภูมิ
+.. admonition:: ตัวอย่าง
+	
+	การกรอก DATASOURCE เมื่อต้องการแสดงข้อมูลอุณหภูมิ
 
-``datasources["...DATASOURCE_NAME..."]["shadow"]["temp"]``
+	``datasources["...DATASOURCE_NAME..."]["shadow"]["temp"]``
 
-การแสดงผลที่ได้เป็นดังรูป
+	การแสดงผลที่ได้เป็นดังรูป
 
-.. image:: _static/portal_freeboard_widgetgauge2.png
+	.. image:: _static/portal_freeboard_widgetgauge2.png
+
+	|
 
 |
 
-**Widget : Spark Line**
+Widget : Spark Line
+~~~~~~~~~~~~~~~~~~~~
 
 เป็น Data Display Widget ที่แสดงผลในรูปแบบเส้นกราฟ และเส้นกราฟแสดงตามข้อมูลที่ระบุ
 
@@ -232,25 +229,30 @@ Dashboard
 
 จากรูปด้านบนข้อมูลที่สามารถระบุได้มีดังนี้
 
-:TYPE: ชนิดของ widget
-:TITLE: ตั้งชื่อ widget
-:VALUE: กำหนดค่าที่ต้องการแสดงผล สามารถ ADD เพิ่มได้มากกว่า 1 เส้นกราฟ (ช่องกรอก DATASOURCE)
-:INCLUDE LEGEND: เปิด/ปิด การเพิ่มคำอธิบายหรือ TAG
-:LEGEND: คำอธิบายหรือ TAG
+- **TYPE** คือ ชนิดของ widget
+- **TITLE** คือ ตั้งชื่อ widget
+- **VALUE** คือ กำหนดค่าที่ต้องการแสดงผล สามารถ ADD เพิ่มได้มากกว่า 1 เส้นกราฟ (ช่องกรอก DATASOURCE)
+- **INCLUDE LEGEND** คือ เปิด/ปิด การเพิ่มคำอธิบายหรือ TAG
+- **LEGEND** คือ คำอธิบายหรือ TAG
 
-ตัวอย่างการกรอก DATASOURCE เมื่อต้องการแสดงข้อมูลอุณหภูมิและความชื้น กด ADD เพิ่มช่อง VALUE ให้มี 2 ช่อง 
+.. admonition:: ตัวอย่าง
 
-``datasources["...DATASOURCE_NAME..."]["shadow"]["temp"]``
+	การกรอก DATASOURCE เมื่อต้องการแสดงข้อมูลอุณหภูมิและความชื้น กด ADD เพิ่มช่อง VALUE ให้มี 2 ช่อง 
 
-``datasources["...DATASOURCE_NAME..."]["shadow"]["humid"]``
+	``datasources["...DATASOURCE_NAME..."]["shadow"]["temp"]``
 
-การแสดงผลที่ได้เป็นดังรูป
+	``datasources["...DATASOURCE_NAME..."]["shadow"]["humid"]``
 
-.. image:: _static/portal_freeboard_widgetsparkline2.png
+	การแสดงผลที่ได้เป็นดังรูป
+
+	.. image:: _static/portal_freeboard_widgetsparkline2.png
+
+	|
 
 |
 
-**Widget : Pointer**
+Widget : Pointer
+~~~~~~~~~~~~~~~~
 
 เป็น Data Display Widget ที่แสดงผลในรูปแบบเข็มชี้ ซึ่งกำหนดตำแหน่งเข็มชี้ได้ตั้งแต่ 0-359 แต่ถ้าเกิน 360 ก็จะเริ่มต้นตำแหน่ง 0 ใหม่อีกครั้ง
 
@@ -260,24 +262,29 @@ Dashboard
 
 จากรูปด้านบนข้อมูลที่สามารถระบุได้มีดังนี้
 
-:TYPE: ชนิดของ widget
-:DIRECTION: ตำแหน่งของเข็มชี้ 360 องศา (0-359) (ช่องกรอก DATASOURCE)
-:VALUE TEXT: กำหนดค่าที่ต้องการแสดงผล (ช่องกรอก DATASOURCE)
-:UNITS: หน่วยข้อมูล
+- **TYPE** คือ ชนิดของ widget
+- **DIRECTION** คือ ตำแหน่งของเข็มชี้ 360 องศา (0-359) (ช่องกรอก DATASOURCE)
+- **VALUE TEXT** คือ กำหนดค่าที่ต้องการแสดงผล (ช่องกรอก DATASOURCE)
+- **UNITS** คือ หน่วยข้อมูล
 
-ตัวอย่างการกรอก DATASOURCE เมื่อต้องการแสดงข้อมูลแรงลมและทิศทาง
+.. admonition:: ตัวอย่าง
 
-``datasources["home-hub"]["shadow"]["wind"]["direction"]``
+	การกรอก DATASOURCE เมื่อต้องการแสดงข้อมูลแรงลมและทิศทาง
 
-``datasources["home-hub"]["shadow"]["wind"]["power"]``
+	``datasources["home-hub"]["shadow"]["wind"]["direction"]``
 
-การแสดงผลที่ได้เป็นดังรูป
+	``datasources["home-hub"]["shadow"]["wind"]["power"]``
 
-.. image:: _static/portal_freeboard_widgetpointer2.png
+	การแสดงผลที่ได้เป็นดังรูป
+
+	.. image:: _static/portal_freeboard_widgetpointer2.png
+
+	|
 
 |
 
-**Widget : Indicator Light**
+Widget : Indicator Light
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 เป็น Data Display Widget ที่แสดงผลในรูปแบบสถานะ ON/OFF เพื่อระบุ STATE ของการทำงาน เช่น สถานะไฟ สถานะเครื่องจักรทำงาน เป็นต้น
 
@@ -285,22 +292,27 @@ Dashboard
 
 จากรูปด้านบนข้อมูลที่สามารถระบุได้มีดังนี้
 
-:TYPE: ชนิดของ widget
-:VALUE: กำหนดค่าที่ต้องการแสดงผล (TRUE,FALSE,1,0) (ช่องกรอก DATASOURCE)
-:ON TEXT: ข้อความที่ต้องการแสดงเมื่อค่าเป็นจริง (ดึงค่าจาก DATASOURCE หรือกรอกค่าลงไปโดยตรงก็ได้)
-:OFF TEXT: ข้อความที่ต้องการแสดงเมื่อค่าเป็นเท็จ (ดึงค่าจาก DATASOURCE หรือกรอกค่าลงไปโดยตรงก็ได้)
+- **TYPE** คือ ชนิดของ widget
+- **VALUE** คือ กำหนดค่าที่ต้องการแสดงผล (TRUE,FALSE,1,0) (ช่องกรอก DATASOURCE)
+- **ON TEXT** คือ ข้อความที่ต้องการแสดงเมื่อค่าเป็นจริง (ดึงค่าจาก DATASOURCE หรือกรอกค่าลงไปโดยตรงก็ได้)
+- **OFF TEXT** คือ ข้อความที่ต้องการแสดงเมื่อค่าเป็นเท็จ (ดึงค่าจาก DATASOURCE หรือกรอกค่าลงไปโดยตรงก็ได้)
 
-ตัวอย่างการกรอก DATASOURCE เมื่อต้องการแสดงข้อมูลการเปิด/ปิดพัดลมดูดอากาศ
+.. admonition:: ตัวอย่าง
 
-``datasources["home-hub"]["shadow"]["bathroom"]["ventilator"]["speed"]!=0``
+	การกรอก DATASOURCE เมื่อต้องการแสดงข้อมูลการเปิด/ปิดพัดลมดูดอากาศ
 
-การแสดงผลที่ได้เป็นดังรูป
+	``datasources["home-hub"]["shadow"]["bathroom"]["ventilator"]["speed"]!=0``
 
-.. image:: _static/portal_freeboard_widgetindicatorlight2.png
+	การแสดงผลที่ได้เป็นดังรูป
+
+	.. image:: _static/portal_freeboard_widgetindicatorlight2.png
+
+	|
 
 |
 
-**Widget : HTML**
+Widget : HTML
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 เป็น Data Display Widget ที่แสดงผลในรูปแบบหน้าเว็บ HTML สามารถเขียนโค้ดเป็นภาษา HTML หรือ Javascript ได้
 
@@ -308,21 +320,26 @@ Dashboard
 
 จากรูปด้านบนข้อมูลที่สามารถระบุได้มีดังนี้
 
-:TYPE: ชนิดของ widget
-:HTML: เขียนโค้ด HTML, Javascript ให้เป็นหน้าเว็บได้ (ช่องกรอก DATASOURCE)
-:Height Blocks: ขนาดความสูงของบล็อคที่ใช้แสดงผล
+- **TYPE** คือ ชนิดของ widget
+- **HTML** คือ เขียนโค้ด HTML, Javascript ให้เป็นหน้าเว็บได้ (ช่องกรอก DATASOURCE)
+- **Height Blocks** คือ ขนาดความสูงของบล็อคที่ใช้แสดงผล
 
-ตัวอย่างในที่นี้จะใช้การใส่โค้ด HTML แสดงตัวอักษรหลายสีหลายขนาด
+.. admonition:: ตัวอย่าง
 
-``<p style="color:red;font-size:18px;">RED</p><p style="color:blue;font-size:36px;">BLUE</p><p style="color:pink;font-size:24px;">PINK</p>``
+	การใส่โค้ด HTML แสดงตัวอักษรหลายสีหลายขนาด
 
-การแสดงผลที่ได้เป็นดังรูป
+	``<p style="color:red;font-size:18px;">RED</p><p style="color:blue;font-size:36px;">BLUE</p><p style="color:pink;font-size:24px;">PINK</p>``
 
-.. image:: _static/portal_freeboard_widgetHTML2.png
+	การแสดงผลที่ได้เป็นดังรูป
+
+	.. image:: _static/portal_freeboard_widgetHTML2.png
+
+	|
 
 |
 
-**Widget : Button**
+Widget : Button
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 เป็น Control Widget ที่แสดงผลในรูปแบบปุ่มกด กำหนด action ที่จะทำงานเมื่อกดปุ่มได้
 
@@ -330,24 +347,29 @@ Dashboard
 
 จากรูปด้านบนข้อมูลที่สามารถระบุได้มีดังนี้
 
-:TYPE: ชนิดของ widget
-:BUTTON CAPTION: ข้อความบนปุ่มกด
-:LABEL TEXT: ข้อความอธิบาย
-:BUTTON COLOR: กำหนดกำหนดสีของปุ่มกด
-:ONCLICK ACTION: เงื่อนไขการทำงานเมื่อมีการกดปุ่ม
-:ONCREATED ACTION: เงื่อนไขการทำงานเมื่อสร้างปุ่มเสร็จ
+- **TYPE** คือ ชนิดของ widget
+- **BUTTON CAPTION** คือ ข้อความบนปุ่มกด
+- **LABEL TEXT** คือ ข้อความอธิบาย
+- **BUTTON COLOR** คือ กำหนดกำหนดสีของปุ่มกด
+- **ONCLICK ACTION** คือ เงื่อนไขการทำงานเมื่อมีการกดปุ่ม
+- **ONCREATED ACTION** คือ เงื่อนไขการทำงานเมื่อสร้างปุ่มเสร็จ
 
-ตัวอย่างในที่นี้จะใช้ปุ่มในการเปลี่ยนช่องทีวี เมิ่อคลิกปุ่มก็จะไปอัพเดทค่าที่เก็บช่องทีวีใน Shadow
+.. admonition:: ตัวอย่าง
 
-``netpie["home-hub"].writeShadow("TV.channel","Channel 1")``
+	การใช้ปุ่มเปลี่ยนช่องทีวี เมิ่อคลิกปุ่มก็จะไปอัพเดทค่าที่เก็บช่องทีวีใน Shadow
 
-การแสดงผลที่ได้เป็นดังรูป
+	``netpie["home-hub"].writeShadow("TV.channel","Channel 1")``
 
-.. image:: _static/portal_freeboard_widgetbutton2.png
+	การแสดงผลที่ได้เป็นดังรูป
+
+	.. image:: _static/portal_freeboard_widgetbutton2.png
+
+	|
 
 |
 
-**Widget : Toggle**
+Widget : Toggle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 เป็น Control Widget ที่แสดงผลในรูปแบบปุ่มกด 2 STATE กำหนด action ที่จะทำงานได้ทั้งเปิด/ปิด
 
@@ -355,30 +377,35 @@ Dashboard
 
 จากรูปด้านบนข้อมูลที่สามารถระบุได้มีดังนี้
 
-:TYPE: ชนิดของ widget
-:TOGGLE CAPTION: ข้อความอธิบาย
-:TOGGLE STATE: กำหนดค่าที่ต้องการแสดงผล (TRUE,FALSE,1,0)
-:ON TEXT: ข้อความที่ต้องการแสดงเมื่อค่าเป็นจริง
-:OFF TEXT: ข้อความที่ต้องการแสดงเมื่อค่าเป็นเท็จ
-:ONTOGGLEON ACTION: เงื่อนไขการทำงานเมื่อต้องการเปลี่ยน STATE จาก OFF เป็น ON
-:ONTOGGLEOFF ACTION: เงื่อนไขการทำงานเมื่อต้องการเปลี่ยน STATE จาก ON เป็น OFF
-:ONCREATED ACTION: เงื่อนไขการทำงานเมื่อสร้าง toggle เสร็จ
+- **TYPE** คือ ชนิดของ widget
+- **TOGGLE CAPTION** คือ ข้อความอธิบาย
+- **TOGGLE STATE** คือ กำหนดค่าที่ต้องการแสดงผล (TRUE,FALSE,1,0)
+- **ON TEXT** คือ ข้อความที่ต้องการแสดงเมื่อค่าเป็นจริง
+- **OFF TEXT** คือ ข้อความที่ต้องการแสดงเมื่อค่าเป็นเท็จ
+- **ONTOGGLEON ACTION** คือ เงื่อนไขการทำงานเมื่อต้องการเปลี่ยน STATE จาก OFF เป็น ON
+- **ONTOGGLEOFF ACTION** คือ เงื่อนไขการทำงานเมื่อต้องการเปลี่ยน STATE จาก ON เป็น OFF
+- **ONCREATED ACTION** คือ เงื่อนไขการทำงานเมื่อสร้าง toggle เสร็จ
 
-ตัวอย่างในที่นี้จะใช้ในการ เปิด/ปิด ทีวี เมิ่อคลิก toggle ก็จะไปอัพเดทสถานะของทีวีใน Shadow
+.. admonition:: ตัวอย่าง
 
-TOGGLE STATE ให้ดึงสถานะปัจจุบันจาก Shadow มาก่อน ``datasources["home-hub"]["shadow"]["TV"]["status"]=="on"``
+	การ เปิด/ปิด ทีวี เมิ่อคลิก toggle ก็จะไปอัพเดทสถานะของทีวีใน Shadow
 
-ONTOGGLEON ACTION เซ็ตเป็น ``netpie["home-hub"].writeShadow("TV.status","on")``
+	TOGGLE STATE ให้ดึงสถานะปัจจุบันจาก Shadow มาก่อน ``datasources["home-hub"]["shadow"]["TV"]["status"]=="on"``
 
-ONTOGGLEOFF ACTION เซ็ตเป็น ``netpie["home-hub"].writeShadow("TV.status","off")``
+	ONTOGGLEON ACTION เซ็ตเป็น ``netpie["home-hub"].writeShadow("TV.status","on")``
 
-การแสดงผลที่ได้เป็นดังรูป
+	ONTOGGLEOFF ACTION เซ็ตเป็น ``netpie["home-hub"].writeShadow("TV.status","off")``
 
-.. image:: _static/portal_freeboard_widgettoggle2.png
+	การแสดงผลที่ได้เป็นดังรูป
+
+	.. image:: _static/portal_freeboard_widgettoggle2.png
+
+	|
 
 |
 
-**Widget : Slider**
+Widget : Slider
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 เป็น Control Widget ที่แสดงผลในรูปแบบปุ่มกดแบบ slide กำหนดระดับค่าสำหรับการใช้งาน เช่น ความคุมความเร็วการทำงานรอบมอเตอร์ กำหนดระดับแสงสว่างของหลอดไฟ เป็นต้น
 
@@ -386,33 +413,38 @@ ONTOGGLEOFF ACTION เซ็ตเป็น ``netpie["home-hub"].writeShadow("TV
 
 จากรูปด้านบนข้อมูลที่สามารถระบุได้มีดังนี้
 
-:TYPE: ชนิดของ widget
-:SLIDER CAPTION: ข้อความอธิบาย
-:FILLED COLOR: สีที่แสดงบน slider
-:DISPLAY VALUE: แสดงค่า slider ด้านบนมุมขวา
-:MIN VALUE: ค่าต่ำสุด
-:MAX VALUE: ค่าสูงสุด
-:STEP: เลื่อน slider ทุกๆ n ครั้ง ตามตัวเลขที่กำหนด
-:INITIAL VALUE: ค่าเริ่มต้น
-:AUTO UPDATE VALUE: เมื่อมีค่าเปลี่ยนแปลง slider จะเปลี่ยนตามค่าที่ได้รับ
-:ONSTART ACTION: เงื่อนไขการทำงานเมื่อคลิกที่ slider
-:ONSLIDE ACTION: เงื่อนไขการทำงานเมื่อคลิกลากเปลี่ยนตำแหน่ง slider แต่ยังไม่ปล่อย
-:ONSTOP ACTION: เงื่อนไขการทำงานเมื่อปล่อยคลิก slider เช่น
-:ONCREATED ACTION: เงื่อนไขการทำงานเมื่อสร้าง toggle เสร็จ
+- **TYPE** คือ ชนิดของ widget
+- **SLIDER CAPTION** คือ ข้อความอธิบาย
+- **FILLED COLOR** คือ สีที่แสดงบน slider
+- **DISPLAY VALUE** คือ แสดงค่า slider ด้านบนมุมขวา
+- **MIN VALUE** คือ ค่าต่ำสุด
+- **MAX VALUE** คือ ค่าสูงสุด
+- **STEP** คือ เลื่อน slider ทุกๆ n ครั้ง ตามตัวเลขที่กำหนด
+- **INITIAL VALUE** คือ ค่าเริ่มต้น
+- **AUTO UPDATE VALUE** คือ เมื่อมีค่าเปลี่ยนแปลง slider จะเปลี่ยนตามค่าที่ได้รับ
+- **ONSTART ACTION** คือ เงื่อนไขการทำงานเมื่อคลิกที่ slider
+- **ONSLIDE ACTION** คือ เงื่อนไขการทำงานเมื่อคลิกลากเปลี่ยนตำแหน่ง slider แต่ยังไม่ปล่อย
+- **ONSTOP ACTION** คือ เงื่อนไขการทำงานเมื่อปล่อยคลิก slider
+- **ONCREATED ACTION** คือ เงื่อนไขการทำงานเมื่อสร้าง toggle เสร็จ
 
-ตัวอย่างในที่นี้จะใช้ในการควบคุมแรงลมของพัดลมดูดอากาศ
+.. admonition:: ตัวอย่าง
 
-AUTO UPDATE VALUE ให้ดึงข้อมูลปัจจุบันจาก Shadow มาก่อน ``datasources["home-hub"]["shadow"]["bathroom"]["ventilator"]["speed"]``
+	การควบคุมแรงลมของพัดลมดูดอากาศ
 
-ONSLIDE ACTION เซ็ตเป็น ``netpie["home-hub"].writeShadow("bathroom.ventilator.speed",value)``
+	AUTO UPDATE VALUE ให้ดึงข้อมูลปัจจุบันจาก Shadow มาก่อน ``datasources["home-hub"]["shadow"]["bathroom"]["ventilator"]["speed"]``
 
-การแสดงผลที่ได้เป็นดังรูป
+	ONSLIDE ACTION เซ็ตเป็น ``netpie["home-hub"].writeShadow("bathroom.ventilator.speed",value)``
 
-.. image:: _static/portal_freeboard_widgetslider2.png
+	การแสดงผลที่ได้เป็นดังรูป
+
+	.. image:: _static/portal_freeboard_widgetslider2.png
+
+	|
 
 |
 
-**Widget : Feedview**
+Widget : Feedview
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 เป็น Data Display Widget ที่แสดงผลข้อมูล Timeseries ในรูปแบบกราฟ เลือกแสดงผลกราฟได้หลายเส้น ตามค่าที่เก็บใน Timeseries Database
 
@@ -420,30 +452,37 @@ ONSLIDE ACTION เซ็ตเป็น ``netpie["home-hub"].writeShadow("bathro
 
 จากรูปด้านบนข้อมูลที่สามารถระบุได้มีดังนี้
 
-:TYPE: ชนิดของ widget
-:TITLE: ตั้งชื่อ widget
-:DATA SOURCE: ชุดข้อมูลกราฟเป็น json array
-:FILTER: data field ที่จะเลือกแสดงข้อมูลบนกราฟ (หลาย data field ให้คั่นด้วยเครื่องหมาย ,)
-:TYPE OF CHART: ประเภทการแสดงผลกราฟ มี 2 ตัวเลือก แสดงแบบ LINE กับ STEP
-:X AXIS TITLE: ข้อความกำกับบนแกน X
-:Y AXIS TITLE: ข้อความกำกับบนแกน Y
-:BEGIN AT 0: YES ตั้งให้ค่าแกน Y เริ่มต้นที่ 0, NO ให้เฉลี่ยค่าเริ่มต้นแกน Y จากข้อมูลกราฟที่มีอยู่
-:LINE COLORS: กำหนดสีให้เส้นกราฟ เช่น #ff0000,#00ff00,#0000ff
-:MAKER: YES แสดงตำแหน่งจุดข้อมูลบนเส้นกราฟ, NO ไม่แสดงตำแหน่งจุดข้อมูลบนเส้นกราฟ
-:MULTIPLE AXIS: YES แสดงแกน Y ตามจำนวนเส้นกราฟ, NO แสดงแกน Y เป็นแกนเดียวกันทุกเส้นกราฟ
-:AUTO GAP: YES ถ้าข้อมูลเก็บด้วยเวลาต่างกันมากเกิน กราฟจะไม่มีการลากเส้นต่อกันให้, NO กราฟจะลากเส้นต่อกันให้
+- **TYPE** คือ ชนิดของ widget
+- **TITLE** คือ ตั้งชื่อ widget
+- **DATA SOURCE** คือ ชุดข้อมูลกราฟเป็น json array
+- **FILTER** คือ data field ที่จะเลือกแสดงข้อมูลบนกราฟ (หลาย data field ให้คั่นด้วยเครื่องหมาย ,)
+- **TYPE OF CHART** คือ ประเภทการแสดงผลกราฟ มี 2 ตัวเลือก แสดงแบบ LINE กับ STEP
+- **X AXIS TITLE** คือ ข้อความกำกับบนแกน X
+- **Y AXIS TITLE** คือ ข้อความกำกับบนแกน Y
+- **BEGIN AT 0** YES ตั้งให้ค่าแกน Y เริ่มต้นที่ 0, NO ให้เฉลี่ยค่าเริ่มต้นแกน Y จากข้อมูลกราฟที่มีอยู่
+- **LINE COLORS** คือ กำหนดสีให้เส้นกราฟ เช่น #ff0000,#00ff00,#0000ff
+- **MAKER**  YES แสดงตำแหน่งจุดข้อมูลบนเส้นกราฟ, NO ไม่แสดงตำแหน่งจุดข้อมูลบนเส้นกราฟ
+- **MULTIPLE AXIS** YES แสดงแกน Y ตามจำนวนเส้นกราฟ, NO แสดงแกน Y เป็นแกนเดียวกันทุกเส้นกราฟ
+- **AUTO GAP** YES ถ้าข้อมูลเก็บด้วยเวลาต่างกันมากเกิน กราฟจะไม่มีการลากเส้นต่อกันให้, NO กราฟจะลากเส้นต่อกันให้
 
-ตัวอย่างการกรอก DATASOURCE เมื่อต้องการแสดงข้อมูลอุณหภูมิเก็บเป็น Timeseries
+.. admonition:: ตัวอย่าง
 
-DATA SOURCE เซ็ตเป็น ``datasources["home-hub"]["feed"]``
+	การกรอก DATASOURCE เมื่อต้องการแสดงข้อมูลอุณหภูมิเก็บเป็น Timeseries
 
-FILTER เซ็ตตามชื่อฟิลด์ใน Shadow temp
+	DATA SOURCE เซ็ตเป็น ``datasources["home-hub"]["feed"]``
 
-การแสดงผลที่ได้เป็นดังรูป
+	FILTER เซ็ตตามชื่อฟิลด์ใน Shadow temp
 
-.. image:: _static/portal_freeboard_widgetfeed2.png
+	การแสดงผลที่ได้เป็นดังรูป
 
-**Widget : Longdo Map**
+	.. image:: _static/portal_freeboard_widgetfeed2.png
+
+	|
+
+|
+
+Widget : Longdo Map
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 เป็น Data Display Widget ที่แสดงผลในรูปแบบแผนที่ ใช้สำหรับระบุตำแหน่งที่ตั้งอุปกรณ์ หรือ car gps tracker
 
@@ -451,22 +490,26 @@ FILTER เซ็ตตามชื่อฟิลด์ใน Shadow temp
 
 จากรูปด้านบนข้อมูลที่สามารถระบุได้มีดังนี้
 
-:TYPE: ชนิดของ widget
-:LATITUDE: ตำแหน่ง latitude บนแผนที่
-:LONGTITUDE: ตำแหน่ง longtitude บนแผนที่
-:ZOOM: การย่อ/ขยายสัดส่วนแผนที่
-:STYLES: รูปแบบแผนที่ Map แผนที่ธรรมดา, Satellite แผนที่ดาวเทียม
-:Traffic: แสดงข้อมูลการจราจรหรือไม่ YES แสดง, NO ไม่แสดง
-:Toolbar: แสดงแถบเครื่องมือหรือไม่ YES แสดง, NO ไม่แสดง
-:Height Blocks: ขนาดความสูงของบล็อคที่ใช้แสดงผล
+- **TYPE** คือ ชนิดของ widget
+- **LATITUDE** คือ ตำแหน่ง latitude บนแผนที่
+- **LONGTITUDE** คือ ตำแหน่ง longtitude บนแผนที่
+- **ZOOM** คือ การย่อ/ขยายสัดส่วนแผนที่
+- **STYLES** คือ รูปแบบแผนที่ Map แผนที่ธรรมดา, Satellite แผนที่ดาวเทียม
+- **Traffic** คือ แสดงข้อมูลการจราจรหรือไม่ YES แสดง, NO ไม่แสดง
+- **Toolbar** คือ แสดงแถบเครื่องมือหรือไม่ YES แสดง, NO ไม่แสดง
+- **Height Blocks** คือ ขนาดความสูงของบล็อคที่ใช้แสดงผล
 
 
-ตัวอย่างการกรอก DATASOURCE เมื่อต้องการแสดงข้อมูลอุณหภูมิเก็บเป็น Timeseries
+.. admonition:: ตัวอย่าง
 
-LATITUDE เซ็ตเป็น ``datasources["home-hub"]["shadow"]["location"]["latitude"]``
+	การกรอก DATASOURCE เมื่อต้องการแสดงข้อมูลอุณหภูมิเก็บเป็น Timeseries
 
-LATITUDE เซ็ตเป็น ``datasources["home-hub"]["shadow"]["location"]["longtitude"]``
+	LATITUDE เซ็ตเป็น ``datasources["home-hub"]["shadow"]["location"]["latitude"]``
 
-การแสดงผลที่ได้เป็นดังรูป
+	LATITUDE เซ็ตเป็น ``datasources["home-hub"]["shadow"]["location"]["longtitude"]``
 
-.. image:: _static/portal_freeboard_widgetmap2.png
+	การแสดงผลที่ได้เป็นดังรูป
+
+	.. image:: _static/portal_freeboard_widgetmap2.png
+
+	|

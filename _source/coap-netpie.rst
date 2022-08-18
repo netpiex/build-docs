@@ -5,37 +5,33 @@
 CoAP API
 ==========
 
-|
-
 CoAP (Constrained Application Protocol) เป็น Protocol ประเภทหนึ่งคล้ายกับ HTTP แต่ HTTP จะเป็น TCP ส่วน CoAP จะเป็น UDP ซึ่งถูกพัฒนาขึ้นเพื่อลดขนาดแพคเกจข้อมูลที่ส่งให้เล็กลง ช่วยให้ลดการใช้ทรัพยากรทั้งหน่วยความจำในการประมวลผลและพลังงาน จึงเหมาะสำหรับ Microcontroller ที่มีหน่วยความจำไม่มากหรือต้องการประหยัดพลัง เช่น NB-IoT โดยมี Endpoint หลัก คือ |coap_url| มีรายละเอียดดังนี้
-
-|
 
 ตัวอย่างการใช้งานในที่นี้จะอยู่ในรูปแบบ Command Line ใช้ NodeJS สำหรับการติดตั้ง CoAP Client (ติดตั้ง NodeJS https://nodejs.org/en/download/) โดยการติดตั้ง CoAP Client ให้รันด้วยคำสั่งต่อไปนี้ใน (เวอร์ชัน CoAP Client ที่รองรับต้องไม่เกิน 0.5.1)
 
-|
+.. code-block:: console
 
-``npm i coap-cli@0.5.1 -g``
+	npm i coap-cli@0.5.1 -g
 
 |
 
 **1. การ Publish ข้อความ ไปที่ Topic ต่างๆ**
 
-|
+.. rst-class:: left-align-left-col
 
-.. list-table::
-	:widths: 20 80
+	.. list-table::
+		:widths: 20 80
 
-	* - **EndPoint**
-	  - |coap_url|/message/{any}/{topic}
-	* - **Method**
-	  - PUT
-	* - **Parameter**
-	  - auth=<ClientID>:<Token>
-	* - **Payload**
-	  - -p message
-	* - **Return**
-	  - Response Code ในที่นี้จะเป็น ``undefined`` เนื่องจาก Code ที่ส่งกลับมาไม่มีการกำหนดค่าไว้
+		* - **EndPoint**
+		  - |coap_url|/message/{any}/{topic}
+		* - **Method**
+		  - PUT
+		* - **Parameter**
+		  - auth=<ClientID>:<Token>
+		* - **Payload**
+		  - -p message
+		* - **Return**
+		  - Response Code ในที่นี้จะเป็น ``undefined`` เนื่องจาก Code ที่ส่งกลับมาไม่มีการกำหนดค่าไว้
 
 ตัวอย่าง (Command Line) 
 
@@ -49,19 +45,19 @@ CoAP (Constrained Application Protocol) เป็น Protocol ประเภท
 
 **2. การอ่านข้อมูล Shadow Data ของ Device**
 
-|
+.. rst-class:: left-align-left-col
 
-.. list-table::
-	:widths: 20 80
+	.. list-table::
+		:widths: 20 80
 
-	* - **EndPoint**
-	  - |coap_url|/shadow/data
-	* - **Method**
-	  - GET
-	* - **Parameter**
-	  - auth=<ClientID>:<Token>
-	* - **Return**
-	  - Response Object {``deviceid`` => ClientID, ``data`` => Shadow Data ของ Device (JSON), ``rev`` => Revision ของ Shadow, ``modified`` => Timestamp การแก้ไขล่าสุด}
+		* - **EndPoint**
+		  - |coap_url|/shadow/data
+		* - **Method**
+		  - GET
+		* - **Parameter**
+		  - auth=<ClientID>:<Token>
+		* - **Return**
+		  - Response Object {``deviceid`` => ClientID, ``data`` => Shadow Data ของ Device (JSON), ``rev`` => Revision ของ Shadow, ``modified`` => Timestamp การแก้ไขล่าสุด}
 
 ตัวอย่าง (Command Line) 
 
@@ -86,21 +82,21 @@ CoAP (Constrained Application Protocol) เป็น Protocol ประเภท
 
 **3. การเขียนข้อมูลลง Shadow Data แบบเขียนผสาน (Merge)**
 
-|
+.. rst-class:: left-align-left-col
 
-.. list-table::
-	:widths: 20 80
+	.. list-table::
+		:widths: 20 80
 
-	* - **EndPoint**
-	  - |coap_url|/shadow/data
-	* - **Method**
-	  - PUT
-	* - **Parameter**
-	  - auth=<ClientID>:<Token>
-	* - **Payload**
-	  - -p {data: { Shadow Data (JSON) }}
-	* - **Return**
-	  - Response Object {``deviceid`` => ClientID, ``data`` => Shadow Data ของ Device (JSON), ``modified`` => Timestamp การแก้ไขล่าสุด, ``timestamp`` => Timestamp ที่ใช้กำกับจุดข้อมูลกรณีมีการเก็บลง Time-series data storage}
+		* - **EndPoint**
+		  - |coap_url|/shadow/data
+		* - **Method**
+		  - PUT
+		* - **Parameter**
+		  - auth=<ClientID>:<Token>
+		* - **Payload**
+		  - -p {data: { Shadow Data (JSON) }}
+		* - **Return**
+		  - Response Object {``deviceid`` คือ ClientID, ``data`` คือ Shadow Data ของ Device (JSON), ``modified`` คือ Timestamp การแก้ไขล่าสุด, ``timestamp`` คือ Timestamp ที่ใช้กำกับจุดข้อมูลกรณีมีการเก็บลง Time-series data storage}
 
 ตัวอย่าง (Command Line)  
 
@@ -128,35 +124,27 @@ CoAP (Constrained Application Protocol) เป็น Protocol ประเภท
 Shadow Batch Update
 --------------------
 
-|
-
 จะใช้ในกรณีที่ IoT Device ไม่สามารถส่งข้อมูลขึ้น Cloud Platform ได้ตามเวลาที่กำหนด เช่น อาจจะเกิดจากปัญหาการเชื่อมต่ออินเตอร์เน็ต เป็นต้น ทำให้ IoT Device จำเป็นต้องเก็บข้อมูลไว้ที่หน่วยความจำของ Device เองก่อน เช่น เก็บลง SD Card เป็นต้น และเมื่อสามารถเชื่อมต่อ Cloud Platform ได้ จึงทำการส่งข้อมูลที่เก็บไว้ทั้งหมดขึ้น Cloud Platform อีกที โดยสามารถส่งค่าขึ้น Platform ครั้งละหลาย ๆ จุดพร้อมกันได้
-
-|
 
 การเขียน Shadow แบบ Batch ทำได้ 3 ช่องทาง ได้แก่
 
-|
-
 1. CoAP API คือ การเขียนข้อมูลเป็น Batch โดยดำเนินการผ่าน CoAP Protocol ซึ่งสามารถเขียนได้ทั้งแบบผสาน (Merge) หรือเขียนทับ (Overwrite) มีรายละเอียดดังนี้
 
-|
+.. rst-class:: left-align-left-col
 
-.. list-table::
-	:widths: 20 80
+	.. list-table::
+		:widths: 20 80
 
-	* - **EndPoint**
-	  - |coap_url|/shadow/batch
-	* - **Method**
-	  - PUT (กรณี Merge) หรือ POST (กรณี Overwrite)
-	* - **Parameter**
-	  - auth=<ClientID>:<Token>
-	* - **Payload**
-	  - -p {"ackid" : ID value, "batch" : [ {"data":{ Shadow Data 1 }, "ts": time 1}, {"data":{ Shadow Data 2 }, "ts": time 2}, ...,{"data":{ Shadow Data n }, "ts": time n} ], "merged": true or false }
-	* - **Return**
-	  - Response Object {``deviceid`` => ClientID, ``response`` => สรุปข้อมูลการอัพเดท Shadow (JSON)}
-
-|
+		* - **EndPoint**
+		  - |coap_url|/shadow/batch
+		* - **Method**
+		  - PUT (กรณี Merge) หรือ POST (กรณี Overwrite)
+		* - **Parameter**
+		  - auth=<ClientID>:<Token>
+		* - **Payload**
+		  - -p {"ackid" : ID value, "batch" : [ {"data":{ Shadow Data 1 }, "ts": time 1}, {"data":{ Shadow Data 2 }, "ts": time 2}, ...,{"data":{ Shadow Data n }, "ts": time n} ], "merged": true or false }
+		* - **Return**
+		  - Response Object {``deviceid`` คือ ClientID, ``response`` คือ สรุปข้อมูลการอัพเดท Shadow (JSON)}
 
 ตัวอย่าง (Command Line)  
 
@@ -192,7 +180,7 @@ Shadow Batch Update
 
 	|
 
-	การทำงานของ Expression ที่กำหนดไว้ใน Schema และ Trigger กรณีเขียน Shadow แบบ Batch
+	**การทำงานของ Expression ที่กำหนดไว้ใน Schema และ Trigger กรณีเขียน Shadow แบบ Batch**
 
 	Expression ยังคงถูกคำนวณตามสูตรที่กำหนดไว้ทุกชุดข้อมูล เหมือนการ For Loop เขียน Shadow เอง แต่การเขียน Shadow แบบ Batch จะถูกหักโควต้า Shadow read/write เพยีง 1 Operation เท่านั้น แต่โควต้า Shadow Expression จะถูกหักตามจำนวนชุดข้อมูลเช่นเดิม ยกตัวอย่างเช่น ชุดข้อมูลที่ส่งค่ามาบันทึก 100 จุด และมีฟิลด์ข้อมูลที่เซ็ต Expression ไว้ 1 ฟิลด์ จำนวน Shadow Expression ที่ถูกหักจะเท่ากับ 1 x 100 = 100 Operations เป็นต้น
 
@@ -210,12 +198,22 @@ Shadow Batch Update
 
 .. caution::
 
-	ข้อจำกัดของการเขียน Shadow แบบ Batch คือ จำนวนชุดข้อมูลที่ส่งไปเขียนได้ต่อครั้งต้องไม่เกิน 100 ชุดข้อมูล (JSON Array ของฟลิด์ ``batch``) เช่น กำหนด Payload ที่ส่งไปเขียนข้อมูลเป็น 
+	ข้อจำกัดของการเขียน Shadow แบบ Batch คือ จำนวนชุดข้อมูลที่ส่งไปเขียนได้ต่อครั้งต้องไม่เกิน 100 ชุดข้อมูล (JSON Array ของฟิลด์ ``batch``) เช่น กำหนด Payload ที่ส่งไปเขียนข้อมูลเป็น 
 
-	{ "ackid" : 1234, "batch" : [ {"data":{"temp":25.9, "humid":9.6}, "ts":-90000}, {"data":{"temp":25.3, "humid":9.8}, "ts":-60000}, {"data":{"temp":24.5, "humid":9.1}, "ts":-30000}, {"data":{"temp":26.8, "humid":8.2}, "ts":0}], "merged": true } 
+	.. code-block:: json
+
+		{ 
+			"batch" : [ 
+				{"data":{"temp":25.9, "humid":9.6}, "ts":-90000}, 
+				{"data":{"temp":25.3, "humid":9.8}, "ts":-60000}, 
+				{"data":{"temp":24.5, "humid":9.1}, "ts":-30000}, 
+				{"data":{"temp":26.8, "humid":8.2}, "ts":0}
+			], 
+			"merged": true 
+		}
 
 	แสดงว่ามีจำนวนชุดข้อมูลเท่ากับ 4 ชุดข้อมูล เป็นต้น หากมีส่งชุดข้อมูลไปเกินกว่าที่กำหนด ข้อมูลทั้งหมดจะไม่ถูกบันทึก และจะมีข้อความแจ้งเตือนกลับมาในรูปแบบ JSON ดังนี้ 
 
-	{"ackid":1234,"errcode":429,"message":"batch size exceeds 100","inputsize": 102} 
+	``{"ackid":1234,"errcode":429,"message":"batch size exceeds 100","inputsize": 102}``
 
 	หมายความว่า การเขียนข้อมูลแบบ Batch ที่ ackid เป็น 1234 ส่งชุดข้อมูลไปเกิน 100 ชุด โดยส่งไป 102 ชุด เป็นต้น

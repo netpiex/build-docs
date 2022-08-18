@@ -7,14 +7,14 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Documentation'
-copyright = '2020, NETPIE'
+project = ''
+copyright = '2022, NETPIE'
 author = 'NETPIE'
 
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '1'
+release = ''
 
 
 # -- General configuration ---------------------------------------------------
@@ -29,6 +29,7 @@ release = '1'
 extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.githubpages',
+    'sphinx_copybutton',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -114,8 +115,10 @@ pygments_style = 'sphinx'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-#html_static_path = ['_static']
+html_static_path = ['_static']
 #html_extra_path = ['_static']
+
+html_css_files = ["custom.css"]
 
 
 # Custom sidebar templates, must be a dictionary that maps document names
@@ -128,9 +131,13 @@ pygments_style = 'sphinx'
 #
 # html_sidebars = {}
 #---sphinx-themes-----
-html_theme = 'rtcat_sphinx_theme'
-import rtcat_sphinx_theme
-html_theme_path = [rtcat_sphinx_theme.get_html_theme_path()]
+#html_theme = 'sphinx_book_theme'
+#import sphinx_book_theme
+#html_theme_path = [sphinx_book_theme.get_html_theme_path()]
 
-html_logo = '_static/NETPIE2020-logo.png'
+html_theme = 'press'
+
+
+#html_logo = '_static/NETPIE2020-logo.png'
+html_logo = '_static/netpie-logo.png'
 html_favicon = '_static/netpie_favicon.png'

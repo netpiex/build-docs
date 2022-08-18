@@ -1,0 +1,91 @@
+img {
+  max-width: 100%;
+}
+
+table.left-align-left-col td {
+    text-align: left;
+    vertical-align: text-top;
+}
+
+.sidebar-group .caption .caption-text{
+  text-transform: uppercase;
+}
+
+blockquote {
+  color: #000;
+}
+
+.highlight {
+  background: #ebedf424;
+  background-color: #ebedf424;
+  color: #000;
+  border: 1px solid #EBEDF4;
+}
+
+.content pre {
+  margin: 0;
+}
+
+.caption {
+  text-align: center;
+}
+
+.admonition {
+  padding: 0.1rem 1.5rem;
+  border-left-width: 0.5rem;
+  border-left-style: solid;
+  margin: 1rem 0;
+  box-shadow: 0px 0px 0px #e5e5e5;
+  background-color: #f3f5f7;
+  color: #000;
+  border: 0px solid #787878;
+}
+.admonition-title {
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 600;
+  margin-bottom: -0.6rem;
+}
+
+.admonition.note {
+  background-color: #fff;
+  border-color: #5faaea;
+  box-shadow: 2px 2px 6px #e5e5e5;
+  border-left-width: 0.5rem;
+  border-left-style: solid;
+}
+
+.admonition.tip {
+  background-color: #fff;
+  border-color: #42b983;
+  box-shadow: 2px 2px 6px #e5e5e5;
+  border-left-width: 0.5rem;
+  border-left-style: solid;
+}
+
+.admonition.caution, .admonition.warning {
+  background-color: rgba(255,229,100,.3);
+  border-color: #e7c000;
+  color: #6b5900;
+  box-shadow: 2px 2px 6px #e5e5e5;
+  border-left-width: 0.5rem;
+  border-left-style: solid;
+
+}
+.admonition.danger, .admonition.error {
+  background-color: #ffe6e6;
+  border-color: #c00;
+  color: #4d0000;
+  box-shadow: 2px 2px 6px #e5e5e5;
+  border-left-width: 0.5rem;
+  border-left-style: solid;
+
+}
+
+.home-link {
+  margin-left: 50px;
+}
+
+.navbar .links {
+  font-size: 1.2rem;
+}
