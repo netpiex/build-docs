@@ -7,14 +7,14 @@
 
 # -- Project information -----------------------------------------------------
 
-project = ''
-copyright = '2022, NETPIE'
+project = 'Documentation'
+copyright = '2020, NETPIE'
 author = 'NETPIE'
 
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = ''
+release = '1'
 
 
 # -- General configuration ---------------------------------------------------
@@ -30,6 +30,7 @@ extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.githubpages',
     'sphinx_copybutton',
+
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -51,12 +52,15 @@ broker_domain = 'mqtt.netpie.io'
 auth_domain = 'https://authx.netpie.io'
 rest_domain = 'https://api.netpie.io/v2/device'
 rest_domain2 = 'api.netpie.io/v2/device'
-feed_domain = 'https://ds.netpie.io/feed'
-feed_domain2 = 'ds.netpie.io/feed'
-swagger_part = '(ทดสอบการทำงานของ API ได้ที่ https://trial-api.netpie.io)'
+feed_domain = 'https://api.netpie.io/v2/feed'
+feed_domain2 = 'api.netpie.io/v2/feed'
 platform_name = 'NETPIE'
 coap_domain = 'coap://coap.netpie.io'
+swagger_part = '(ทดสอบการทำงานของ API ได้ที่  https://trial-api.netpie.io/)'
+tag_project = '50'
+tag_device = '10'
 #gql_domain = ''
+#swagger_part = ''
 
 rst_prolog = """
 .. |portal_url| replace:: {0}
@@ -66,20 +70,24 @@ rst_prolog = """
 .. |rest_url2| replace:: {4}
 .. |feed_url| replace:: {5}
 .. |feed_url2| replace:: {6}
-.. |swagger_part| replace:: {7}
-.. |platform_name| replace:: {8}
-.. |coap_url| replace:: {9}
+.. |platform_name| replace:: {7}
+.. |coap_url| replace:: {8}
+.. |swagger_part| replace:: {9}
+.. |tag_project| replace:: {10}
+.. |tag_device| replace:: {11}
 """.format(
 portal_domain, 
 broker_domain,
-auth_domain,
+auth_domain, 
 rest_domain,
 rest_domain2,
 feed_domain,
 feed_domain2,
-swagger_part,
 platform_name,
-coap_domain
+coap_domain,
+swagger_part,
+tag_project,
+tag_device 
 )
 
 # -- Customize Config For NEXPIE Site ----------------------------------------
@@ -89,7 +97,7 @@ coap_domain
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = 'en'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -111,15 +119,14 @@ pygments_style = 'sphinx'
 # documentation.
 #
 # html_theme_options = {}
+html_theme = 'press'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
-#html_extra_path = ['_static']
 
-html_css_files = ["custom.css"]
-
+html_css_files = ["netpietheme.css","custom.css",'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css']
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
@@ -131,13 +138,17 @@ html_css_files = ["custom.css"]
 #
 # html_sidebars = {}
 #---sphinx-themes-----
-#html_theme = 'sphinx_book_theme'
-#import sphinx_book_theme
-#html_theme_path = [sphinx_book_theme.get_html_theme_path()]
 
-html_theme = 'press'
+html_theme_options = {
+  "external_links": [
+      ("<i class='fa fa-facebook-square'></i>", "https://www.facebook.com/groups/netpie/"),
+      ("<i class='fa fa-youtube-play'></i>", "https://www.youtube.com/channel/UCUx4rX08qf3rFdviFymCtZw"),
+      ("<i class='fa fa-book'></i>", "https://netpie.io/guide"),
+      ("<i class='fa fa-envelope'></i>", "mailto:contact@nexpie.com")
+  ]
+}
 
-
-#html_logo = '_static/NETPIE2020-logo.png'
 html_logo = '_static/netpie-logo.png'
 html_favicon = '_static/netpie_favicon.png'
+
+

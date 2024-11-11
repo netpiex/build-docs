@@ -1,74 +1,70 @@
 .. raw:: html
 
-    <div align="right"><b>TH</b> | <a href="https://docs.netpie.io/en/device-config.html">EN</a></div>
+    <div align="right"><b>TH</b> | <a href="https://docs.netpie.io/en/">EN</a></div>
+
+.. _device-config:
 
 Device Configuration
 =====================
 
-|
 
 Device Shadow
 ------------------
 
-คือ ฐานข้อมูลเสมือนของอุปกรณ์ เป็นฐานข้อมูลเล็ก ๆ ที่มีคู่อยู่กับอุปกรณ์ (Device) ทุกตัว ใช้สำหรับเก็บข้อมูลต่าง ๆ เกี่ยวกับอุปกรณ์นั้น ๆ (Device Shadow Data) เช่น ข้อมูลที่เกิดจากเซนเซอร์ ข้อมูลการกำหนดองค์ประกอบต่าง ๆ (Device Configuration) เป็นต้น
 
-โดย Device Shadow จะกำหนดในรูปแบบ JSON มีลักษณะดังนี้
+คือ ฐานข้อมูลเสมือนของอุปกรณ์ เป็นฐานข้อมูลเล็ก ๆ ที่มีคู่อยู่กับอุปกรณ์ (Device) ทุกตัว ใช้สำหรับเก็บข้อมูลต่าง ๆ เกี่ยวกับอุปกรณ์นั้น ๆ (Device Shadow Data) เช่น ข้อมูลที่เกิดจากเซนเซอร์  ข้อมูลการกำหนดองค์ประกอบต่าง ๆ (Device Configuration) เป็นต้น 
 
 .. code-block:: json
 
 	{
-		"field1" : "value1",
-		"field2" : 2,
-		"field3" : {
-			"subfiled1" : "value3.1",
-			"subfiled2" : [1, 2, 3],
-			"subfiled3" : {
-				"subfiled3.1" : "value3.3.1"
-			}
-		}
+		"config": {
+			"lastupdate": "2020-06-01",
+			"var": {
+				"v1": "a",
+				"v2": true,
+				"v3": 1
+			},
+			"version": 1
+		},
+		"enable": true,
+		"items": ["a", "b", "c"]
 	}
+
+|
+
+.. note:: การลบฟิลด์ใน Shadow ผ่าน |portal_url|
+
+	การบันทึก Shadow ผ่านหน้าเว็บ Portal จะเป็นการบันทึกแบบผสาน (Merge) ดังนั้น ถ้าต้องการลบฟิลด์ใดฟิลด์หนึ่งจาก Shadow จะใช้วิธีลบออกจากช่องกรอก Shadow ไม่ได้ ต้องใช้วิธีเซ็ตฟิลด์นั้นให้เป็นค่า null เมื่อบันทึกระบบจะทำการลบฟิลด์นั้นออกจาก Shadow ให้
 
 |
 
 Device Schema
 ------------------
 
-นิยามของ Device Schema ในที่นี้ คือ แผงผังข้อมูลที่กำหนดไว้เพื่อใช้กำกับ Device Shadow สำหรับ Device ที่ต้องมีการจัดการข้อมูล แนะนำให้สร้าง Device Schema ของข้อมูลเตรียมไว้ Device Schema เสมือนเป็น Device Template ทำให้ Server สามารถ
-
-- การตรวจสอบชนิดข้อมูล (Data Validation)
-- การแปลงข้อมูล (Data Transformation) เช่น เปลี่ยนหน่วยของข้อมูล เป็นต้น
-- การเก็บข้อมูลลงใน Timeseries Database 
+Schema เป็นตัวกำหนดโครงสร้างข้อมูลใน shadow โดยปกติ device จะไม่ถูกบังคับให้ต้องมี schema หาก device นั้นไม่มี schema ทุกการเขียน shadow จะถูกบันทึกลงไปใน DeviceShadow 
+โดยไม่มีการประมวลผลใดๆเบื้องต้น เช่น เปลี่ยนหน่วยข้อมูล ก่อนการบันทึกหรือก่อนการนำค่าไปใช้ต่อ
 
 โดย Device Schema จะประกาศในรูปแบบ JSON มีลักษณะดังนี้
 
 .. code-block:: json
 
 	{
-	    "additionalProperties": false,
-	    "properties": {
-	        "temp": {
-	            "operation": {
-	                "store": {
-	                    "ttl": "30d"
-	                },
-	                "transform": {
-	                    "expression": "($.temp * 1.8) + 32"
-	                }
-	            },
-	            "type": "number"
-	        },
-	        "place": {
-		      "operation": {
-		        "store": {
-		          "ttl": "7m"
-		        }
-		      },
-		      "type": "string"
-		    }
-	    }
+  		"additionalProperties": false,
+  		"properties": {
+    		"temp": {
+      			"operation": {
+        			"transform": {
+          				"expression": "($.temp * 1.8) + 32"
+        			}
+      			},
+      			"type": "number"
+    		},
+    		"place": {
+      			"type": "string"
+    			}
+  		}
 	}
 
-|
 
 Device Schema จะประกอบไปด้วย
 
@@ -76,46 +72,328 @@ Device Schema จะประกอบไปด้วย
 	
 	สถานะการอนุญาตให้บันทึกข้อมูลลง Shadow หรือ Timeseries Database ในกรณีที่ข้อมูลไม่ตรงตามที่กำหนดใน Properties
 
-	``additionalProperties : true`` คือ อนุญาตให้บันทึกลง Shadow หรือ Timeseries Database
+	``additionalProperties : true`` => อนุญาตให้บันทึกลง Shadow หรือ Timeseries Database
 
-	``additionalProperties : false`` คือ ไม่อนุญาตให้บันทึกเฉพาะส่วนที่ไม่ตรงตาม Properties
+	``additionalProperties : false`` => ไม่อนุญาตให้บันทึกเฉพาะส่วนที่ไม่ตรงตาม Properties
 
-	.. admonition:: ตัวอย่าง
-
-		Schema มีการกำหนด Properties เป็น ``temp``, ``humid`` ข้อมูลที่ส่งมาเป็น ``temp``, ``humid`` และ ``location`` ถ้าหาก ``additionalProperties`` เป็น ``true`` ข้อมูลของ ``location`` จะถูกบันทึกลงไปใน shadow และ Timeseries Database แต่หากเป็น ``false`` จะมีเพียง ``temp`` และ ``humid``
-		เท่านั้นที่จะถูกบันทึกลง shadow และ Timeseries Database
-
-|
+	**ตัวอย่าง** Schema มีการกำหนด Properties เป็น temp, humid ข้อมูลที่ส่งมาเป็น temp, humid และ color ถ้าหาก additionalProperties เป็น true ข้อมูลของ color จะถูกบันทึกลงไปใน shadow หรือ feed แต่หากเป็น false จะมีเพียง humid และ temp เท่านั้นที่จะถูกบันทึกลง shadow หรือ Timeseries Database
 
 :properties *(json)*:
 
-	เริ่มจากกำหนดชื่อฟิลด์ (จากตัวอย่าง  คือ ``temp`` และ ``place``) และกำหนดคุณสมบัติของแต่ละฟิลด์ซึ่งจะอยู่ในรูปแบบ JSON โดยจะแยก 2 ส่วน คือ
+	เริ่มจากกำหนดชื่อฟิลด์ (จากตัวอย่าง  คือ "temp" และ "place") และกำหนดคุณสมบัติของแต่ละฟิลด์ซึ่งจะอยู่ในรูปแบบ JSON โดยจะแยก 2 ส่วน คือ
 
 	- ``operation`` สำหรับตั้งค่าการจัดการข้อมูลในฟิลด์นั้น ๆ ประกอบด้วย
 
-		- ``store`` สำหรับตั้งค่าการเก็บข้อมูลลง Timeseries Database
+		``transform`` การแปลงข้อมูล (Data Transformation) ก่อนการจัดเก็บ
 
-			- ``ttl`` คือ ระยะเวลาของการเก็บข้อมูลใน Timeseries Database แต่ละจุดข้อมูลที่มีอายุการเก็บครบตามที่กำหนดจะถูกลบทิ้งอัตโนมัติ จำเป็นต้องกำหนดค่านี้ ระบบถึงจะเก็บข้อมูลลง Timeseries Database การกำหนดค่าจะระบุตัวเลขจำนวนเต็มตามด้วยหน่วยเวลา ดังนี้ ms(มิลลิวินาที), s(วินาที), m(นาที) h(ชั่วโมง), d(วัน), y(ปี) ถ้าไม่ระบุหน่วยค่า default จะเป็น ms(มิลลิวินาที) 
+			``expression`` คือ สูตรหรือวิธีการแปลงข้อมูล (Data Transformation) ก่อนการจัดเก็บ
 
-			.. admonition:: ตัวอย่าง
-
-				30d หมายถึง เก็บข้อมูลนาน 30 วัน, 1y หมายถึง เก็บข้อมูลนาน 1 ปี, 3000 หมายถึง เก็บข้อมูลนาน 3 วินาที
-
-		- ``transform`` การแปลงข้อมูล (Data Transformation) ก่อนการจัดเก็บ
-
-			- ``expression`` คือ สูตรหรือวิธีการแปลงข้อมูล (Data Transformation) ก่อนการจัดเก็บ
-
-			.. admonition:: ตัวอย่าง
-
-				จาก *Device Schema Example* กำหนด ``expression`` เท่ากับ ``($.temp * 1.8) + 32`` เป็นการแปลงหน่วยอุณหภูมิค่าที่เซนเซอร์วัดได้จากหน่วยเซลเซียสเป็นฟาเรนไฮต์ โดยนำมาคูณด้วย 1.8 และบวกด้วย 32 จะได้ค่าอุณหภูมิเป็นหน่วยฟาเรนไฮต์ ก่อนบันทึกลงใน Device Shadow หรือ Timeseries Database
+			**ตัวอย่าง** จาก *Device Schema Example* กำหนด ``expression`` เท่ากับ ``($.temp * 1.8) + 32`` เป็นการแปลงหน่วยอุณหภูมิค่าที่เซนเซอร์วัดได้จากหน่วยเซลเซียสเป็นฟาเรนไฮต์ โดยนำมาคูณด้วย 1.8 และบวกด้วย 32 จะได้ค่าอุณหภูมิเป็นหน่วยฟาเรนไฮต์ ก่อนบันทึกลงใน Device Shadow หรือ Timeseries Database
 
 	- ``type`` คือ ชนิดของข้อมูลในฟิลด์นั้น ๆ ได้แก่ number, string, boolean, array, object 
 
+|
+
 .. caution:: 
 
-	การกำหนดชื่อฟิลด์ใน Properties Schema ต้องประกอบด้วยอักษรภาษาอังกฤษ (a-z, A-Z), ตัวเลข (0-9) หรือ Underscore (_) เท่านั้น ห้ามมีอักขระพิเศษอื่น ๆ นอกเหนือจากนี้ เพราะจะไม่สามารถเก็บข้อมูลได้
-	
+	การกำหนดชื่อฟิลด์ใน Properties Schema ต้องประกอบด้วยอักษรภาษาอังกฤษ (a-z, A-Z), ตัวเลข (0-9) หรือ Underscore (_) เท่านั้น ห้ามมีอักขระพิเศาอื่น ๆ นอกเหนือจากนี้ เพราะจะไม่สามารถเก็บข้อมูลได้
+
 |
+
+โดยที่สามารถใช้ประโยชน์จาก schema ได้ในหลายลักษณะต่อไปนี้
+
+**1. ใช้สำหรับ validate data type**
+
+สามารถกำหนดค่าต่างๆของฟิวด์ข้อมูลได้ เช่น data type, minimum, maximum ถ้าตัวแปรใน shadow ฟิวด์ไหน ไม่ผ่านเงื่อนไขการ validate ตัวแปรนั้นจะถูกเอาออกไป 
+เสมือนไม่ได้ส่งเข้ามา ส่วนตัวแปรอื่นๆ จะยังคงถูกนำไปประมวลผลต่อไป 
+
+.. code-block:: json
+
+	{
+		"additionalProperties": true,
+		"properties": {
+			"temp": {
+				"type": "number",
+				"minimum": 0,
+				"maximum": 100,
+				"default": 25,
+			}
+		}
+	}
+
+แต่ถ้าตัวแปรที่ส่งเข้ามา มีชนิดต่างจากที่ระบุใน schema ระบบจะพยายาม convert ให้ในรูปแบบที่เหมาะสมที่สุด
+
+- ``กรณีที่ 1`` เขียนตัวแปรผิดชนิด ลงตัวแปร schema ชนิด string ระบบจะแปลงเป็น string อัตโนมัติ เช่น
+
+.. rst-class:: left-align-left-col
+
+	.. list-table::
+		:widths: 20 40
+
+		* - **Variable**
+		  - **Tranformed Variable**
+		* - 2
+		  - “2”
+		* - true
+		  - “true”
+		* - {x: 123}
+		  - “{\”x\”:123}”
+
+- ``กรณีที่ 2`` เขียนตัวแปรผิดชนิด ลงตัวแปร schema ชนิด number ระบบจะแปลงเป็น number อัตโนมัติ หากแปลงได้ แต่ถ้าแปลงไม่ได้ จะไม่สนใจตัวแปรนี้
+	
+.. rst-class:: left-align-left-col
+
+	.. list-table::
+		:widths: 20 40
+
+		* - **Variable**
+		  - **Tranformed Variable**
+		* - “2.3”
+		  - 2.3
+		* - true
+		  - 1
+		* - {x: 123}
+		  - ไม่สนใจตัวแปรนี้
+
+
+- ``กรณีที่ 3`` เขียนตัวแปรผิดชนิด ลงตัวแปร schema ชนิด boolean ระบบจะแปลงเป็น boolean อัตโนมัติ แต่ถ้าแปลงไม่ได้ หรือกำกวม จะไม่สนใจตัวแปรนี้
+		
+.. rst-class:: left-align-left-col
+
+	.. list-table::
+		:widths: 20 40
+		
+		* - **Variable**
+		  - **Tranformed Variable**
+		* - “TruE”
+		  - true
+		* - “False”
+		  - false
+		* - 0
+		  - false
+		* - 1
+		  - true
+		* - {x: 123}
+		  - ไม่สนใจตัวแปรนี้
+
+**2. ใช้แปลงค่าของข้อมูลเบื้องต้น**
+
+สามารถใส่ฟังก์ชั่น เพื่อแปลงค่าก่อนนำไปใช้ ค่าตัวแปรที่ขึ้นต้นด้วย $. เป็นการอ้างอิงค่าที่ถูกอัพเดตเข้ามาใหม่ สามารถถอด dot notaion path แบบนี้ได้ $home.bedroom.temp  
+เช่น ตัวอย่างการแปลงหน่วยของค่า sensor ที่เข้ามา จาก C เป็น F 
+
+.. code-block:: json
+
+	{
+		"additionalProperties": true,
+		"properties": {
+			"temp": {
+				"type": "number",
+				"minimum": 0,
+				"maximum": 100,
+				"operation": {
+					"transform": {
+						"expression": "$.temp*9/5 + 32"
+					}
+				}
+			}
+		}
+	}
+
+Schema Decimal Transform
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+นอกจากนี้ยังสามารถอ้างอิงค่าเก่าด้วยตัวแปรได้โดยใช้ $$. และ $.เป็นการอ้างอิงค่าที่ถูกอัพเดตเข้ามาใหม่ เช่นตัวอย่าง จะเป็นการ smoothing ค่า ด้วยการหาค่าเฉลี่ยถ่วงน้ำหนักกับค่าเดิม ส่วนฟิวด์​ dp คือ decimal places หรือตำแหน่งทศนิยม 
+เช่น ถ้ากำหนดค่า dp: 1 คือทศนิยม 1 ตำแหน่ง แล้วค่าที่ส่งเข้ามาเป็น 0.3333333333 จะถูกแปลงเป็น 0.3 
+
+.. code-block:: json
+
+	{
+		"additionalProperties": true,
+		"properties": {
+			"humid": {
+				"type": "number",
+				"operation": {
+					"transform": {
+						"expression": "0.9*$$.humid + 0.1*$.humid",
+						"dp": 1
+					}
+				}
+			}
+		}
+	}
+
+Schema Array Transform 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ฟีเจอร์ Transform มีฟังก์ชั่นพิเศษ ที่สามารถเรียกใช้ได้ ได้แก่
+
+- ``concat(array, array)``   รวม array สองตัวเข้าด้วยกัน
+
+- ``slice(array, int)``  ตัดตัวแปรตามจำนวนที่กำหนด ฟิวด์ที่สองหากเป็นลบจะเป็นการตัดจากด้านหลัง
+
+- ``sort(array, int)``   เรียงลำดับ array ใหม่ ฟิวด์ที่สองค่าบวกลบ (เช่น -1, 1 ) จะเป็นการระบุทิศทางการเรียง
+
+- ``reverse(array)``   กลับทิศ array
+
+
+.. code-block:: json
+
+		{
+		"properties": {
+			"temp": {
+				"operation": {
+					"transform": {
+						"expression": "$.temp"
+			}
+		}
+		},
+		"log": {
+			"operation": {
+				"transform": {
+					"expression": "concat($$.log, [$.temp])"
+			}
+		}
+		},
+		"log5": {
+			"operation": {
+				"transform": {
+					"expression": "slice(concat($$.log5, [$.temp]), -5)"
+			}
+		}
+		},
+		"log5R": {
+			"operation": {
+				"transform": {
+					"expression": "slice(reverse($$.log5))"
+			}
+		}
+		},
+		"top5": {
+			"operation": {
+				"transform": {
+					"expression": "slice(sort(concat($$.top5, [$.temp])), -5)"
+			}
+		}
+		},
+		"bottom5": {
+			"operation": {
+				"transform": {
+					"expression": "slice(sort(concat($$.bottom5, [$.temp]), -1), -5)"
+					}
+				}
+			}
+		}
+	}
+
+
+Shadow Timestamp
+~~~~~~~~~~~~~~~~~~~~
+
+จุดประสงค์สำคัญของการเขียน shadow คือการบันทึกค่าข้อมูลที่เกิดขึ้น บางครั้งแทนที่ค่านั้นจะเป็นค่าของเวลาปัจจุบัน อาจจะต้องการบันทึกค่าในอดีต สามารถกำหนดค่า timestamp ของจุดข้อมูลได้โดย
+
+- ``Publish Topic`` @shadow/data/update
+
+โดยที่ Payload คือ
+
+.. code-block:: json
+
+	{
+  		"data": {
+    		"temp": 24.5,
+    		"Humid": 63.9
+  		},
+  		"timestamp": 1684982518000
+	}
+
+
+หากมีการกำหนดให้ store ลง feed ค่าเวลาของจุดข้อมูลจะเป็นเลข timestamp ตัวนี้ แทนที่จะเป็นค่า default ซึ่งก็คือค่า timestamp  ของเวลาปัจจุบัน   หากค่า timestamp ที่กำหนด เก่ากว่าฟิวด์ ​timestamp ของ shadow 
+ค่าจะไม่ถูกเขียนทับลง shadow แต่ส่วนของ feed จะมีการ trigger, transform  และ store ตามปกติ เราจึงสามารถใช้กลไกนี้ ในการอัพเดตค่าย้อนหลังใน feed ได้
+
+Shadow Batch Update
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+เราสามารถเขียนค่าลง shadow ได้ครั้งละมากๆ จะมีประโยชน์เวลาที่ต้องการเขียน feed ย้อนหลัง ค่าที่ใหม่ที่สุดจะไปปรากฎใน shadow  แต่หาก timestamp ที่มากที่สุดยังน้อยกว่าค่า timestamp ของ shadow ค่าที่เขียนลงไป จะไม่ไปทับค่าล่าสุดของ shadow แต่จะยังมีการส่งไป store และ รัน trigger ตามปกติ
+
+- ``Publish Topic`` @shadow/data/update
+
+โดยที่ Payload คือ
+
+.. code-block:: json
+
+	{
+		"batch" : [
+			{"data":{"temp":25.9, "humid":9.6}, "ts":-90000},
+			{"data":{"temp":25.3, "humid":9.8}, "ts":-60000},
+			{"data":{"temp":24.5, "humid":9.1}, "ts":-30000},
+			{"data":{"temp":26.8, "humid":8.2}, "ts":0}
+		],
+		"merged": true
+	}
+
+หลังการเขียน จะมี message ตอบกลับทาง topic @private/shadow/batch/update/response เพื่อยืนยัน ปัจจุบัน NETPIE กำหนด max record size ไว้ที่ 100 ถ้าคำสั่งมีจำนวน record เกิน DeviceShadow 
+จะไม่บันทึกค่าให้ และจะตอบ error กลับทาง @private/shadow/batch/update/response เช่นกัน
+
+Shadow Options
+~~~~~~~~~~~~~~~~~~
+
+การเขียน shadow มี option พิเศษ ที่ใช้ override ค่าบางอย่างจากการเขียน ได้แก่
+
+- ``merged`` เป็นการกำหนดลักษณะการเขียน shadow ว่าจะให้แทรกค่าเข้าไปค่าเดิม (merged: true)  หรือ เขียนทับ shadow ทั้งตัวด้วยค่าที่ระบุ (merged: false)   ถ้าไม่ระบุ จะใช้ค่าปกติเป็น merged: true
+
+- ``store`` หากเซตเป็น false จะเป็นการระบุให้การเขียนครั้งนี้ ไม่ต้องเก็บค่าเข้า feed 
+
+- ``trigger``  หากเซตเป็น false จะเป็นการระบุให้การเขียนครั้งนี้ ไม่ต้องรัน trigger 
+
+Option เหล่านี้ สามารถใช้ได้ทั้งการเขียนแบบค่าเดียว และการเขียนแบบ batch
+
+
+
+Datatag
+~~~~~~~~~~~~~
+
+datatag คือ feature ใหม่เป็น feature ที่ช่วยในการสร้าง feed ในการเก็บข้อมูล shadow ลง feed โดยที่ไม่จำเป็นต้องเขียน shadow schema อีกต่อไป หากไม่ได้มีความต้องการที่จะคุม format ของฟิวด์และ data type ใน schema 
+หรือต้องการทำ data expression ก็สามารถทิ้ง schema เป็นค่าว่างได้เลย ตามรูป
+
+.. image:: _static/device_schema1.png
+	:align: center
+
+แต่เพื่อเป็นการอำนวยความสะดวกให้กับผู้ใช้ที่คุ้นเคยกับระบบ feed เดิม จึงเพิ่มทางเลือกในการสร้าง feed ผ่าน schema ตัวอย่างการเขียน schema แบบเดิม ในลักษณะนี้
+
+.. code-block:: json
+
+	{
+        "properties": {
+                "temp": {
+                        "operation": {
+                                "store": {
+                                        "ttl": "7d"
+                                },
+                                "type": "number"
+                        	}
+                	}
+        	}
+	}
+
+เมื่อเซฟจะพบว่า schema เปลี่ยนไปเพราะฟิวด์ store จะถูกลบออกไปจาก schema โดยที่ ฟิวด์ store จะไปอยู่ในหน้า datatag แทน
+
+.. code-block:: json
+
+	{
+    	"properties": {
+                "temp": {
+                        "type": "number"
+                	}
+        	}
+    	}
+	
+แต่จะไปเกิด datatag ในหน้า feed อัตโนมัติเหมือนกับการกดสร้างเองตามรูป
+
+.. image:: _static/device_datatag1.png
+
+ในกรณีที่ device มี datatag ชื่อนี้อยู่ก่อนแล้ว การเซฟ schema ลงไปจะไม่เกิดการสร้าง datatag ใหม่เพิ่ม ในขณะเดียวกัน การเซฟ schema ที่ขาดฟิวด์ store ดังกล่าวอีกครั้ง ก็จะไม่มีผลทำให้ datatag 
+ถูกลบออกจาก feed กลไกการสร้าง datatag อัตโนมัตินี้ จะทำงานครั้งแรกเพียงครั้งเดียว เพื่ออำนวยความสะดวกกับ user เท่านั้น
+
+ดูรายละเอียดการใช้งาน datatag เพิ่มเติมได้ที่ :ref:`device-feed`
 
 .. _trigger-and-action:
 
@@ -123,7 +401,7 @@ Device Trigger and Event Hook
 -----------------------------
 
 Device Trigger
-^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~
 
 เป็นระบบที่ผูกการเปลี่ยนแปลงข้อมูลของ Device (Device Shadow) เข้ากับการกระทำภายนอก (Event Hook) เช่น การตั้งค่าแจ้งเตือนตามสถานะต่าง ๆ ตามเงื่อนไขการทำงานของ Device ที่ถูกตั้งค่าไว้ การจัดการข้อมูล Trigger ให้เข้าไปที่ Device ที่ต้องการ จากนั้นคลิกไปแทบที่ชื่อว่า Trigger ดังรูปต่อไปนี้
 
@@ -163,7 +441,6 @@ Device Trigger
 
 .. image:: _static/trigger_tab_add_ex.png
 
-|
 
 การอ้างอิงค่า Shadow ใน Trigger
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -176,7 +453,6 @@ Device Trigger
 
 - ``$PREV.พาธ.ของ.ตัว.แปร`` ค่าก่อนหน้าที่จะถูกอัพเดทลง Shadow โดยขึ้นต้นด้วย $PREV ตามด้วย Path ตามโครงสร้างใน Shadow
 
-|
 
 ความแตกต่างระหว่าง $NEW, $CUR และ $PREV ใน Trigger
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -211,7 +487,7 @@ Write Shadow แบบ Merge ด้วยค่านี้ ``{ "data": { "f2": 
 
 การอ้างอิงค่า ``f1`` :
 
-	- ``$PREV.f1`` มีค่าเป็น	``d1``
+	- ``$PREV.f1`` มีค่าเป็น ``d1``
 
 	- ``$NEW.f1`` มีค่าเป็น	``null``
 
@@ -309,23 +585,22 @@ Comparisons ที่เรียกใช้งานได้ใน Condition 
 |
 
 Event Hook
-^^^^^^^^^^^
+~~~~~~~~~~~~~~
 
 เป็นตัวกลางที่ใช้กำหนดว่าเมื่อเกิด Trigger จะให้ดำเนินการอะไร ซึ่งจะต้องไปกำหนดที่ |portal_url| เมนู *Event Hooks* ดังรูป
 
-.. image:: _static/event_hooks2.png
+.. image:: _static/event_hooks.png
 
 
 สร้าง Event Hook โดยการคลิกที่ปุ่ม "Create" กรอกข้อมูล สำหรับ *Type* คือ ชนิดของ Event Hook ซึ่งปัจจุบันมีเพียงชนิดเดียว คือ WEBHOOK ในอนาคตจะมีการพัฒนาชนิดอื่นๆ ตามมา จากนั้นคลิกที่ปุ่ม "Create" ระบบจะทำการสร้าง Event Hook ให้ ดังรูป
 
-.. image:: _static/event_hooks_create2.png
+.. image:: _static/event_hooks_create.png
 
 
 จากนั้นคลิกที่รายการ Event Hook ที่สร้างเพื่อเข้าไปตั้งค่าการทำงาน โดย Configuration จะกำหนดในรูปแบบ JSON ดังรูป
 
 .. image:: _static/event_hooks_setconfig.png
 
-|
 
 .. code-block:: json
 
@@ -364,20 +639,20 @@ Event Hook
 
 |
 
+.. _device-feed:
+
 Device Feed
 ------------------
 
-สำหรับจัดการและดูข้อมูลใน Timeseries Database เบื้องต้นของแต่ละ Device ซึ่งจะแสดงในรูปแบบของกราฟเส้น แยกตามฟิลด์ (หรือก็คือ Properties ที่กำหนดอยู่ใน Device Schema) และยังสามารถดาวน์โหลดข้อมูลออกมาเป็นไฟล์ .csv ได้ โดยการใช้งานให้เข้าไปที่ Device ที่ต้องการ จากนั้นคลิกไปแทบที่ชื่อว่า Feed ดังรูปต่อไปนี้
+สำหรับจัดการและดูข้อมูลใน Timeseries Database ของแต่ละ Device ซึ่งจะแสดงในรูปแบบของกราฟเส้นแยกตามฟิลด์ และยังสามารถดาวน์โหลดข้อมูลออกมาเป็นไฟล์ .csv ได้ โดยการใช้งานให้เข้าไปที่ Device ที่ต้องการ จากนั้นคลิกไปแทบที่ชื่อว่า Feed ดังรูปต่อไปนี้
 
-.. image:: _static/feed_tab.png
+.. image:: _static/device_feed1.png
+	
+เมื่อมีการเก็บข้อมูลลงใน Timeseries Database จะปรากฏกราฟข้อมูลแยกตามฟิลด์ที่กำหนดให้เก็บข้อมูล ลักษณะจะเป็นดังรูปด้านล่าง 
 
-เมื่อมีการเก็บข้อมูลลงใน Timeseries Database จะปรากฏกราฟข้อมูลแยกตามฟิลด์ที่กำหนดให้เก็บข้อมูล ลักษณะจะเป็นดังรูปด้านล่าง ที่มีการเก็บข้อมูล 2 ฟิลด์ คือ humid และ temp
-
-.. image:: _static/feed_feature.png
+.. image:: _static/device_feed2.png
 
 จากรูปด้านบน การใช้งานในแต่ละส่วนสามารถตั้งค่าหรือมีรายละเอียดการใช้งานดังนี้
-
-|
 
 **1. ตั้งค่าช่วงเวลาในการดึงข้อมูลมาแสดงกราฟ**
 
@@ -391,29 +666,79 @@ Device Feed
 
 .. image:: _static/feed_from_to.png
 
-|
+**2. เพิ่ม datatag**
 
-**2. ค่าความถี่ในการเฉลี่ยข้อมูล (Sampling)**
+datatag คือ feature ที่ช่วยในการสร้าง feed โดยที่ไม่ต้องเขียน shadow schema สามารถสร้างโดยกดที่ปุ่ม "Add datatag" quota ของ datatag สามารถใช้ได้ |tag_project| tags / project , |tag_device| tags / device 
 
-เป็นการกำหนดความละเอียดในการแสดงข้อมูล โดยสามารถกำหนดได้ทั้งหมด 7 ระดับ ดังนี้
+.. image:: _static/device_feed3.png
 
-- ``None`` คือ เป็นการแสดงข้อมูลที่มีความละเอียดสูงสุด โดยข้อมูลที่นำมาแสดงจะเป็นข้อมูลดิบ (Raw Data) ที่ ณ ช่วงเวลานั้น
+ในการเพิ่ม datatag ทำการกดปุ่ม datatag จะขึ้นหน้าต่างดังรูป
 
-- ``Second`` คือ เป็นการนำข้อมูลจริงทั้งหมดในช่วงเวลาที่กำหนดมาประมวลผล โดยทุก 1 วินาทีที่มีข้อมูลมากกว่า 1 จุด จะถูกนำมาหาค่าเฉลี่ยเพื่อให้ได้ค่าเหลือเพียง 1 จุด/วินาที
+.. image:: _static/device_feed6.png
+	:align: center
 
-- ``Minute`` คือ เป็นการนำข้อมูลจริงทั้งหมดในช่วงเวลาที่กำหนดมาประมวลผล โดยทุก 1 นาทีที่มีข้อมูลมากกว่า 1 จุด จะถูกนำมาหาค่าเฉลี่ยเพื่อให้ได้ค่าเหลือเพียง 1 จุด/นาที
+ทำการเลือกค่าที่อยู่ใน shadow ที่ต้องการนำมาแสดง โดยทำการใส่ $ จะแสดงค่า value ที่อยู่ใน shadow ขึ้นมาดังรูป
 
-- ``Hour`` คือ เป็นการนำข้อมูลจริงทั้งหมดในช่วงเวลาที่กำหนดมาประมวลผล โดยทุก 1 ชั่วโมงที่มีข้อมูลมากกว่า 1 จุด จะถูกนำมาหาค่าเฉลี่ยเพื่อให้ได้ค่าเหลือเพียง 1 จุด/ชั่วโมง
+.. image:: _static/device_feed7.png
+	:align: center
 
-- ``Day`` คือ เป็นการนำข้อมูลจริงทั้งหมดในช่วงเวลาที่กำหนดมาประมวลผล โดยทุก 1 วันที่มีข้อมูลมากกว่า 1 จุด จะถูกนำมาหาค่าเฉลี่ยเพื่อให้ได้ค่าเหลือเพียง 1 จุด/วัน
+จากนั้นทำการเลือก value ที่ต้องการแสดงโดยมีค่าต่างๆดังนี้
 
-- ``Week`` คือ เป็นการนำข้อมูลจริงทั้งหมดในช่วงเวลาที่กำหนดมาประมวลผล โดยทุก 1 สัปดาห์ที่มีข้อมูลมากกว่า 1 จุด จะถูกนำมาหาค่าเฉลี่ยเพื่อให้ได้ค่าเหลือเพียง 1 จุด/สัปดาห์
+- ``Data Path`` คือตำแหน่งของฟิวด์ใน shadow ที่ต้องการเช่น
 
-- ``Year`` คือ เป็นการนำข้อมูลจริงทั้งหมดในช่วงเวลาที่กำหนดมาประมวลผล โดยทุก 1 ปีที่มีข้อมูลมากกว่า 1 จุด จะถูกนำมาหาค่าเฉลี่ยเพื่อให้ได้ค่าเหลือเพียง 1 จุด/ปี ซึ่งเป็นระดับที่ความละเอียดของข้อมูลต่ำที่สุด
+.. list-table::
+   :header-rows: 1
+   
+   * - Shadow
+     - Data Path
+   * - {"temp":25}
+     - temp
+   * - {"home"{"temp":25}}
+     - home.temp
+   
+- ``Data Type`` คือประเภทที่ต้องการเก็บ ประเภทต้องตรงกับค่าใน shadow เช่น ค่าใน shadow เป็น number data type ก็ต้องเซ็ทเป็น number
 
-|
+- ``TTL`` คือระยะเวลาที่ต้องการเก็บข้อมูลเมื่อเวลาผ่านไปข้อมูลจะถูกลบออกไปโดยอัตโนมัติตามเวลาที่ตั้งไว้
 
-**3. การดาวน์โหลดข้อมูล (Export Feed)**
+- ``Expression`` คือการแปลงข้อมูล เช่น ต้องการแปลงจากเซลเซียสเป็นฟาเรนไฮต์ ทำการใส่ ($.value * 1.8) + 32 ลงในช่อง Expression ได้เลย โดยที่ $.value จะเป็นการอ้างอิงชื่อจาก datapath แต่ละ datatag นั้นๆ
+
+.. image:: _static/device_feed12.png
+	:align: center
+
+เมื่อทำการใส่ค่าดังรูปค่าที่ได้จากเซลเซียสจะถูกแปลงเป็นฟาเรนไฮต์
+
+.. image:: _static/device_feed13.png
+
+- ``Name`` คือชื่อของ datatag
+
+- ``Description`` คือคำอธิบาย datatag
+
+- ``Unit`` คือหน่วยของข้อมูลที่ต้องการนำมาแสดง
+
+.. image:: _static/device_feed8.png
+	:align: center
+
+เมื่อทำการกรอกค่าดังรูปจะได้ Feed ขึ้นมา
+
+.. image:: _static/device_feed9.png
+
+.. warning:: 
+	- ควรตั้ง Data Type ของ feed ให้สอดคล้องกับข้อมูลที่เขียนเข้า shadow เพราะระบบจะพยายาม cast type ให้ตรงกับ type ที่กำหนดไว้  เช่น “2” เป็น 2 แต่ในกรณีที่แย่ที่สุดอาจจะ cast ไม่ได้ เช่น ถ้าเราตั้ง type เป็น “number” แต่เขียนค่าลง shadow ว่า “14 June 2023” แบบนี้ข้อมูลจะไม่เกิดการเขียนจุดลง feed
+	- การลบ Datatag ข้อมูล time series ที่เก็บมาจะถูกลบทิ้งไปด้วย
+	
+**3. ลบ datatag**
+
+เป็นการลบ datatag ทั้งหมดออก
+
+.. image:: _static/device_feed4.png
+
+**4. Search หา datatag**
+
+จะเป็นการหา datatag ที่ต้องการได้
+
+.. image:: _static/device_feed11.png
+
+**5. การดาวน์โหลดข้อมูล (Export Feed)**
 
 เป็นการดาวน์โหลดข้อมูลที่เก็บใน Timeseries Database ตามช่วงเวลาที่กำหนด ออกมาเป็นไฟล์ .csv โดยคลิกที่ปุ่ม `Exports` จะปรากฏหน้าสำหรับตั้งค่าการดาวน์โหลดข้อมูลดังรูปต่อไปนี้
 
@@ -430,14 +755,6 @@ Device Feed
 เมื่อกรอกข้อมูลครบแล้วปุ่ม Download จะ Active ขึ้นมาให้สามารถกดได้ ทำการกดเพื่อดาวน์โหลดข้อมูล ส่วน `Clear all` ใช้สำหรับ Reset การตั้งค่าสำหรับดาวน์โหลดข้อมูล
 
 |
-
-**4. การลบจุดข้อมูล (Clear data)**
-
-จะใช้สำหรับลบจุดข้อมูลใน Timeseries Database ตามช่วงเวลาที่กำหนด โดยทุกฟิลด์ข้อมูลจะมีลิงค์ `Clear data` กำกับไว้ทุกฟิลด์ คลิกที่ฟิลด์ใดก็จะเป็นการลบเฉพาะข้อมูลในฟิลด์นั้นๆ เมื่อคลิกที่ลิงค์ `Clear data` ของฟิลด์ใดฟิลด์หนึ่ง จะปรากฏหน้าสำหรับตั้งค่าการลบข้อมูลดังรูปต่อไปนี้
-
-.. image:: _static/feed_delete.png
-
-จากรูปด้านบน จะแสดงชื่อฟิลด์ที่ต้องลบข้อมูล และต้องกำหนดช่วงเวลา (Time range) ที่จะลบจุดข้อมูลออก โดยรูปแบบการกำหนดช่วงเวลาจะเหมือนในข้อ `1. ตั้งค่าช่วงเวลาในการดึงข้อมูลมาแสดงกราฟ` เมื่อกรอกข้อมูลครบแล้วปุ่ม Clear data จะ Active ขึ้นมาให้สามารถกดได้ ทำการกดเพื่อลบข้อมูลออกจาก Timeseries Database
 
 .. note:: จำนวนจุดข้อมูลสูงสุดที่ระบบกำหนดให้ดึงข้อมูลได้ในแต่ละครั้ง
 

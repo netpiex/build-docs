@@ -1,11 +1,11 @@
 .. raw:: html
 
-    <div align="right"><b>TH</b> | <a href="https://docs.netpie.io/en/usage-calculate.html">EN</a></div>
+    <div align="right"><b>TH</b> | <a href="https://docs.netpie.io/en/">EN</a></div>
 
 Service Usage Calculation
 ==========================
 
-การคำนวณปริมาณการใช้งาน Service ต่างๆ ของ |platform_name| Platform จะถูกแยกการคิดได้เป็นประเภทใหญ่ๆ ดังต่อนี้
+การคำนวณปริมาณการใช้งาน Service ต่างๆ ของ |platform_name| Platform ดูปริมาณการใช้งานในแต่ละรอบบิลได้จาก Web Portal โดยคลิกที่ชื่อผู้ใช้มุมบนขวามือ และเลือกเมนู "Billing" ดูรายละเอียดเพิ่มเติมได้ที่ :ref:`billing-page` จะถูกแยกการคิดได้เป็นประเภทใหญ่ๆ ดังต่อนี้
 
 .. _api-quota:
 
@@ -27,17 +27,40 @@ API Response
 
 	การอ่านข้อมูลจาก Time Series Database ผ่าน REST API 1 ครั้ง ข้อมูลที่ส่งไปตอน Request มีขนาด 71 bytes และข้อมูล Response กลับมามีขนาด 10 kilobytes ดังนั้น การนับในครั้งนี้จะเป็นดังนี้ 
 
+	
 	Request ส่ง Payload ไป ขนาด 71 bytes	= 71 / 1024*4 = 1 Operation(Request) เศษที่หาร 4KB ไม่ลงตัวต้องปัดขึ้นเป็นอีก 1 Block
 
+	
 	Response ตอบกลับ Payload ขนาด 10KB  	= 10 / 4 = 3 Operations(Response) เศษที่หาร 4KB ไม่ลงตัวต้องปัดขึ้นเป็นอีก 1 Block
 
+	
 	รวม API Call Quota ที่ถูกใช้ไป 		= 1 + 3 = 4 Operations
 
 |
 
-.. _mqtt-quota:
+Device Online 
+--------------------
 
-Real-time Messages
+ระยะเวลารวมทั้งหมดที่ Device เชื่อมต่ออยู่ใน |platform_name| Platform มีหน่วยนับเป็นวินาที(Second)
+
+.. admonition:: ตัวอย่าง
+
+	มี Device ที่ลงทะเบียนใช้งาน |platform_name| Platform อยู่ 2 Devices Device เพื่อส่งข้อมูลสถานะการทำงานต่างๆ ของเครื่องจักรไปเก็บที่ Platform โดย Device1 เชื่อมต่อ Platform เวลา 08:00:03 ส่งข้อมูลเสร็จและตัดการเชื่อมต่อ Platform ที่เวลา 08:00:15 ส่วน Device2 เชื่อมต่อ Platform เวลา 08:00:05 ส่งข้อมูลเสร็จและตัดการเชื่อมต่อ Platform ที่เวลา 08:00:20 ดังนั้น เวลารวมในกรณีนี้จะเป็น
+
+
+	Device1 Online (08:00:03 - 08:00:15)	 = 12 วินาที
+
+
+	Device2 Online (08:00:05 - 08:00:20)	 = 15 วินาที 
+
+
+	รวม Connection Quota ที่ถูกใช้ไป 			 = 12 + 15 = 27 วินาที
+
+|
+
+.. _message-quota:
+
+Real Time Message
 ----------------------------
 
 ปริมาณการใช้บริการที่เกี่ยวกับ MQTT มีหน่วยนับเป็น Message โดยการกระทำที่จะถูกนับเป็นการใช้งานประเภทนี้ คือ
@@ -80,6 +103,8 @@ MQTT Connect
 
 |
 
+.. _shadow-quota:
+
 Shadow Read/Write
 --------------------
 
@@ -101,37 +126,33 @@ Shadow Expression
 .. admonition:: ตัวอย่าง
 
 	Device 1 ตัว เมื่อ online ขึ้นมาจะทำการอ่าน Shadow ทั้งหมดของตนเอง (ขนาด Shadow 2 kilobytes) มาเป็นค่าเริ่มต้นสำหรับการตั้งค่าการทำงาน หลังจากนั้น Device จะส่งค่าอุณหภูมิปัจจุบันของตัวเองไปอัพเดทที่ Shadow (ขนาดข้อมูลที่ส่งไป 20 bytes) โดยค่าที่ส่งไปมีหน่วยเป็นฟาเรนไฮต์ ซึ่งมีการกำหนด Expression สำหรับแปลงหน่วยเป็นเซลเซียส คำนวนปริมาณ Shadow Operation Quota ที่ถูกใช้ไปได้ดังนี้
-
+	
 
 	2 Operations(Shadow Read) + 1 Operation(Shadow Write) + 1 Operation(Shadow Expression) = 4 Operations
 
 |
 
+.. _time-series-quota:
+
 Time Series Data Store
 -----------------------
 
-ปริมาณข้อมูล (Time Series Data) และระยะเวลาที่ต้องการเก็บข้อมูล มีหน่วยนับเป็น Point-Day, Point-Month หรือ Point-Year หมายความว่า ข้อมูลที่ส่งมาเก็บ 1 จุดข้อมูล (ขนาดข้อมูลไม่เกิน 1 kilobyte) ระยะเวลาในการเก็บ (TTL) 1 วัน, 1 เดือน หรือ 1 ปี ถูกนับเป็น 1 Point-Day, 1 Point-Month หรือ 1 Point-Year ตามลำดับ จำนวนจุดข้อมูลที่เก็บได้จะแปรผกผันกับระยะเวลาในการเก็บ (ถ้าเก็บนานจำนวนจุดข้อมูลที่เก็บได้จะน้อยลง)
+ปริมาณข้อมูล (Time Series Data) และระยะเวลาที่ต้องการเก็บข้อมูล มีหน่วยนับเป็น Point-Day หมายความว่า ข้อมูลที่ส่งมาเก็บ 1 จุดข้อมูล (ขนาดข้อมูลไม่เกิน 1 kilobyte) ระยะเวลาในการเก็บ (TTL) 30 วัน ถูกนับเป็น 1 Point-Month หรือ 30 Point-Day 
+
 
 .. admonition:: ตัวอย่าง
 
-	Device สำหรับวัดความชื้นและอุณหภูมิ วัดค่าและส่งข้อมูลไปเก็บทุก 1 ชั่วโมง เก็บค่าย้อนหลัง 7 วัน ภายในระยะเวลา 30 วัน คำนวนปริมาณ Store Quota ที่ถูกใช้ไปได้ดังนี้
+	Device สำหรับวัดความชื้นและอุณหภูมิ(2 data point), วัดค่าและส่งข้อมูลไปเก็บทุก 1 ชั่วโมง(24 time/day), เก็บค่าย้อนหลัง 30 วัน(TTL), ระยะเวลาใช้บริการ 31 วัน คำนวนปริมาณ Quota ที่ถูกใช้ไปได้ดังนี้
 
 
-	2(point data) x [ 24(hours/day) x 30(days) ] x 7(days) = 10080 Point-Day
+	2(data point) x 30(TTL) X 24(time/day) x 31(day) = 44,640 Point-Day หรือเท่ากับ
 
 
-	หรือ
-
-
-	2(point data) x [ 24(hours/day) x 30(days) ] x [ 7(days) / 30(days/month) ] = 336 Point-Month
-	
-
-	หรือ
-
-
-	2(point data) x [ 24(hours/day) x 30(days) ] x [ 7(days) / 365(days/year) ] = 27.62 Point-Year
+	44,640 Point-Day / 30 = 1,488 Point-Month
 
 |
+
+.. _trigger-quota:
 
 Trigger & Action
 --------------------
@@ -157,7 +178,11 @@ Shadow Trigger
 
 
 	ส่งอุณหภูมิ (temp) ครั้งที่ 1 ค่าเป็น 1 ทำ action ``checkTemp`` ตรวจสอบเงื่อนไขและค่าเป็น True = 1 Operations
+
+
 	ส่งอุณหภูมิ (temp) ครั้งที่ 2 ค่าเป็น 0 ทำ action ``checkTemp`` ตรวจสอบเงื่อนไขและค่าเป็น False = 0 Operations
+
+
 	ส่งอุณหภูมิ (temp) ครั้งที่ 3 ค่าเป็น -1 ทำ action ``checkTemp`` ตรวจสอบเงื่อนไขและค่าเป็น False = 0 Operations
 
 
@@ -166,37 +191,37 @@ Shadow Trigger
 
 	รวม Trigger & Action Quota ที่ถูกใช้ไป 			 = 2 + 1 + 0 + 0 + 2 = 5 Operations
 	
-	.. code-block:: json
+.. code-block:: json
 
+	{
+		"enabled": true,
+		"trigger": [{
+			"action": "LINENOTIFY",
+			"event": "DEVICE.STATECHANGED",
+			"msg": "My Device {{$NEW.statustext}}, statuscode: {{$NEW.status}}",
+			"option": {
+				"url": "https://notify-api.line.me/api/notify",
+				"linetoken": "HBfiJA309FWFouCPzK5WhGUvJT1RvN3xb6hGxnIqAAA"
+			}
+		},
 		{
-			"enabled": true,
-			"trigger": [{
-				"action": "LINENOTIFY",
-				"event": "DEVICE.STATECHANGED",
-				"msg": "My Device {{$NEW.statustext}}, statuscode: {{$NEW.status}}",
-				"option": {
-					"url": "https://notify-api.line.me/api/notify",
-					"linetoken": "HBfiJA309FWFouCPzK5WhGUvJT1RvN3xb6hGxnIqAAA"
-				}
-			},
-			{
-				"action": "myApp",
-				"event": "DEVICE.STATECHANGED",
-				"msg": "{{$NEW.statustext}}",
-				"option": {
-					"deviceid": "155941ce-1f4a-4e57-1864-1759af4f872c"
-				}
-			},
-			{
-				"action": "checkTemp",
-				"event": "SHADOW.UPDATED",
-				"condition": "$NEW.bedroom.temp > 0",
-				"msg": "My temperature was change from {{$PREV.bedroom.temp}} to {{$NEW.bedroom.temp}}",
-				"option": {
-					"url": "https://mywebhook/devicetemp"
-				}
-			}]
-		}
+			"action": "myApp",
+			"event": "DEVICE.STATECHANGED",
+			"msg": "{{$NEW.statustext}}",
+			"option": {
+				"deviceid": "155941ce-1f4a-4e57-1864-1759af4f872c"
+			}
+		},
+		{
+			"action": "checkTemp",
+			"event": "SHADOW.UPDATED",
+			"condition": "$NEW.bedroom.temp > 0",
+			"msg": "My temperature was change from {{$PREV.bedroom.temp}} to {{$NEW.bedroom.temp}}",
+			"option": {
+				"url": "https://mywebhook/devicetemp"
+			}
+		}]
+	}
 
 |
 
@@ -205,12 +230,10 @@ Shadow Trigger
 Datasource
 --------------------
 
-
 ปริมาณขนาดข้อมูลสะสม (หน่วยเป็น Byte) ที่เกิดจากการ Download ข้อมูลจาก Time-series data storage หรือก็คือ Data Transfer ซึ่งการดึงข้อมูลทั้งจากระบบภายนอก หรือ Dashboard ที่มีให้ใช้งานภายในจะถูกคิดโควต้าส่วนนี้ทั้งหมด
 
-
 .. admonition:: ตัวอย่าง
-
+	
 	มีการเก็บข้อมูลอุณหภุมิและความชื้นลงใน Time-series data storage มีการพัฒนา Web Application เพื่อมาดึงข้อมูลจาก Time-series data storage ไปแสดงผลเป็นกราฟ โดยความถี่ในการดึงข้อมูลมาอัพเดทในกราฟ คือ ทุก 5 นาที (Auto Refresh), ขนาดข้อมูลที่ดึงไปแสดงผลในแต่ละครั้ง คือ 2.5 KB ดังนั้น ถ้ามีการเปิด Web Application ให้แสดงผลกราฟทิ้งไว้นาน 1 ชั่วโมง จะคำนวณปริมาณ Datasource ที่ถูกใช้ไปได้ ดังนี้
 
 

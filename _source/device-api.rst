@@ -1,6 +1,6 @@
 .. raw:: html
 
-    <div align="right"><b>TH</b> | <a href="https://docs.netpie.io/en/device-api.html">EN</a></div>
+    <div align="right"><b>TH</b> | <a href="https://docs.netpie.io/en/">EN</a></div>
 
 RESTful API
 ============
@@ -13,7 +13,6 @@ Device API
 --------------------
 
 เป็น API ที่เกี่ยวข้องกับ Device โดย Domain name ของ API คือ |rest_url| มีรายละเอียดดังนี้
-
 
 **1. การขอสถานะเชื่อมต่อ Platform ของ Device (Device Status)**
 
@@ -41,11 +40,9 @@ Device API
 	
 	Authorization: Device 777d5c96-4c83-4aa6-a273-5ee7c5f453b1:abcduKh8r2tP1zVc1W1nG8YWZeu21234
 
-|
-
 **2. การ Publish ข้อความ ไปที่ Topic ต่างๆ สามารถใช้งานได้ 2 แบบ**
 
-*แบบที่ 1 เป็นการระบุ Topic ในรูปแบบ URL Path*
+- แบบที่ 1 เป็นการระบุ Topic ในรูปแบบ URL Path
 
 .. rst-class:: left-align-left-col
 
@@ -73,7 +70,7 @@ Device API
 
 |
 
-*แบบที่ 2 เป็นการระบุ Topic ผ่าน Parameter (Query String)*
+- แบบที่ 2 เป็นการระบุ Topic ผ่าน Parameter (Query String)
 
 .. rst-class:: left-align-left-col
 
@@ -101,7 +98,7 @@ Device API
 
 **3. การ Publish ข้อความส่วนตัว (Private Message) ไปยัง Device แบบเจาะจง Device สามารถใช้งานได้ 2 แบบ**
 
-*แบบที่ 1 เป็นการระบุ Topic ในรูปแบบ URL Path*
+- แบบที่ 1 เป็นการระบุ Topic ในรูปแบบ URL Path
 
 .. rst-class:: left-align-left-col
 
@@ -126,11 +123,10 @@ Device API
 	Authorization: Device 777d5c96-4c83-4aa6-a273-5ee7c5f453b1:abcduKh8r2tP1zVc1W1nG8YWZeu21234
 
 	Hello Device
-	
 
 |
 
-*แบบที่ 2 เป็นการระบุ Topic ผ่าน Parameter (Query String)*
+- แบบที่ 2 เป็นการระบุ Topic ผ่าน Parameter (Query String)
 
 .. rst-class:: left-align-left-col
 
@@ -158,9 +154,9 @@ Device API
 
 .. caution:: 
 
-	การส่ง  Message ผ่านทาง REST API ลักษณะ Topic จะแตกต่างจากการส่งผ่าน MQTT Prototol เล็กน้อย คือ ถ้าส่งผ่าน REST API การตั้งค่า Topic ไม่ต้องใส่ ``@msg`` นำหน้า แต่ระบบจะทำการเติมให้อัตโนมัติ ซึ่งถ้าส่งผ่าน MQTT Prototol จะต้องใส่ ``@msg`` นำหน้า Topic ที่จะส่งเอง
-	
-	การส่งข้อความส่วนตัว (Private Message) ฝั่ง Device ที่ถูกส่ง Message ไปหาต้องทำการ Subcribe Topic โดยมี Prefix เป็น @private นำหน้า Topic ที่ต้องการ Subcribe เช่น ``@private/topic/for/me`` หรือจะใช้ ``@private/#`` ก็จะทำให้ได้รับ Private Message ในทุก Topic
+	การส่ง Message ผ่านทาง REST API ลักษณะ Topic จะแตกต่างจากการส่งผ่าน MQTT Prototol เล็กน้อย คือ ถ้าส่งผ่าน REST API การตั้งค่า Topic ไม่ต้องใส่ "@msg" นำหน้า แต่ระบบจะทำการเติมให้อัตโนมัติ ซึ่งถ้าส่งผ่าน MQTT Prototol จะต้องใส่ "@msg" นำหน้า Topic ที่จะส่งเอง
+
+    การส่งข้อความส่วนตัว (Private Message) ฝั่ง Device ที่ถูกส่ง Message ไปหาต้องทำการ Subcribe Topic โดยมี Prefix เป็น @private นำหน้า Topic ที่ต้องการ Subcribe เช่น @private/topic/for/me หรือจะใช้ @private/# ก็จะทำให้ได้รับ Private Message ในทุก Topic
 
 |
 
@@ -232,9 +228,6 @@ Device API
 			}
 		}
 
-	|
-
-
 |
 
 **6. การเขียนข้อมูลลง Shadow Data แบบเขียนทับ (Overwrite)**
@@ -281,8 +274,6 @@ Device API
 			}
 		}
 
-	|
-
 |
 
 .. _key-shadow-batch-rest:
@@ -290,7 +281,9 @@ Device API
 Shadow Batch Update
 --------------------
 
+
 จะใช้ในกรณีที่ IoT Device ไม่สามารถส่งข้อมูลขึ้น Cloud Platform ได้ตามเวลาที่กำหนด เช่น อาจจะเกิดจากปัญหาการเชื่อมต่ออินเตอร์เน็ต เป็นต้น ทำให้ IoT Device จำเป็นต้องเก็บข้อมูลไว้ที่หน่วยความจำของ Device เองก่อน เช่น เก็บลง SD Card เป็นต้น และเมื่อสามารถเชื่อมต่อ Cloud Platform ได้ จึงทำการส่งข้อมูลที่เก็บไว้ทั้งหมดขึ้น Cloud Platform อีกที โดยสามารถส่งค่าขึ้น Platform ครั้งละหลาย ๆ จุดพร้อมกันได้
+
 
 การเขียน Shadow แบบ Batch ทำได้ 3 ช่องทาง ได้แก่
 
@@ -339,9 +332,7 @@ Shadow Batch Update
 			]
 		}
 
-	|
-
-|	
+|
 
 .. note:: 
 
@@ -353,7 +344,7 @@ Shadow Batch Update
 
 	|
 
-	**การทำงานของ Expression ที่กำหนดไว้ใน Schema และ Trigger กรณีเขียน Shadow แบบ Batch**
+	การทำงานของ Expression ที่กำหนดไว้ใน Schema และ Trigger กรณีเขียน Shadow แบบ Batch
 
 	Expression ยังคงถูกคำนวณตามสูตรที่กำหนดไว้ทุกชุดข้อมูล เหมือนการ For Loop เขียน Shadow เอง แต่การเขียน Shadow แบบ Batch จะถูกหักโควต้า Shadow read/write เพยีง 1 Operation เท่านั้น แต่โควต้า Shadow Expression จะถูกหักตามจำนวนชุดข้อมูลเช่นเดิม ยกตัวอย่างเช่น ชุดข้อมูลที่ส่งค่ามาบันทึก 100 จุด และมีฟิลด์ข้อมูลที่เซ็ต Expression ไว้ 1 ฟิลด์ จำนวน Shadow Expression ที่ถูกหักจะเท่ากับ 1 x 100 = 100 Operations เป็นต้น
 
@@ -371,30 +362,17 @@ Shadow Batch Update
 
 .. caution::
 
-	ข้อจำกัดของการเขียน Shadow แบบ Batch คือ จำนวนชุดข้อมูลที่ส่งไปเขียนได้ต่อครั้งต้องไม่เกิน 100 ชุดข้อมูล (JSON Array ของฟิลด์ ``batch``) เช่น กำหนด Request Body ที่ส่งไปเขียนข้อมูลเป็น
+	ข้อจำกัดของการเขียน Shadow แบบ Batch คือ จำนวนชุดข้อมูลที่ส่งไปเขียนได้ต่อครั้งต้องไม่เกิน 100 ชุดข้อมูล (JSON Array ของฟลิด์ ``batch``) เช่น กำหนด Request Body ที่ส่งไปเขียนข้อมูลเป็น 
 
-	.. code-block:: json
-
-		{ 
-			"batch" : [ 
-				{"data":{"temp":25.9, "humid":9.6}, "ts":-90000}, 
-				{"data":{"temp":25.3, "humid":9.8}, "ts":-60000}, 
-				{"data":{"temp":24.5, "humid":9.1}, "ts":-30000}, 
-				{"data":{"temp":26.8, "humid":8.2}, "ts":0}
-			], 
-			"merged": true 
-		}
+	{ "batch" : [ {"data":{"temp":25.9, "humid":9.6}, "ts":-90000}, {"data":{"temp":25.3, "humid":9.8}, "ts":-60000}, {"data":{"temp":24.5, "humid":9.1}, "ts":-30000}, {"data":{"temp":26.8, "humid":8.2}, "ts":0}], "merged": true } 
 
 	แสดงว่ามีจำนวนชุดข้อมูลเท่ากับ 4 ชุดข้อมูล เป็นต้น หากมีส่งชุดข้อมูลไปเกินกว่าที่กำหนด ข้อมูลทั้งหมดจะไม่ถูกบันทึก และจะมีข้อความแจ้งเตือนกลับมา
-
-	``{"ackid":1234,"errcode":429,"message":"batch size exceeds 100","inputsize": 102}``
-
-	หมายความว่า การเขียนข้อมูลแบบ Batch ที่ ackid เป็น 1234 ส่งชุดข้อมูลไปเกิน 100 ชุด โดยส่งไป 102 ชุด เป็นต้น
 
 |
 
 Data Store API
 --------------------
+
 
 เป็น API ที่เกี่ยวข้องกับการดึงข้อมูลที่เก็บอยู่ใน Timeseries Data โดย Domain name ของ API คือ |feed_url| ฐานข้อมูลที่ใช้เก็บ คือ ซึ่งใช้ KairosDB ลักษณะการ Query ข้อมูล Parameter ต่างๆ ที่ส่งไปจะเป็นรูปแบบเดียวกับ KairosDB มีรายละเอียดดังนี้
 
@@ -500,8 +478,6 @@ Data Store API
 			] 
 		}
 
-	|
-
 |
 
 .. admonition:: ตัวอย่างที่ 2 Authorization ด้วย ClientID และ DeviceToken: 
@@ -536,5 +512,3 @@ Data Store API
 				}
 			]
 		}
-
-	|

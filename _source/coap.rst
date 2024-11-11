@@ -1,6 +1,6 @@
 .. raw:: html
 
-    <div align="right"><b>TH</b> | <a href="https://docs.netpie.io/en/coap-netpie.html">EN</a></div>
+    <div align="right"><b>TH</b> | <a href="https://docs.netpie.io/en/">EN</a></div>
 
 CoAP API
 ==========
@@ -37,7 +37,7 @@ CoAP (Constrained Application Protocol) เป็น Protocol ประเภท
 
 .. code-block:: console
 
-	coap put "coap://coap.netpie.io/message/home/bedroom?auth=6c36fdee-5273-4318-xxxx-75dfd2c513db:nzxGsGMYnFdfET6xxxxfb32U9z5kuhvx" -p "Hello from CoAP"
+	coap put "coap://coap.netpie.io/message/home/bedroom?auth=6c36fdee-5273-4318-xxxx-75dfd2c513db:nzxGsGMYnFdfET6qbpifb32U9z5kxxxx" -p "Hello from CoAP"
 
 จากตัวอย่างด้านบน เป็นการ Publish ข้อความ ``Hello from CoAP`` ไปที่ Topic ``@msg/home/bedroom`` 
 
@@ -59,11 +59,12 @@ CoAP (Constrained Application Protocol) เป็น Protocol ประเภท
 		* - **Return**
 		  - Response Object {``deviceid`` => ClientID, ``data`` => Shadow Data ของ Device (JSON), ``rev`` => Revision ของ Shadow, ``modified`` => Timestamp การแก้ไขล่าสุด}
 
+
 ตัวอย่าง (Command Line) 
 
 .. code-block:: console
 
-	coap get "coap://coap.netpie.io/shadow/data?auth=6c36fdee-5273-4318-xxxx-75dfd2c513db:nzxGsGMYnFdfET6xxxxfb32U9z5kuhvx"
+	coap get "coap://coap.netpie.io/shadow/data?auth=6c36fdee-5273-4318-xxxx-75dfd2c513db:nzxGsGMYnFdfET6qbpifb32U9z5kxxxx"
 
 จากตัวอย่างด้านบน เป็นการอ่านข้อมูล Shadow ของ Device ID : 6c36fdee-5273-4318-xxxx-75dfd2c513db และค่าที่ได้กลับมา คือ
 
@@ -98,13 +99,13 @@ CoAP (Constrained Application Protocol) เป็น Protocol ประเภท
 		* - **Return**
 		  - Response Object {``deviceid`` คือ ClientID, ``data`` คือ Shadow Data ของ Device (JSON), ``modified`` คือ Timestamp การแก้ไขล่าสุด, ``timestamp`` คือ Timestamp ที่ใช้กำกับจุดข้อมูลกรณีมีการเก็บลง Time-series data storage}
 
-ตัวอย่าง (Command Line)  
+ตัวอย่าง (Command Line)  {"deviceid":"6c36fdee-5273-4318-xxxx-75dfd2c513db","data":{"temp":30.4},"modified":1605518877506,"timestamp":1605518877506}
 
 .. code-block:: console
 
-	coap put "coap://coap.netpie.io/shadow/data?auth=6c36fdee-5273-4318-xxxx-75dfd2c513db:nzxGsGMYnFdfET6xxxxfb32U9z5kuhvx" -p "{data: {temp: 30.4} }"
+	coap put "coap://coap.netpie.io/shadow/data?auth=6c36fdee-5273-4318-xxxx-75dfd2c513db:nzxGsGMYnFdfET6qbpifb32U9z5kxxxx" -p "{data: {temp: 30.4} }"
 
-จากตัวอย่างด้านบน เป็นการเขียนข้อมูล Shadow แบบผสาน (Merge) ของ Device ID : 6c36fdee-5273-4318-xxxx-75dfd2c513db และค่าที่ได้กลับมา คือ
+จากตัวอย่างด้านบน เป็นการเขียนข้อมูล Shadow แบบผสาน (Merge) ของ Device ID : 6c36fdee-5273-4318-ba7e-75dfd2c513db และค่าที่ได้กลับมา คือ
 
 .. code-block:: json
 	
@@ -122,9 +123,10 @@ CoAP (Constrained Application Protocol) เป็น Protocol ประเภท
 .. _key-shadow-batch-coap:
 
 Shadow Batch Update
---------------------
+---------------------
 
 จะใช้ในกรณีที่ IoT Device ไม่สามารถส่งข้อมูลขึ้น Cloud Platform ได้ตามเวลาที่กำหนด เช่น อาจจะเกิดจากปัญหาการเชื่อมต่ออินเตอร์เน็ต เป็นต้น ทำให้ IoT Device จำเป็นต้องเก็บข้อมูลไว้ที่หน่วยความจำของ Device เองก่อน เช่น เก็บลง SD Card เป็นต้น และเมื่อสามารถเชื่อมต่อ Cloud Platform ได้ จึงทำการส่งข้อมูลที่เก็บไว้ทั้งหมดขึ้น Cloud Platform อีกที โดยสามารถส่งค่าขึ้น Platform ครั้งละหลาย ๆ จุดพร้อมกันได้
+
 
 การเขียน Shadow แบบ Batch ทำได้ 3 ช่องทาง ได้แก่
 
@@ -145,6 +147,7 @@ Shadow Batch Update
 		  - -p {"ackid" : ID value, "batch" : [ {"data":{ Shadow Data 1 }, "ts": time 1}, {"data":{ Shadow Data 2 }, "ts": time 2}, ...,{"data":{ Shadow Data n }, "ts": time n} ], "merged": true or false }
 		* - **Return**
 		  - Response Object {``deviceid`` คือ ClientID, ``response`` คือ สรุปข้อมูลการอัพเดท Shadow (JSON)}
+
 
 ตัวอย่าง (Command Line)  
 
@@ -180,7 +183,7 @@ Shadow Batch Update
 
 	|
 
-	**การทำงานของ Expression ที่กำหนดไว้ใน Schema และ Trigger กรณีเขียน Shadow แบบ Batch**
+	การทำงานของ Expression ที่กำหนดไว้ใน Schema และ Trigger กรณีเขียน Shadow แบบ Batch
 
 	Expression ยังคงถูกคำนวณตามสูตรที่กำหนดไว้ทุกชุดข้อมูล เหมือนการ For Loop เขียน Shadow เอง แต่การเขียน Shadow แบบ Batch จะถูกหักโควต้า Shadow read/write เพยีง 1 Operation เท่านั้น แต่โควต้า Shadow Expression จะถูกหักตามจำนวนชุดข้อมูลเช่นเดิม ยกตัวอย่างเช่น ชุดข้อมูลที่ส่งค่ามาบันทึก 100 จุด และมีฟิลด์ข้อมูลที่เซ็ต Expression ไว้ 1 ฟิลด์ จำนวน Shadow Expression ที่ถูกหักจะเท่ากับ 1 x 100 = 100 Operations เป็นต้น
 
@@ -198,22 +201,12 @@ Shadow Batch Update
 
 .. caution::
 
-	ข้อจำกัดของการเขียน Shadow แบบ Batch คือ จำนวนชุดข้อมูลที่ส่งไปเขียนได้ต่อครั้งต้องไม่เกิน 100 ชุดข้อมูล (JSON Array ของฟิลด์ ``batch``) เช่น กำหนด Payload ที่ส่งไปเขียนข้อมูลเป็น 
+	ข้อจำกัดของการเขียน Shadow แบบ Batch คือ จำนวนชุดข้อมูลที่ส่งไปเขียนได้ต่อครั้งต้องไม่เกิน 100 ชุดข้อมูล (JSON Array ของฟลิด์ ``batch``) เช่น กำหนด Payload ที่ส่งไปเขียนข้อมูลเป็น 
 
-	.. code-block:: json
-
-		{ 
-			"batch" : [ 
-				{"data":{"temp":25.9, "humid":9.6}, "ts":-90000}, 
-				{"data":{"temp":25.3, "humid":9.8}, "ts":-60000}, 
-				{"data":{"temp":24.5, "humid":9.1}, "ts":-30000}, 
-				{"data":{"temp":26.8, "humid":8.2}, "ts":0}
-			], 
-			"merged": true 
-		}
+	{ "ackid" : 1234, "batch" : [ {"data":{"temp":25.9, "humid":9.6}, "ts":-90000}, {"data":{"temp":25.3, "humid":9.8}, "ts":-60000}, {"data":{"temp":24.5, "humid":9.1}, "ts":-30000}, {"data":{"temp":26.8, "humid":8.2}, "ts":0}], "merged": true } 
 
 	แสดงว่ามีจำนวนชุดข้อมูลเท่ากับ 4 ชุดข้อมูล เป็นต้น หากมีส่งชุดข้อมูลไปเกินกว่าที่กำหนด ข้อมูลทั้งหมดจะไม่ถูกบันทึก และจะมีข้อความแจ้งเตือนกลับมาในรูปแบบ JSON ดังนี้ 
 
-	``{"ackid":1234,"errcode":429,"message":"batch size exceeds 100","inputsize": 102}``
+	{"ackid":1234,"errcode":429,"message":"batch size exceeds 100","inputsize": 102} 
 
 	หมายความว่า การเขียนข้อมูลแบบ Batch ที่ ackid เป็น 1234 ส่งชุดข้อมูลไปเกิน 100 ชุด โดยส่งไป 102 ชุด เป็นต้น

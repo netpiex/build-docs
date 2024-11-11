@@ -1,3 +1,7 @@
+.custom-social-link{
+  display: none !important;
+}
+
 img {
   max-width: 100%;
 }

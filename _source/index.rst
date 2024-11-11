@@ -2,9 +2,9 @@
 
     <div align="right"><b>TH</b> | <a href="https://docs.netpie.io/en/">EN</a></div>
 
-###########################
+#################################
 คู่มือการใช้งาน NETPIE Platform
-###########################
+#################################
 
 ยินดีต้อนรับสู่การใช้งาน NETPIE Platform 2020
 
@@ -18,8 +18,8 @@
    device-config
    mqtt-api
    device-api
-   coap-netpie
-   freeboard
-   quota-netpie
+   coap
+   dashboard
+   freequota
    usage-calculate
    self-examination
