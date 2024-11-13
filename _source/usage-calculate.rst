@@ -1,11 +1,11 @@
 .. raw:: html
 
-    <div align="right"><b>TH</b> | <a href="https://docs.netpie.io/en/">EN</a></div>
+    <div align="right"><b>TH</b> | <a href="https://docs.netpie.io/en/usage-calculate.html">EN</a></div>
 
 Service Usage Calculation
 ==========================
 
-การคำนวณปริมาณการใช้งาน Service ต่างๆ ของ |platform_name| Platform ดูปริมาณการใช้งานในแต่ละรอบบิลได้จาก Web Portal โดยคลิกที่ชื่อผู้ใช้มุมบนขวามือ และเลือกเมนู "Billing" ดูรายละเอียดเพิ่มเติมได้ที่ :ref:`billing-page` จะถูกแยกการคิดได้เป็นประเภทใหญ่ๆ ดังต่อนี้
+การคำนวณปริมาณการใช้งาน Service ต่างๆ ของ |platform_name| Platform ดูปริมาณการใช้งานในแต่ละรอบบิลได้จาก Web Portal โดยคลิกที่ชื่อผู้ใช้มุมบนขวามือ และเลือกเมนู "Billing" จะถูกแยกการคิดได้เป็นประเภทใหญ่ๆ ดังต่อนี้
 
 .. _api-quota:
 

@@ -1,6 +1,6 @@
 .. raw:: html
 
-    <div align="right"><b>TH</b> | <a href="https://docs.netpie.io/en/">EN</a></div>
+    <div align="right"><b>TH</b> | <a href="https://docs.netpie.io/en/overview-netpie.html">EN</a></div>
 
 NETPIE 2020 Overview
 =======================

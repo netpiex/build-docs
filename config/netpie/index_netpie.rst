@@ -16,10 +16,10 @@
    overview-netpie
    getting-started
    device-config
-   mqtt-api
+   mqtt-api 
    device-api
-   coap
+   coap-netpie
    dashboard
-   freequota
+   quota-netpie
    usage-calculate
    self-examination

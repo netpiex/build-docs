@@ -1,7 +1,3 @@
-.. raw:: html
-
-    <div align="right"><b>TH</b> | <a href="https://docs.netpie.io/en/">EN</a></div>
-
 Free Quota
 ===============
 
