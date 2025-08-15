@@ -276,6 +276,41 @@ Device API
 
 |
 
+**7. การส่ง Push Notification ไปยัง Mobile Application**
+
+.. rst-class:: left-align-left-col
+
+    ==================   =====================================================================================================================
+    EndPoint             |rest_url|/push
+    Method               PUT
+    Request Header       Authorization : *Device ClientID:Token*
+    Request Body         ข้อมูล Push Notification ในรูปแบบ JSON ประกอบด้วย:
+							- ``title`` : หัวข้อการแจ้งเตือน
+							- ``subtitle`` (optional): ข้อความรองของการแจ้งเตือน
+							- ``body`` : เนื้อหาหลักของการแจ้งเตือน
+							
+    Return               Response Object
+                         	- ``message`` คือ ข้อความตอบกลับ
+    ==================   =====================================================================================================================
+
+.. admonition:: ตัวอย่าง
+
+    PUT /device/push HTTP/1.1
+
+    Host: |rest_url2|
+
+    Authorization: Device 777d5c96-4c83-4aa6-a273-5ee7c5f453b1:abcduKh8r2tP1zVc1W1nG8YWZeu21234
+
+    .. code-block:: json
+
+        {
+            "title": "Living room", 
+            "subtitle": "Abnormal condition detected", 
+            "body": "Temperature exceeded 50°C!"
+        }
+
+|
+
 .. _key-shadow-batch-rest:
 
 Shadow Batch Update

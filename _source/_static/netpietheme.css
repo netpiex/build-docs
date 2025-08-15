@@ -2175,3 +2175,7 @@ dl {
         text-align: left
     }
 }
+
+.darkmode-switch {
+    display:none;
+}

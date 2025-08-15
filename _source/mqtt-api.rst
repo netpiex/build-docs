@@ -300,3 +300,24 @@ Shadow Batch Update
 	|
 
 	หมายความว่า การเขียนข้อมูลแบบ Batch ที่ ackid เป็น 140 ส่งชุดข้อมูลไปเกิน 100 ชุด โดยส่งไป 102 ชุด เป็นต้น
+
+Push API Topic
+---------------------
+
+จะเป็นการส่ง Push Notification ไปยัง Mobile Application โดยมี Topic และ Payload ดังตัวอย่างนี้
+
+.. rst-class:: left-align-left-col
+
+	===============	============================================================================================
+	Publish topic 	``@push``
+	Payload 		.. code-block:: json
+
+						{
+							"title": "Livingroom",
+							"subtitle": "Abnormal condition detected",
+							"body": "Temperature exceeded 45°C!"
+						}
+
+	===============	============================================================================================
+
+|
