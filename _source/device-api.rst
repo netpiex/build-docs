@@ -547,3 +547,12 @@ Data Store API
 				}
 			]
 		}
+
+LivenessTTL
+--------------
+
+การเชื่อมต่อ Device กับ Platform ผ่าน REST API โดยมีการกำหนดค่า Livenessttl เพื่อแสดงสถานะออนไลน์ของ Device โดย Livenessttl คือ เวลา (วินาที) ที่แสดงสถานะของ Device ที่นับจากการเรียก Device API ล่าสุด เช่น ถ้าเซ็ตค่า Livenessttl เป็น 120 วินาที Device จะแสดงสถานะออนไลน์ตามเวลาที่เซ็ตไว้ ถ้าเกิน 120 วินาที จะกลับไปแสดงสถานะออฟไลน์ตามเดิม โดยที่ค่า Default ของ Livenessttl คือ 0 ถ้าไม่ Enable Livenessttl จะไม่แสดงสถานะออนไลน์ของ Device ถ้ามีการเรียก REST API
+
+สามารถ Enable Livenessttl ภายในแต่ละ Device และกำหนดค่าเป็นจำนวนวินาทีที่ต้องการ เช่น 120 วินาที
+
+.. image:: _static/livenessttl_enable.png
